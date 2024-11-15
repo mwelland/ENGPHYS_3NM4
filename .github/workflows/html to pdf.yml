@@ -38,8 +38,17 @@ jobs:
         # Convert combined HTML to PDF
         weasyprint docs/output/combined.html docs/output/combined.pdf
 
-    - name: Upload PDF as an artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: combined-pdf
-        path: docs/output/combined.pdf
+
+    - name: Commit and push the PDF
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add docs/output/combined.pdf
+        git commit -m "Add/update combined PDF file"
+        git push
+
+    # - name: Upload PDF as an artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: combined-pdf
+    #     path: docs/output/combined.pdf
