@@ -37,9 +37,9 @@ jobs:
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
         git fetch origin
         git checkout jupyterbook
-        mkdir -p book
-        cp -r _build/html/* book/
-        git add book/
+        mkdir -p docs
+        cp -r _build/html/* docs/
+        git add docs/
         git commit -m "Deploy Jupyter Book to book folder"
         git push origin jupyterbook
       env:
