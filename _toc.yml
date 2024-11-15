@@ -6,7 +6,7 @@ chapters:
 
 - file: Lecture notes/Root finding
   sections:
-    - file: Polynomial roots
-    - file: Closed methods
-    - file: Open methods
-    - file: Global convergence methods
+    - file: Lecture notes/Polynomial roots
+    - file: Lecture notes/Closed methods
+    - file: Lecture notes/Open methods
+    - file: Lecture notes/Global convergence methods
