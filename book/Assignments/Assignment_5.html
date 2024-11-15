@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Question 1: &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Assignments/Assignment_5';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../Lecture%20notes/Curve_fit.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../Lecture%20notes/Curve_fit.html">
+                    Example: An overdetermined, inconsistent linear system
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Lecture%20notes/Root%20finding/Root_finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Lecture%20notes/Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Lecture%20notes/Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Lecture%20notes/Root%20finding/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Lecture%20notes/Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Assignments/Assignment_5.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Question 1:</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Question 1:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2">Question 2:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3">Question 3:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-write-out-the-objective-function-to-be-minimized-in-terms-of-theta">a) Write out the objective function to be minimized in terms of theta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-write-out-the-constraints-given-the-geometry-and-b-and-h">b) Write out the constraints given the geometry and <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(H\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-determine-the-equilibrium-values-of-theta-1-theta-2-and-theta-3-given">c) Determine the equilibrium values of  <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, and <span class="math notranslate nohighlight">\(\theta_3\)</span> given:</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Assignment_5.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p>#Assignment 5</p>
+<p>Due EOD Monday Oct 21st.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="question-1">
+<h1>Question 1:<a class="headerlink" href="#question-1" title="Link to this heading">#</a></h1>
+<p>{Method, answer }</p>
+<p>Given the data in (T, k) columns,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.73000000e+02</span><span class="p">,</span> <span class="mf">4.45900132e+03</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.76030303e+02</span><span class="p">,</span> <span class="mf">4.41776331e+03</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.79060606e+02</span><span class="p">,</span> <span class="mf">7.02912764e+03</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.82090909e+02</span><span class="p">,</span> <span class="mf">8.07233255e+03</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.85121212e+02</span><span class="p">,</span> <span class="mf">1.35655353e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.88151515e+02</span><span class="p">,</span> <span class="mf">1.53935301e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.91181818e+02</span><span class="p">,</span> <span class="mf">1.66518521e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.94212121e+02</span><span class="p">,</span> <span class="mf">2.57056205e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">2.97242424e+02</span><span class="p">,</span> <span class="mf">2.80402378e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.00272727e+02</span><span class="p">,</span> <span class="mf">3.52850720e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.03303030e+02</span><span class="p">,</span> <span class="mf">2.53348206e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.06333333e+02</span><span class="p">,</span> <span class="mf">6.20422294e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.09363636e+02</span><span class="p">,</span> <span class="mf">5.65720969e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.12393939e+02</span><span class="p">,</span> <span class="mf">8.94469023e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.15424242e+02</span><span class="p">,</span> <span class="mf">9.65941942e+04</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.18454545e+02</span><span class="p">,</span> <span class="mf">1.14139663e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.21484848e+02</span><span class="p">,</span> <span class="mf">1.00384893e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.24515152e+02</span><span class="p">,</span> <span class="mf">1.60315046e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.27545455e+02</span><span class="p">,</span> <span class="mf">1.75487522e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.30575758e+02</span><span class="p">,</span> <span class="mf">2.79200552e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.33606061e+02</span><span class="p">,</span> <span class="mf">2.83492579e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.36636364e+02</span><span class="p">,</span> <span class="mf">2.19343286e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.39666667e+02</span><span class="p">,</span> <span class="mf">3.46339717e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.42696970e+02</span><span class="p">,</span> <span class="mf">3.29907107e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.45727273e+02</span><span class="p">,</span> <span class="mf">2.99334626e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.48757576e+02</span><span class="p">,</span> <span class="mf">4.85091915e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.51787879e+02</span><span class="p">,</span> <span class="mf">7.28675595e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.54818182e+02</span><span class="p">,</span> <span class="mf">9.91612106e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.57848485e+02</span><span class="p">,</span> <span class="mf">9.39914377e+05</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.60878788e+02</span><span class="p">,</span> <span class="mf">1.46925677e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.63909091e+02</span><span class="p">,</span> <span class="mf">1.46126057e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.66939394e+02</span><span class="p">,</span> <span class="mf">1.35738053e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.69969697e+02</span><span class="p">,</span> <span class="mf">1.14736966e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.73000000e+02</span><span class="p">,</span> <span class="mf">2.10254656e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.76030303e+02</span><span class="p">,</span> <span class="mf">1.12017395e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.79060606e+02</span><span class="p">,</span> <span class="mf">2.34226319e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.82090909e+02</span><span class="p">,</span> <span class="mf">2.22858410e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.85121212e+02</span><span class="p">,</span> <span class="mf">3.26613076e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.88151515e+02</span><span class="p">,</span> <span class="mf">3.68055559e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.91181818e+02</span><span class="p">,</span> <span class="mf">2.37869512e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.94212121e+02</span><span class="p">,</span> <span class="mf">4.10021974e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">3.97242424e+02</span><span class="p">,</span> <span class="mf">3.84314791e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.00272727e+02</span><span class="p">,</span> <span class="mf">6.46893402e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.03303030e+02</span><span class="p">,</span> <span class="mf">5.35422811e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.06333333e+02</span><span class="p">,</span> <span class="mf">7.73962115e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.09363636e+02</span><span class="p">,</span> <span class="mf">8.41409713e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.12393939e+02</span><span class="p">,</span> <span class="mf">7.81006766e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.15424242e+02</span><span class="p">,</span> <span class="mf">8.35579617e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.18454545e+02</span><span class="p">,</span> <span class="mf">1.03669786e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.21484848e+02</span><span class="p">,</span> <span class="mf">1.02992887e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.24515152e+02</span><span class="p">,</span> <span class="mf">6.39189417e+06</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.27545455e+02</span><span class="p">,</span> <span class="mf">1.36405449e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.30575758e+02</span><span class="p">,</span> <span class="mf">1.49410729e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.33606061e+02</span><span class="p">,</span> <span class="mf">2.09149077e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.36636364e+02</span><span class="p">,</span> <span class="mf">2.14703032e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.39666667e+02</span><span class="p">,</span> <span class="mf">2.11464887e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.42696970e+02</span><span class="p">,</span> <span class="mf">2.60359855e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.45727273e+02</span><span class="p">,</span> <span class="mf">3.19593647e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.48757576e+02</span><span class="p">,</span> <span class="mf">2.84547486e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.51787879e+02</span><span class="p">,</span> <span class="mf">2.98421720e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.54818182e+02</span><span class="p">,</span> <span class="mf">3.54693846e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.57848485e+02</span><span class="p">,</span> <span class="mf">4.17941703e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.60878788e+02</span><span class="p">,</span> <span class="mf">4.65948030e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.63909091e+02</span><span class="p">,</span> <span class="mf">5.74740135e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.66939394e+02</span><span class="p">,</span> <span class="mf">4.12282427e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.69969697e+02</span><span class="p">,</span> <span class="mf">6.43295352e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.73000000e+02</span><span class="p">,</span> <span class="mf">6.78921367e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.76030303e+02</span><span class="p">,</span> <span class="mf">6.87155479e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.79060606e+02</span><span class="p">,</span> <span class="mf">6.70678776e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.82090909e+02</span><span class="p">,</span> <span class="mf">6.23342574e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.85121212e+02</span><span class="p">,</span> <span class="mf">9.48617775e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.88151515e+02</span><span class="p">,</span> <span class="mf">9.34710486e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.91181818e+02</span><span class="p">,</span> <span class="mf">8.25781385e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.94212121e+02</span><span class="p">,</span> <span class="mf">1.02888832e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">4.97242424e+02</span><span class="p">,</span> <span class="mf">9.99071191e+07</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.00272727e+02</span><span class="p">,</span> <span class="mf">1.01319698e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.03303030e+02</span><span class="p">,</span> <span class="mf">1.32602108e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.06333333e+02</span><span class="p">,</span> <span class="mf">1.31923942e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.09363636e+02</span><span class="p">,</span> <span class="mf">1.00146518e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.12393939e+02</span><span class="p">,</span> <span class="mf">1.48398130e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.15424242e+02</span><span class="p">,</span> <span class="mf">2.01128065e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.18454545e+02</span><span class="p">,</span> <span class="mf">2.25792703e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.21484848e+02</span><span class="p">,</span> <span class="mf">1.99863590e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.24515152e+02</span><span class="p">,</span> <span class="mf">2.47074414e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.27545455e+02</span><span class="p">,</span> <span class="mf">2.08548654e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.30575758e+02</span><span class="p">,</span> <span class="mf">1.83449792e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.33606061e+02</span><span class="p">,</span> <span class="mf">2.58856094e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.36636364e+02</span><span class="p">,</span> <span class="mf">3.10038100e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.39666667e+02</span><span class="p">,</span> <span class="mf">3.58956357e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.42696970e+02</span><span class="p">,</span> <span class="mf">3.21512830e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.45727273e+02</span><span class="p">,</span> <span class="mf">4.30773903e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.48757576e+02</span><span class="p">,</span> <span class="mf">4.39179856e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.51787879e+02</span><span class="p">,</span> <span class="mf">4.57110476e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.54818182e+02</span><span class="p">,</span> <span class="mf">3.75292342e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.57848485e+02</span><span class="p">,</span> <span class="mf">3.97574548e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.60878788e+02</span><span class="p">,</span> <span class="mf">4.57516936e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.63909091e+02</span><span class="p">,</span> <span class="mf">2.63845055e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.66939394e+02</span><span class="p">,</span> <span class="mf">4.59249219e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.69969697e+02</span><span class="p">,</span> <span class="mf">5.23677345e+08</span><span class="p">],</span>
+       <span class="p">[</span><span class="mf">5.73000000e+02</span><span class="p">,</span> <span class="mf">7.51098462e+08</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.73000000e+02</span><span class="p">,</span> <span class="mf">4.45900132e+03</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>        <span class="p">[</span><span class="mf">2.76030303e+02</span><span class="p">,</span> <span class="mf">4.41776331e+03</span><span class="p">],</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>        <span class="p">[</span><span class="mf">2.79060606e+02</span><span class="p">,</span> <span class="mf">7.02912764e+03</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span>        <span class="p">[</span><span class="mf">5.69969697e+02</span><span class="p">,</span> <span class="mf">5.23677345e+08</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span>        <span class="p">[</span><span class="mf">5.73000000e+02</span><span class="p">,</span> <span class="mf">7.51098462e+08</span><span class="p">]])</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>fit a modified Arrhenius curve of the form:</p>
+<div class="math notranslate nohighlight">
+\[k = [A +B T]e^{\frac{-E}{RT}} \]</div>
+<p>where <span class="math notranslate nohighlight">\(R\)</span> is the Ideal gas constant.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="question-2">
+<h1>Question 2:<a class="headerlink" href="#question-2" title="Link to this heading">#</a></h1>
+<p><img alt="Screenshot 2024-10-10 172050.png" src="data:image/png;base64,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" /></p>
+<p>A wire carrying an electric current is surrounded by rubber insulation of outer radius <span class="math notranslate nohighlight">\(r\)</span>. The resistance of the wire generates heat, which is conducted through the insulation and convected into the surrounding air. The temperature of the wire can be shown to be:</p>
+<div class="math notranslate nohighlight">
+\[ T = \frac{q}{2 \pi} \bigg[ \frac{ln(r/a)}{k} + \frac{1}{hr} \bigg] + T_\infty \]</div>
+<p>where</p>
+<ul class="simple">
+<li><p>q = rate of heat generation in wire = 50 W/m</p></li>
+<li><p>a = radius of wire = 5mm</p></li>
+<li><p>k = thermal conductivity of rubber = 0.16 W/m · K</p></li>
+<li><p>h = convective heat-transfer coefficient = 20 W/m2 · K</p></li>
+<li><p>T∞ = ambient temperature = 280 K</p></li>
+</ul>
+<p>Find <span class="math notranslate nohighlight">\(r\)</span> that minimizes <span class="math notranslate nohighlight">\(T\)</span></p>
+<p>{method, imlementation, answer}</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="question-3">
+<h1>Question 3:<a class="headerlink" href="#question-3" title="Link to this heading">#</a></h1>
+<p><img alt="Screenshot 2024-10-10 165605.png" src="data:image/png;base64,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" /></p>
+<p>A cable fixed at the ends carrier the weights <span class="math notranslate nohighlight">\(W_1\)</span> and <span class="math notranslate nohighlight">\(W_2\)</span>. The potential energy of the system is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align} V &amp;= -W_1 y_1 - W_2 y_2 \\
+\end{align} \end{split}\]</div>
+<p>The principle of minimum potential energy states that the equilibrium configuration of the system is the one that satisfies geometric constraints and minimizes the potential energy.</p>
+<p>You will be asked to determine the angles <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, and <span class="math notranslate nohighlight">\(\theta_3\)</span>.</p>
+<section id="a-write-out-the-objective-function-to-be-minimized-in-terms-of-theta">
+<h2>a) Write out the objective function to be minimized in terms of theta<a class="headerlink" href="#a-write-out-the-objective-function-to-be-minimized-in-terms-of-theta" title="Link to this heading">#</a></h2>
+<p>{answer}</p>
+</section>
+<section id="b-write-out-the-constraints-given-the-geometry-and-b-and-h">
+<h2>b) Write out the constraints given the geometry and <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(H\)</span>.<a class="headerlink" href="#b-write-out-the-constraints-given-the-geometry-and-b-and-h" title="Link to this heading">#</a></h2>
+<p>{answer}</p>
+</section>
+<section id="c-determine-the-equilibrium-values-of-theta-1-theta-2-and-theta-3-given">
+<h2>c) Determine the equilibrium values of  <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, and <span class="math notranslate nohighlight">\(\theta_3\)</span> given:<a class="headerlink" href="#c-determine-the-equilibrium-values-of-theta-1-theta-2-and-theta-3-given" title="Link to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(L_1 = 1.2 m\)</span>, <span class="math notranslate nohighlight">\(L_2 = 1.5 m\)</span>, <span class="math notranslate nohighlight">\(L_3 = 1.0 m\)</span>, <span class="math notranslate nohighlight">\(B = 3.5 m\)</span>, <span class="math notranslate nohighlight">\(H = 0\)</span>, <span class="math notranslate nohighlight">\(W_1 = 20 kN\)</span>, and <span class="math notranslate nohighlight">\(W2 = 30 kN\)</span>.</p>
+<p>{method, implementation, answer}</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Assignments"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Question 1:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#question-2">Question 2:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#question-3">Question 3:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-write-out-the-objective-function-to-be-minimized-in-terms-of-theta">a) Write out the objective function to be minimized in terms of theta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#b-write-out-the-constraints-given-the-geometry-and-b-and-h">b) Write out the constraints given the geometry and <span class="math notranslate nohighlight">\(B\)</span> and <span class="math notranslate nohighlight">\(H\)</span>.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#c-determine-the-equilibrium-values-of-theta-1-theta-2-and-theta-3-given">c) Determine the equilibrium values of  <span class="math notranslate nohighlight">\(\theta_1\)</span>, <span class="math notranslate nohighlight">\(\theta_2\)</span>, and <span class="math notranslate nohighlight">\(\theta_3\)</span> given:</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
