@@ -24,9 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         # Install pandoc
-        #sudo apt-get update
-        #sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
-        #pip install jupyter nbconvert
+        sudo apt-get update
+        sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
         pip install jupyter nbconvert nbformat
 
     - name: Convert all Jupyter Notebooks to PDF
