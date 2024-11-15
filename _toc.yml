@@ -1,7 +1,7 @@
 # Table of contents
 # Learn more at https://jupyterbook.org/customize/toc.html
 format: jb-book
-root: index
+root: Lecture notes/Curve_fit.ipynb
 chapters:
 - file: Lecture notes/Root finding/Root_finding.ipynb
   sections:
