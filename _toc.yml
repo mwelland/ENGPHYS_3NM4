@@ -4,7 +4,13 @@ format: jb-book
 root: Lecture notes/Curve_fit.ipynb
 chapters:
 
-- file: Lecture notes/Differential_equations
+- file: Lecture notes/Root finding
   sections:
-    - file: Lecture notes/Finite_volume
-    - file: Lecture notes/Finite_difference
+    - file: Polynomial roots
+    - file: Closed methods
+    - file: Open methods
+    - file: Closed methods
+    - file: Closed methods/Newton's method
+    - file: Closed methods/Secant method
+    - file: Global convergence methods
+    
