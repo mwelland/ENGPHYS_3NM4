@@ -25,7 +25,7 @@ jobs:
       run: |
         # Install pandoc
         sudo apt-get update
-        sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended
+        sudo apt-get install -y pandoc texlive-xetex texlive-fonts-recommended texlive-plain-generic
         pip install jupyter nbconvert nbformat
 
     - name: Convert all Jupyter Notebooks to PDF
