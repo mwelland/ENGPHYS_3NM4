@@ -1,2 +1,10 @@
-- file: Lecture notes/Finite_volume.ipynb
-- file: Lecture notes/Finite_difference.ipynb
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: Lecture notes/Curve_fit.ipynb
+chapters:
+
+- file: Lecture notes/Differential_equations
+  sections:
+    - file: Lecture notes/Finite_volume
+    - file: Lecture notes/Finite_difference
