@@ -1,0 +1,48 @@
+name: Convert HTML to PDF
+
+on:
+  push:
+    branches:
+      - jupyterbook
+  pull_request:
+    branches:
+      - jupyterbook
+
+jobs:
+  convert_html_to_pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        # Install WeasyPrint
+        pip install weasyprint
+
+    - name: Convert HTML files to PDF
+      run: |
+        # Combine all .html files in the 'html_files' directory into a single PDF
+        mkdir -p pdf_output
+        OUTPUT_PDF="pdf_output/combined.pdf"
+        
+        # Find all .html files and concatenate them into one temporary file
+        cat html_files/*.html > temp_combined.html
+        
+        # Use WeasyPrint to convert the combined HTML to PDF
+        weasyprint temp_combined.html $OUTPUT_PDF
+        
+        # Cleanup temporary file
+        rm temp_combined.html
+
+    - name: Upload generated PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: html-to-pdf
+        path: pdf_output/combined.pdf
