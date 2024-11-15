@@ -4,9 +4,9 @@ format: jb-book
 root: Lecture notes/Curve_fit.ipynb
 chapters:
 
-- file: Lecture notes/Root finding
+- file: Lecture notes/Root finding/Root_finding.ipynb
   sections:
-    - file: Lecture notes/Polynomial roots
-    - file: Lecture notes/Closed methods
-    - file: Lecture notes/Open methods
-    - file: Lecture notes/Global convergence methods
+    - file: Lecture notes/Root finding/Polynomial roots
+    - file: Lecture notes/Root finding/Closed methods
+    - file: Lecture notes/Root finding/Open methods
+    - file: Lecture notes/Root finding/Global convergence methods
