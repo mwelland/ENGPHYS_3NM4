@@ -22,7 +22,7 @@ jobs:
     - name: Combine HTML files
       run: |
         # Find and concatenate all HTML files under docs/Lecture notes
-        find docs/Lecture\ notes -type f -name "*.html" -exec cat {} + > docs/output/combined.html
+        find docs/Lecture\ notes/Root\finding -type f -name "*.html" -exec cat {} + > docs/output/combined.html
 
     - name: Set up Python environment
       uses: actions/setup-python@v2
