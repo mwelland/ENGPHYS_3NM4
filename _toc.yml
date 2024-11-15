@@ -10,7 +10,5 @@ chapters:
     - file: Closed methods
     - file: Open methods
     - file: Closed methods
-    - file: Closed methods/Newton's method
-    - file: Closed methods/Secant method
     - file: Global convergence methods
     
