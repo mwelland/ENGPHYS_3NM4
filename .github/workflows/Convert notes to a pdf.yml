@@ -1,0 +1,43 @@
+name: Generate Single PDF from Notebooks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  generate_pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python environment
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install jupyter nbconvert
+
+    - name: Convert all Jupyter Notebooks to PDF
+      run: |
+        # Create a temporary directory to store the combined notebook
+        mkdir combined_notebooks
+
+        # Find all .ipynb files and copy them to a combined directory
+        find . -type f -name "*.ipynb" -exec cp {} combined_notebooks/ \;
+
+        # Convert the combined notebooks into a single PDF
+        jupyter nbconvert --to pdf combined_notebooks/*.ipynb
+
+    - name: Upload generated PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: notebook-pdf
+        path: combined_notebooks/*.pdf
