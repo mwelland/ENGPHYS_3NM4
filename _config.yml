@@ -1,0 +1,3 @@
+title: My Jupyter Book
+execute:
+  execute_notebooks: auto  # Run notebooks during the build
