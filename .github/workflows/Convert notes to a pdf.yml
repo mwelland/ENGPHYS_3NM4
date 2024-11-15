@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install jupyter nbconvert
+        pip install jupyter nbconvert pandoc
 
     - name: Convert all Jupyter Notebooks to PDF
       run: |
