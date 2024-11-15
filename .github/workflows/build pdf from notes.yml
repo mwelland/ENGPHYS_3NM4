@@ -23,14 +23,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-<<<<<<< HEAD:.github/workflows/convert notes to pdf.yml
         # Install pandoc
         sudo apt-get update
         sudo apt-get install -y pandoc
         pip install jupyter nbconvert
-=======
-        pip install jupyter nbconvert pandoc
->>>>>>> 8299fb50c73be84ae05cdc69c07c98603eaf26e2:.github/workflows/build pdf from notes.yml
 
     - name: Convert all Jupyter Notebooks to PDF
       run: |
