@@ -3,7 +3,6 @@
 format: jb-book
 root: Lecture notes/Curve_fit.ipynb
 chapters:
-
 - file: Lecture notes/Root finding/Root_finding.ipynb
   sections:
     - file: Lecture notes/Root finding/Polynomial roots
