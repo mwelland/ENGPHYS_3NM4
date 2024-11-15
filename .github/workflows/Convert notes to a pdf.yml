@@ -31,7 +31,7 @@ jobs:
         mkdir combined_notebooks
 
         # Find all .ipynb files and copy them to a combined directory
-        find . -type f -name "*.ipynb" -exec cp {} combined_notebooks/ \;
+        find . -type f -name "Lecture notes/*.ipynb" -exec cp {} combined_notebooks/ \;
 
         # Convert the combined notebooks into a single PDF
         jupyter nbconvert --to pdf combined_notebooks/*.ipynb
