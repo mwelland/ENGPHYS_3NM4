@@ -33,8 +33,9 @@ jobs:
         OUTPUT_PDF="pdf_output/combined.pdf"
         
         # Find all .html files and concatenate them into one temporary file
-        cat html_files/*.html > temp_combined.html
-        
+        #cat html_files/*.html > temp_combined.html
+        find docs/Lecture\ notes -type f -name "*.html" -exec cat {} + > temp_combined.html
+
         # Use WeasyPrint to convert the combined HTML to PDF
         weasyprint temp_combined.html $OUTPUT_PDF
         
