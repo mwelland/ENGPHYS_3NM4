@@ -1,4 +1,4 @@
-name: Convert HTML to PDF
+name: HTML to PDF Conversion
 
 on:
   push:
@@ -16,34 +16,30 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Prepare output directory
+      run: mkdir -p docs/output
+
+    - name: Combine HTML files
+      run: |
+        # Find and concatenate all HTML files under docs/Lecture notes
+        find docs/Lecture\ notes -type f -name "*.html" -exec cat {} + > docs/output/combined.html
+
     - name: Set up Python environment
       uses: actions/setup-python@v2
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
+    - name: Install WeasyPrint
       run: |
-        # Install WeasyPrint
         pip install weasyprint
 
-    - name: Convert HTML files to PDF
+    - name: Convert HTML to PDF
       run: |
-        # Combine all .html files in the 'html_files' directory into a single PDF
-        mkdir -p pdf_output
-        OUTPUT_PDF="pdf_output/combined.pdf"
-        
-        # Find all .html files and concatenate them into one temporary file
-        #cat html_files/*.html > temp_combined.html
-        find docs/Lecture\ notes -type f -name "*.html" -exec cat {} + > temp_combined.html
+        # Convert combined HTML to PDF
+        weasyprint docs/output/combined.html docs/output/combined.pdf
 
-        # Use WeasyPrint to convert the combined HTML to PDF
-        weasyprint temp_combined.html $OUTPUT_PDF
-        
-        # Cleanup temporary file
-        rm temp_combined.html
-
-    - name: Upload generated PDF
+    - name: Upload PDF as an artifact
       uses: actions/upload-artifact@v3
       with:
-        name: html-to-pdf
+        name: combined-pdf
         path: docs/output/combined.pdf
