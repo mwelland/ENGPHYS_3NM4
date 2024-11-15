@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Truncation error &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Truncation_error';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="Curve_fit.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="Curve_fit.html">
+                    Example: An overdetermined, inconsistent linear system
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Root%20finding/Root_finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lecture notes/Truncation_error.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Truncation error</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">Taylor series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-the-order-of-approximatino-of-the-central-difference-formula">Example 2: Find the order of approximatino of the central difference formula,</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-examine-the-terms-of-sin-x-for-large-x">Example: Examine the terms of  sin(x)  for large x</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-you-should-use-a-package">Why you should use a package</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Truncation_error.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">binary_repr</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">binary_repr</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="truncation-error">
+<h1>Truncation error<a class="headerlink" href="#truncation-error" title="Link to this heading">#</a></h1>
+<p>Truncation error occurs when we <em>approximate</em> a mathematical function.</p>
+<section id="taylor-series">
+<h2>Taylor series<a class="headerlink" href="#taylor-series" title="Link to this heading">#</a></h2>
+<p>Recall the <em>EVER SO USEFUL</em> Taylor series:</p>
+<p><span class="math notranslate nohighlight">\(f(x+\Delta x) = f(x) + f'(x) \Delta x + f''(x) \frac{\Delta x ^2}{2} + f'''(x) \frac{\Delta x ^3}{6} + ...\)</span></p>
+<p><span class="math notranslate nohighlight">\(= \sum_{n=0}^{\infty} \frac{f^{(n)}(x)}{n!} \Delta x ^n\)</span></p>
+<p>but this is not useful unless we have an infinite amount of time and resources.</p>
+<p>If <span class="math notranslate nohighlight">\(\Delta x\)</span> is <em>small</em>, <span class="math notranslate nohighlight">\(\Delta x ^2\)</span> is smaller, and <span class="math notranslate nohighlight">\(\Delta x ^3\)</span> smaller still. In fact, as long as <span class="math notranslate nohighlight">\(f(x)\)</span> is <em>well behaved</em> (loosely defined as continuous, smooth, differentiable, not infinite, etc) the derivatives don’t explode exponentially and the rightmost terms get very small.</p>
+<p>So let’s <em>truncate</em> the series and only keep the first <span class="math notranslate nohighlight">\(k\)</span> terms:</p>
+<p><span class="math notranslate nohighlight">\(f(x+\Delta x) = f(x) + f'(x) \Delta x + f''(x) \frac{\Delta x ^2}{2} + E_k \)</span></p>
+<p>where</p>
+<p><span class="math notranslate nohighlight">\(E_k = \sum_{n=k}^{\infty} \frac{f^{(n)}(x)}{n!} \Delta x ^n\)</span></p>
+<p>is the <strong>truncation error</strong>.</p>
+<p>This quantity is akin to a True Error in that if we knew what <span class="math notranslate nohighlight">\(E_k\)</span> was exactly, we would have the true function <span class="math notranslate nohighlight">\(f\)</span>!</p>
+<p>It is more useful to define the <em>order</em> of the error. Noting that the leading term is <span class="math notranslate nohighlight">\(\propto \Delta x ^k\)</span>, we would say:</p>
+<p><span class="math notranslate nohighlight">\(f(x_0+\Delta x) \approx f(x_0) + f'(x_0) \Delta x + f''(x_0) \frac{\Delta x ^2}{2} + 𝒪(\Delta x ^3)\)</span></p>
+<p>or that this is a <em>third</em> order approximation.</p>
+<p>This is a useful statement, since it indicates the payoff for tuning the numerical parameters. In this case, halving the step size halves the error.</p>
+<p>###Example: Find the order of approximate derivative we calculated previously (known as the <em>forward</em> difference).</p>
+<p><span class="math notranslate nohighlight">\(f'(x) \approx \frac{f(x+\Delta x) - f(x)}{\Delta x}\)</span></p>
+<p>We can substitute the Taylor series for <span class="math notranslate nohighlight">\(f(x+\Delta x)\)</span></p>
+<p><span class="math notranslate nohighlight">\(f'(x) \approx \frac{f(x) + f'(x_0) \Delta x + f''(x_0) \frac{\Delta x ^2}{2} ... - f(x)}{\Delta x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx \frac{f'(x_0) \Delta x + f''(x_0) \frac{\Delta x ^2}{2} ...}{\Delta x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx f'(x_0) + f''(x_0) \frac{\Delta x}{2} ...\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx f'(x_0) + f''(x_0) \frac{\Delta x}{2} ...\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx f'(x_0) + 𝒪(\Delta x)\)</span></p>
+<p>Therefore this approximation, call the <em>forward difference</em> is a first order algorithm.</p>
+<section id="example-2-find-the-order-of-approximatino-of-the-central-difference-formula">
+<h3>Example 2: Find the order of approximatino of the central difference formula,<a class="headerlink" href="#example-2-find-the-order-of-approximatino-of-the-central-difference-formula" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(f'(x) \approx \frac{f(x+\Delta x) - f(x-\Delta x)}{2 \Delta x}\)</span></p>
+<p>Substituting the (3rd order) Taylor series for <span class="math notranslate nohighlight">\(f(x+\Delta x)\)</span> and <span class="math notranslate nohighlight">\(f(x+[-\Delta x])\)</span></p>
+<p><span class="math notranslate nohighlight">\(f'(x) \approx \frac{f(x) + f'(x) \Delta x + f''(x) \frac{\Delta x ^2}{2} + f'''(x_0) \frac{\Delta x ^3}{6} ... - [f(x) + f'(x) [-\Delta x] + f''(x) \frac{-\Delta x ^2}{2} + f'''(x_0) \frac{-\Delta x ^3}{6}...]}{2 \Delta x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx \frac{f(x) + f'(x) \Delta x + f''(x) \frac{\Delta x ^2}{2} + f'''(x_0) \frac{\Delta x ^3}{6} ... - f(x) + f'(x) \Delta x - f''(x) \frac{-\Delta x ^2}{2} + f'''(x_0) \frac{-\Delta x ^3}{6}...}{2 \Delta x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx \frac{2 f'(x) \Delta x + 2 f'''(x_0) \frac{\Delta x ^3}{6} ...}{2 \Delta x}\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx f'(x) + f'''(x_0) \frac{\Delta x ^2}{6} ...\)</span></p>
+<p><span class="math notranslate nohighlight">\(\approx f'(x) + 𝒪(\Delta x ^2)\)</span></p>
+<p>Therefore, the central difference approximation is a second order algorithm (for the same number of function calls!). By halving the step size, the error is quartered!</p>
+<p>#Common mathematical functions</p>
+<p>Computers are very good at addition / subtraction, multiplication / division, and exponentiation. How should we calculate other functions?</p>
+<p>Let’s examine some Taylor expansions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Function</p></th>
+<th class="head text-left"><p>Taylor Expansion</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\(\sin(x) \)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots \)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\( \cos(x) \)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots \)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><span class="math notranslate nohighlight">\( \exp(x) \)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots \)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><span class="math notranslate nohighlight">\( \ln(1+x) \)</span></p></td>
+<td class="text-left"><p><span class="math notranslate nohighlight">\( x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots \)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>On the surface these look good, and in <em>infinite</em> precision they are globally convergent.</p>
+<p>But we are not in <em>infinite</em> precision.</p>
+<p>###Example: Examine the terms of <span class="math notranslate nohighlight">\(sin(x)\)</span> for small x</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">def</span> <span class="nf">taylor_series_sin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_terms</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the Taylor series expansion of sin(x) up to n_terms.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    x (float): The point at which to evaluate the Taylor series.</span>
+<span class="sd">    n_terms (int): The number of terms to include in the expansion.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    list: A list of terms in the Taylor series expansion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_terms</span><span class="p">):</span>
+        <span class="n">term</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">term</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The terms are as follows:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">term</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">terms</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Term </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">term</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Approximate sin(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">, and it should be </span><span class="si">{</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">:</span><span class="s2">.10f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For a small x:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taylor_series_sin</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>NB: The terms are flipping signs (potential for roundoff error), but more importantly they are decresing.</p>
+<p>-&gt; No problem</p>
+</section>
+<section id="example-examine-the-terms-of-sin-x-for-large-x">
+<h3>Example: Examine the terms of  sin(x)  for large x<a class="headerlink" href="#example-examine-the-terms-of-sin-x-for-large-x" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taylor_series_sin</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Getting a bit funny…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">taylor_series_sin</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Completely wrong.</p>
+</section>
+</section>
+<section id="why-you-should-use-a-package">
+<h2>Why you should use a package<a class="headerlink" href="#why-you-should-use-a-package" title="Link to this heading">#</a></h2>
+<p>In this case, the remedy is fairly simple, but if you are not careful, these function can behave very strangely. In practice, the means of calculation are very sophisticated for performance and stability, including other expansion techniques and sometimes even look-up tables.</p>
+<p>This is why we use packages! :-)</p>
+<p>The Taylor expansion is still useful to consider limiting behaviour.</p>
+<p>For small <span class="math notranslate nohighlight">\(x\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(exp(x) \approx 1+x\)</span>
+which is subject to roundoff error. Therefore packages like numpy provide special functions like <span class="math notranslate nohighlight">\(expm1 = exp(x)-1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Poorer approximation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#Better approximation</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lecture notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#taylor-series">Taylor series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-the-order-of-approximatino-of-the-central-difference-formula">Example 2: Find the order of approximatino of the central difference formula,</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-examine-the-terms-of-sin-x-for-large-x">Example: Examine the terms of  sin(x)  for large x</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-you-should-use-a-package">Why you should use a package</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

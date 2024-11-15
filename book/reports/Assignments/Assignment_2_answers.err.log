@@ -1,0 +1,71 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.9.20/x64/lib/python3.9/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+A = np.array([[-5, 3, 0, 0, 0],
+              [3, -6, 3, 0, 0],
+              [0, 3, -6, 3, 0],
+              [0, 0, 3, -6, 3],
+              [0, 0, 0, 3, -5]])
+b = np.array([-.08, 0, 0, .06, 0])
+x0 = np.array([0., 0., 0., 0., 0.])
+
+import numpy as np
+def gauss_seidel_step(A, b, x):
+  """Performs a single Gauss-Seidel iteration step.
+
+  Args:
+    A: The coefficient matrix.
+    b: The right-hand side vector.
+    x: The current solution vector.
+
+  Returns:
+    The updated solution vector.
+  """
+
+  n = len(x)
+  for i in range(n):
+    x[i] = (b[i] - np.dot(A[i, :i], x[:i]) - np.dot(A[i, i + 1:], x[i + 1:])) / A[i, i]
+  return x
+
+np.set_printoptions(precision=4)
+
+print('The true answer is: \n', np.linalg.solve(A, b), '\n')
+for i in range(100):
+  x0 = gauss_seidel_step(A, b, x0)
+  residual = np.dot(A, x0) - b
+  print(f'Iteration {i + 1}: x = {x0}, residual = {np.linalg.norm(residual)}')
+  if np.linalg.norm(residual) < 1e-4:
+    break
+
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      2[0m A [38;5;241m=[39m np[38;5;241m.[39marray([[[38;5;241m-[39m[38;5;241m5[39m, [38;5;241m3[39m, [38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m0[39m],
+[1;32m      3[0m               [[38;5;241m3[39m, [38;5;241m-[39m[38;5;241m6[39m, [38;5;241m3[39m, [38;5;241m0[39m, [38;5;241m0[39m],
+[1;32m      4[0m               [[38;5;241m0[39m, [38;5;241m3[39m, [38;5;241m-[39m[38;5;241m6[39m, [38;5;241m3[39m, [38;5;241m0[39m],
+[1;32m      5[0m               [[38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m3[39m, [38;5;241m-[39m[38;5;241m6[39m, [38;5;241m3[39m],
+[1;32m      6[0m               [[38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m3[39m, [38;5;241m-[39m[38;5;241m5[39m]])
+[1;32m      7[0m b [38;5;241m=[39m np[38;5;241m.[39marray([[38;5;241m-[39m[38;5;241m.08[39m, [38;5;241m0[39m, [38;5;241m0[39m, [38;5;241m.06[39m, [38;5;241m0[39m])
+
+[0;31mModuleNotFoundError[0m: No module named 'numpy'
+
