@@ -1,0 +1,884 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The Hessian &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture_notes/Linear_systems/Indirect methods/Linear_systems_5';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome to My Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Lecture_notes/Linear_systems/Indirect methods/Linear_systems_5.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Hessian</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hessian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-minimal-residual-method-gmres">Generalized Minimal Residual Method (GMRES)</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Linear_systems_5.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p>Goals</p>
+<ul class="simple">
+<li><p>Understand how iterative methods approach the solution through building a basis</p></li>
+<li><p>Be able to use Conjugate Gradient and GMRES</p></li>
+</ul>
+<p>#Nomenclature</p>
+<p>Capital letters are Matricies: <span class="math notranslate nohighlight">\(A\)</span></p>
+<p>Vectors have arrows above: <span class="math notranslate nohighlight">\(\vec{x}\)</span></p>
+<p>Scalars are lower case: <span class="math notranslate nohighlight">\(\alpha\)</span></p>
+<p>Superscripts generally denote iteration number: <span class="math notranslate nohighlight">\(\vec{x}^k\)</span>.</p>
+<p>#Conjugate gradient (CG)</p>
+<p>Conjugate gradient method is a standard tool for solving symmetric positive definite systems.</p>
+<p>Consider a quadratic surface, defined by:</p>
+<p><span class="math notranslate nohighlight">\(f(\vec{x}^k) = \frac{1}{2} \vec{x}^T A \vec{x} -\vec{b}^T \vec{x}\)</span>.</p>
+<p>This surface has a minimum at:</p>
+<p>\begin{align}
+\frac{d f}{ d x} = \vec{0} &amp;= A \vec{x}-\vec{b} \
+\vec{0} &amp;= \vec{r}
+\end{align}</p>
+<p>Where <span class="math notranslate nohighlight">\(\vec{r}=A \vec{x}-\vec{b} \)</span> is the residual. Minimizing <span class="math notranslate nohighlight">\(f\)</span> is equivilant to solving <span class="math notranslate nohighlight">\(A\vec{x} = \vec{b}\)</span> which is equiviliant to finding <span class="math notranslate nohighlight">\(\vec{r}=\vec{0}\)</span>.</p>
+<p>For a general guess <span class="math notranslate nohighlight">\(\vec{x}^k\)</span>,</p>
+<p>\begin{align}
+A \vec{x}^k-\vec{b} =\vec{r}^k \ne 0 \
+\end{align}</p>
+<section id="the-hessian">
+<h1>The Hessian<a class="headerlink" href="#the-hessian" title="Link to this heading">#</a></h1>
+<p>Note: The matrix <span class="math notranslate nohighlight">\(A\)</span> in this case is the <em>hessian</em>, <span class="math notranslate nohighlight">\(H\)</span>, of <span class="math notranslate nohighlight">\(f\)</span>, which is the matrix made by the mixed second derivatives:</p>
+<p><span class="math notranslate nohighlight">\(H = \begin{bmatrix}
+\frac{\partial^2 f}{\partial x_1^2} &amp; \frac{\partial^2 f}{\partial x_1 \partial x_2} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} &amp; \frac{\partial^2 f}{\partial x_2^2} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_2 \partial x_n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\frac{\partial^2 f}{\partial x_n \partial x_1} &amp; \frac{\partial^2 f}{\partial x_n \partial x_2} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_n^2}
+\end{bmatrix}\)</span></p>
+<p>From the rule of mixed second derivatives, we see that the Hessian is symmetric.</p>
+<p>The Hessian is positive definite if <span class="math notranslate nohighlight">\(\vec{x}^T H \vec{x} &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(\vec{x}\)</span>. In this case the quadratic surface <span class="math notranslate nohighlight">\(f\)</span> is convex (opening upwards). For a 1D case, this means you have a positive second derivative.</p>
+<blockquote>
+<div><p>For comparison, the other common function with second derivatives is the Laplacian, which is a scalar sum of the diagonal elements of H: <span class="math notranslate nohighlight">\(\Delta f = \nabla^2 f = \frac{\partial^2 f}{\partial x_1^2} + \frac{\partial^2 f}{\partial x_2^2} + \frac{\partial^2 f}{\partial x_3^2} ... \)</span></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is symmetric, you could form a surface <span class="math notranslate nohighlight">\(f\)</span> which has an <em>extrenum</em> at the solution of the system. These problems are generally called <em>saddle point problem</em>.</p></li>
+<li><p>Since <span class="math notranslate nohighlight">\(A\)</span> is symmetric positive definite, the surface is convex quadratic (paraboloid) which has a minimum at the solution of the linear system.</p></li>
+</ul>
+<p>##The algorithm</p>
+<p>Starting at <span class="math notranslate nohighlight">\(\vec{x}^k\)</span>, we will choose step direction <span class="math notranslate nohighlight">\(\vec{s}^k\)</span>, and step length <span class="math notranslate nohighlight">\(\alpha^k\)</span> to reach our next guess <span class="math notranslate nohighlight">\(\vec{x}^{k+1}\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(\vec{x}^{k+1} = \vec{x}^k + \alpha^k \vec{s}^k\)</span></p>
+</section>
+<section id="choose-the-step-length">
+<h1>Choose the step length<a class="headerlink" href="#choose-the-step-length" title="Link to this heading">#</a></h1>
+<p>An obvious choice for <span class="math notranslate nohighlight">\(\alpha^k\)</span> is whatever minimizes <span class="math notranslate nohighlight">\(f(\vec{x}^{k+1})\)</span>!</p>
+<p><span class="math notranslate nohighlight">\(f(\vec{x}+\alpha^k \vec{s}^k) = \frac{1}{2} [\vec{x}+\alpha^k \vec{s}^k]^T A [\vec{x}+\alpha^k \vec{s}^k] -\vec{b}^T [\vec{x}+\alpha^k \vec{s}^k]\)</span>.</p>
+<p>The minimum is found when:</p>
+<p>\begin{align}
+\frac{\partial f}{\partial \alpha^k} = 0 &amp;= {\vec{s}^k}^T A [\vec{x}+\alpha^k \vec{s}^k] -\vec{b}^T \vec{s}^k\
+&amp;= {\vec{s}^k}^T A \vec{x}^k+ {\vec{s}^k}^T A \alpha^k \vec{s}^k -{\vec{s}^k}^T \vec{b} \
+&amp;= {\vec{s}^k}^T [A \vec{x}^k-\vec{b}] + \alpha^k {\vec{s}^k}^T A  \vec{s}^k  \
+\alpha_k &amp;= \frac{{\vec{s}^k}^T \vec{r}^k}{{\vec{s}^k}^T A  \vec{s}^k}
+\end{align}</p>
+<p>So given a step direction <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> we can take an optimal step length <span class="math notranslate nohighlight">\(\alpha_k\)</span> which is determined by the current residual <span class="math notranslate nohighlight">\(\vec{r}^k\)</span>.</p>
+<p>###Choose the step direction: Steepest descent</p>
+<p>The magic of these methods comes from the choice of step direction.</p>
+<p>How do we go about choosing <span class="math notranslate nohighlight">\(\vec{s}^k\)</span>?</p>
+<p>The intuitive answer is the negative gradient of <span class="math notranslate nohighlight">\(f(x^k)\)</span>, which is simply,</p>
+<p><span class="math notranslate nohighlight">\(s^k = -\nabla f = -\frac{d f}{d\vec{x}} = -\vec{r}^k\)</span></p>
+<p>The optimal step size is therefore,</p>
+<p><span class="math notranslate nohighlight">\(\alpha_k=\frac{{\vec{r}^k}^T \vec{r}^k}{{\vec{r}^k}^T A \vec{r}^k}\)</span></p>
+<p>Now we take the step to form <span class="math notranslate nohighlight">\(\vec{x}^{k+1}\)</span> and repeat the process until your choice of tolerance on the residual (or <span class="math notranslate nohighlight">\(\vec{x}^k\)</span>!) is met.</p>
+<p>Let’s code it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy the surface plotter from the last lecture:</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">plot_surface</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x_true</span><span class="p">):</span>
+  <span class="c1"># Utility function to autoscale the plot limits to include x0 and x_true</span>
+  <span class="k">def</span> <span class="nf">calculate_box_limits</span><span class="p">(</span><span class="n">point1</span><span class="p">,</span> <span class="n">point2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mf">.5</span><span class="p">):</span>
+    <span class="c1"># Extract coordinates</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">point1</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">point2</span>
+    <span class="c1"># Calculate min and max coordinates with padding</span>
+    <span class="n">min_x</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="o">-</span> <span class="n">padding</span>
+    <span class="n">max_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span> <span class="o">+</span> <span class="n">padding</span>
+    <span class="n">min_y</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">-</span> <span class="n">padding</span>
+    <span class="n">max_y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span> <span class="o">+</span> <span class="n">padding</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">min_x</span><span class="p">,</span> <span class="n">max_x</span><span class="p">,</span> <span class="n">min_y</span><span class="p">,</span> <span class="n">max_y</span><span class="p">)</span>
+
+  <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">yb</span><span class="p">,</span> <span class="n">ye</span> <span class="o">=</span> <span class="n">calculate_box_limits</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+  <span class="c1"># Plot the linear system</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yb</span><span class="p">,</span> <span class="n">ye</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+  <span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+  <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">((</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">Z</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">Y</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span> <span class="o">*</span> <span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">Y</span><span class="p">)</span>
+  <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+  <span class="n">CS</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">])</span>  <span class="c1"># Set x-axis limits</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">yb</span><span class="p">,</span> <span class="n">ye</span><span class="p">])</span>  <span class="c1"># Set y-axis limits</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">CS</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">fig</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Copy the surface plotter from the last lecture:</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">def</span> <span class="nf">plot_surface</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x_true</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>   <span class="c1"># Utility function to autoscale the plot limits to include x0 and x_true</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: write a function to solve a linear system using the method of steepest descent</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="k">def</span> <span class="nf">steepest_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Solves a linear system Ax = b using the method of steepest descent.</span>
+
+
+<span class="sd">  Args:</span>
+<span class="sd">    A: The coefficient matrix (must be symmetric positive definite).</span>
+<span class="sd">    b: The right-hand side vector.</span>
+<span class="sd">    x0: The initial guess for the solution.</span>
+<span class="sd">    tol: The tolerance for the residual.</span>
+<span class="sd">    max_iter: The maximum number of iterations.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    x: The approximate solution.</span>
+<span class="sd">    residuals: A list of the residuals at each iteration.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+  <span class="n">iterations</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">A</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
+      <span class="k">break</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">A</span> <span class="o">@</span> <span class="n">r</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">r</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteration &#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s1">&#39; : &#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">iterations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">iterations</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">x_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The true answer is &#39;</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_surface</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">iterations</span> <span class="o">=</span> <span class="n">steepest_descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+
+<span class="n">iterations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">iterations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The true answer is  [0.81818182 1.72727273]
+Iteration  0  :  [1.1380597  1.36567164]
+Iteration  1  :  [0.78590538 1.65913358]
+Iteration  2  :  [0.83080067 1.71300793]
+Iteration  3  :  [0.81690855 1.72458471]
+Iteration  4  :  [0.81867962 1.72671   ]
+Iteration  5  :  [0.81813159 1.72716669]
+Iteration  6  :  [0.81820146 1.72725053]
+Iteration  7  :  [0.81817984 1.72726854]
+Iteration  8  :  [0.81818259 1.72727185]
+Iteration  9  :  [0.81818174 1.72727256]
+</pre></div>
+</div>
+<img alt="../../../_images/69f9265531a15d3f41f0bfb63ae71771becb4c0425eabd3206c0a8ccecf6eaca.png" src="../../../_images/69f9265531a15d3f41f0bfb63ae71771becb4c0425eabd3206c0a8ccecf6eaca.png" />
+</div>
+</div>
+<p>The approach results in the final <span class="math notranslate nohighlight">\(\vec{x}^{approx}\)</span> (eg: after 9 iterations) being formed as:</p>
+<p><span class="math notranslate nohighlight">\(\vec{x}^{9} = \vec{x}^0 + \alpha^1 \vec{s}^1 + \alpha^2 \vec{s}^2 + \alpha^3 \vec{s}^3 ...\)</span></p>
+<p>Let’s consider this for a minute. We are assembling the vector that moves from <span class="math notranslate nohighlight">\(\vec{x}^0\)</span> to <span class="math notranslate nohighlight">\(~\vec{x}^9\)</span>, as a series of 9 steps in directions <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> with magnitude <span class="math notranslate nohighlight">\(\alpha^k\)</span>.</p>
+<p>-&gt; What does this expression remind you of?</p>
+<p>This path is inefficient because you end up with zig-zagging where one step <em>undoes</em> some of the others which is inefficient.</p>
+<p>-&gt; How do we ensure the next step doesn’t undo the previous step?</p>
+</section>
+<section id="choose-the-step-direction-conjugate-gradient">
+<h1>Choose the step direction: Conjugate gradient<a class="headerlink" href="#choose-the-step-direction-conjugate-gradient" title="Link to this heading">#</a></h1>
+<p>The problem is that certain steps undo the effect of the previous step(s). We can instead choose successive step directions to <em>not undo each other</em>, by requiring the next step be <em>conjugate</em> to each other.</p>
+<p>This means we must base the <span class="math notranslate nohighlight">\(\vec{s}^{k+1}\)</span> step on the <span class="math notranslate nohighlight">\(\vec{s}^{k}\)</span> step and the gradient descent (which we just saw was <span class="math notranslate nohighlight">\(\vec{r}^k\)</span>).</p>
+<p><span class="math notranslate nohighlight">\(\vec{s}^{k+1} = \vec{r}^{k+1}+\beta^k \vec{s}^k\)</span></p>
+<p>and require that <span class="math notranslate nohighlight">\(\vec{s}^{k+1}\)</span> and <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> are <em>conjugate to each other in <span class="math notranslate nohighlight">\(A\)</span></em>:</p>
+<p><span class="math notranslate nohighlight">\({\vec{s}^{k+1}}^T A \vec{s}^k = 0\)</span></p>
+<p>This does not mean that <span class="math notranslate nohighlight">\(\vec{s}^{k+1}\)</span> and <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> are orthogonal; rather vectors <span class="math notranslate nohighlight">\(\vec{s}^{k+1}\)</span> and <span class="math notranslate nohighlight">\(A \vec{s}^k\)</span> (or equivilantly <span class="math notranslate nohighlight">\(A \vec{s}^{k+1}\)</span> and <span class="math notranslate nohighlight">\(\vec{s}^k\)</span>) are orthogonal.</p>
+<p>We can then solve,</p>
+<p>\begin{align}
+[\vec{r}^{k+1}+\beta^k \vec{s}^k]^T A \vec{s}^k &amp;= 0\
+\beta^k  &amp;= -\frac{\vec{r}^{k+1} A \vec{s}^k}{{\vec{s}^k}^T A \vec{s}^k}
+\end{align}</p>
+<p>and so we find the next step direction,</p>
+<p><span class="math notranslate nohighlight">\(s^{k+1} = r^{k+1} -\frac{r^{k+1} A s^k}{{s^k}^T A s^k} s^k\)</span>.</p>
+<p>The step length <span class="math notranslate nohighlight">\(\alpha_k\)</span> is determined exactly as before.</p>
+<p>Actually, we are going to make the new step direction conjugate to <em>all</em> the previous directions, so we have to say:</p>
+<p><span class="math notranslate nohighlight">\(\vec{s}^{k+1} = \vec{r}^{k+1} - \sum_{i&lt;k}\frac{\vec{r}^{k+1} A \vec{s}^k}{{\vec{s}^k}^T A \vec{s}^k} \vec{s}^k\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+<span class="n">x_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The true answer is &#39;</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The true answer is  [0.81818182 1.72727273]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: call a cg solve on this system, but build a list of the iterations</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">cg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">iterations</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_iteration_and_save</span><span class="p">(</span><span class="n">xk</span><span class="p">):</span>
+  <span class="n">iterations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xk</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">cg</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">print_iteration_and_save</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 0.]
+[1.1380597  1.36567164]
+[0.81818182 1.72727273]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">iterations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_surface</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">x_true</span><span class="p">)</span>
+
+<span class="c1"># Plot the iterations on a 2D surface</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterations</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">iterations</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/039579daad6d610431820a55edf2321dac48deb5dfca0b2364aeba30bb5273b5.png" src="../../../_images/039579daad6d610431820a55edf2321dac48deb5dfca0b2364aeba30bb5273b5.png" />
+</div>
+</div>
+<p>Let’s examine the steps, which we can find as the difference between successive iterations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s1</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">-</span><span class="n">iterations</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">iterations</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span><span class="o">-</span><span class="n">iterations</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">s2</span><span class="p">))</span>  <span class="c1">#not zero</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="n">A</span><span class="nd">@s2</span><span class="p">))</span>  <span class="c1">#Zero</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span><span class="n">A</span><span class="nd">@s1</span><span class="p">))</span>  <span class="c1">#Zero</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.1380597  1.36567164] [-0.31987788  0.36160109]
+0.1297882196885316
+6.661338147750939e-16
+6.661338147750939e-16
+</pre></div>
+</div>
+</div>
+</div>
+<p>Successive steps are conjugate in <span class="math notranslate nohighlight">\(A\)</span> as expected.</p>
+<p>Another interesting property is that the residual at each step is orthogonal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r0</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@iterations</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">-</span><span class="n">b</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@iterations</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="o">-</span><span class="n">b</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@iterations</span><span class="p">[</span><span class="mi">2</span><span class="p">,:]</span><span class="o">-</span><span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">r0</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>which helps with computational efficiency.</p>
+</section>
+<section id="analysis">
+<h1>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h1>
+<p>Beginning at <span class="math notranslate nohighlight">\(\vec{x}^0\)</span>, we are tasked with finding <span class="math notranslate nohighlight">\(\vec{x}^{approx}\)</span> through an expansion:</p>
+<p><span class="math notranslate nohighlight">\(\vec{x}^{approx} - \vec{x}^0 =  \alpha^1 \vec{s}^1 + \alpha^2 \vec{s}^2 + ...\)</span>.</p>
+<p>but this is simply vector addition using a set of directions. Our algorithms has generated the directions <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> which form a set of <em>vector bases</em> for:</p>
+<p><span class="math notranslate nohighlight">\(\vec{x}^{approx} - \vec{x}^0\)</span></p>
+<p>and, at the same time, the corresonding <em>components</em>, the <span class="math notranslate nohighlight">\(\alpha^k\)</span>.</p>
+<ul class="simple">
+<li><p>The method of steepest descent doesn’t enforce all vector bases be orthogonal (or conjugate), resulting in frenetic zig-zagging and more bases than necessary.</p></li>
+<li><p>The conjugate gradient method enforces conjugacy in the vector bases such that they don’t overlap. Vectors are linearly independent from the matrix-vector products of the others. This algorithm relies on <span class="math notranslate nohighlight">\(A\)</span> being SPD.</p></li>
+</ul>
+<blockquote>
+<div><p>Note that these techniques only ever use <span class="math notranslate nohighlight">\(A\)</span> in the context for a matrix-vector product - <span class="math notranslate nohighlight">\(A \vec{x}\)</span>. Matrix-vector products are <span class="math notranslate nohighlight">\(O(n^2)\)</span> (for dense matricies, better for sparse) but there is also the storage requirement for <span class="math notranslate nohighlight">\(A\)</span>. If we can find a better way to get the vector <span class="math notranslate nohighlight">\(A\vec{x}\)</span> that doesn’t involve (assembling), storing, and multiplying <span class="math notranslate nohighlight">\(A\)</span>, we can see improvements. This is the basis of <strong>Matrix-free</strong> algorithms.</p>
+</div></blockquote>
+<p>Note the <em>space</em> of the solution vector <span class="math notranslate nohighlight">\(x\)</span> is just its dimension <span class="math notranslate nohighlight">\(n\)</span>, and if CG determins linearly independent vectors, it can only find, at most <span class="math notranslate nohighlight">\(n\)</span>! Therefore, CG will find the exact solution in <span class="math notranslate nohighlight">\(n\)</span> iterations (baring roundoff error) which some may take to imply it is a <em>direct method</em>. However, the situation is even better, which qualifies it as an iterative technique! Let’s see what happens with a larger system:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Solve a 10x10 random spd linear system with CG</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">cg</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">A_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">A_rand</span> <span class="o">=</span> <span class="n">A_r</span> <span class="o">@</span> <span class="n">A_r</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Ensure A is symmetric positive definite</span>
+<span class="n">b_rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x0_rand</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">it_counter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disp</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_disp</span> <span class="o">=</span> <span class="n">disp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">niter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rk</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">niter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_disp</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iter </span><span class="si">%3i</span><span class="se">\t</span><span class="s1">rk = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">niter</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">rk</span><span class="p">)))</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">cg</span><span class="p">(</span><span class="n">A_rand</span><span class="p">,</span> <span class="n">b_rand</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0_rand</span><span class="p">,</span> <span class="n">atol</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">rtol</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">it_counter</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution:&quot;</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Info:&quot;</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iter   1	rk = [0.0209 0.0075 0.032  0.0783 0.0439 0.0073 0.0369 0.0801]
+iter   2	rk = [-0.8925 -1.2871 -0.2747  1.7474  1.0466 -0.8757  0.0896  1.3888]
+iter   3	rk = [-1.1486 -1.8634 -0.5373  1.7162  1.341  -0.7321  0.404   1.9777]
+iter   4	rk = [-1.2676 -2.5568 -0.1426  1.5324  2.2171 -0.4695  0.4377  1.9871]
+iter   5	rk = [-2.2603 -2.864   0.6716  1.1551  3.1509 -0.1319  0.5006  2.1877]
+iter   6	rk = [-2.9958 -2.8345  0.9681  0.9131  4.1145 -0.3175  1.4379  1.8352]
+iter   7	rk = [-2.9739 -2.8203  1.0523  0.7471  4.2074 -0.5366  1.4883  1.9233]
+iter   8	rk = [-2.9605 -2.7277  0.9849  0.6628  4.3529 -0.6061  1.4368  1.9791]
+iter   9	rk = [-2.9605 -2.7277  0.9849  0.6628  4.3529 -0.6061  1.4368  1.9791]
+Solution: [-2.9605 -2.7277  0.9849  0.6628  4.3529 -0.6061  1.4368  1.9791]
+Info: 0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that successive iterations are getting closer and closer. Usually, the estimates converge before <span class="math notranslate nohighlight">\(n\)</span> iterations (which is especially useful for large sparse matricies!)</p>
+<p>###Restart</p>
+<p>Sometimes, the set of <span class="math notranslate nohighlight">\(s^k\)</span> gets too large and round-off error can accumulate. Therefore, some implementation have an integer ‘restart’ parameter which will trigger a restart of the bases after a set number have been generated.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="generalized-minimal-residual-method-gmres">
+<h1>Generalized Minimal Residual Method (GMRES)<a class="headerlink" href="#generalized-minimal-residual-method-gmres" title="Link to this heading">#</a></h1>
+<p>Let’s finally turn our attention towards the general case of <span class="math notranslate nohighlight">\(A\)</span> being a general non-symmetric matrix. Since it is non-symmetric, it can not be a Hessian and there is no quadratic surface associated with it.</p>
+<p>We can adapt the same basic method of CG:</p>
+<ul class="simple">
+<li><p>Take the residual of the system, <span class="math notranslate nohighlight">\(\vec{r} = A\vec{x}-\vec{b}\)</span> and minimize its Euclidian norm, <span class="math notranslate nohighlight">\(||\vec{r}||\)</span>.</p></li>
+<li><p>Beginning with <span class="math notranslate nohighlight">\(\vec{x}^0\)</span>, construct a basis for <span class="math notranslate nohighlight">\(\vec{x}^{approx}-\vec{x}^0\)</span> in <span class="math notranslate nohighlight">\(\vec{s}^k\)</span>.</p></li>
+<li><p>Enforce orthogonality with successive <span class="math notranslate nohighlight">\(\vec{s}^{k}\)</span></p></li>
+<li><p>Since each <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> is linearly independent, the method will converge in at most <span class="math notranslate nohighlight">\(n\)</span> iterations, but typically converges much sooner.</p></li>
+<li><p>A restart may still be necessary to control memory consumption for large systems.</p></li>
+</ul>
+<p>The major difference is that the conjugacy of <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> is not possible since <span class="math notranslate nohighlight">\(A\)</span> is not SPD. Rather, <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> are chosen to be orthogonal which is a more general, but less powerful condition.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">gmres</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
+
+
+<span class="n">iterations</span> <span class="o">=</span> <span class="p">[</span><span class="n">x0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">print_iteration_and_save</span><span class="p">(</span><span class="n">xk</span><span class="p">):</span>
+  <span class="n">iterations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">xk</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">xk</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">gmres</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">it_counter</span><span class="p">(),</span> <span class="n">callback_type</span> <span class="o">=</span> <span class="s1">&#39;legacy&#39;</span><span class="p">)</span>  <span class="c1">#x</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 0.]
+iter   1	rk = 0.15122563463888616
+iter   2	rk = 7.674967607276873e-17
+[array([0., 0.])]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">solution</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">gmres</span><span class="p">(</span><span class="n">A_rand</span><span class="p">,</span> <span class="n">b_rand</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">x0_rand</span><span class="p">,</span> <span class="n">atol</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">rtol</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">,</span> <span class="n">callback</span> <span class="o">=</span> <span class="n">it_counter</span><span class="p">(),</span> <span class="n">callback_type</span><span class="o">=</span><span class="s1">&#39;legacy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution:&quot;</span><span class="p">,</span> <span class="n">solution</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Info:&quot;</span><span class="p">,</span> <span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iter   1	rk = 0.6009604017495943
+iter   2	rk = 0.3918500855823959
+iter   3	rk = 0.20243617177538392
+iter   4	rk = 0.15688283627620023
+iter   5	rk = 0.10599045198232475
+iter   6	rk = 0.0398441273250505
+iter   7	rk = 0.022361032564208502
+iter   8	rk = 2.2495773485670963e-15
+Solution: [-2.9605 -2.7277  0.9849  0.6628  4.3529 -0.6061  1.4368  1.9791]
+Info: 0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lecture_notes/Linear_systems/Indirect methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hessian</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-minimal-residual-method-gmres">Generalized Minimal Residual Method (GMRES)</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

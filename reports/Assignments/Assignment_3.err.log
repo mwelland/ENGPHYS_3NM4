@@ -1,0 +1,65 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+
+# 20 data points presented in columns: | x | y | z | T |
+
+data = np.array([
+    [5.1690e-02, 2.3766e-01, 6.7059e-01, 5.2645e+02],
+    [1.1353e-01, 9.4708e-02, 5.3856e-01, 5.5201e+02],
+    [1.6676e-01, 1.4358e-01, 4.6936e-01, 5.0802e+02],
+    [1.3610e-01, 3.7207e-02, 2.1694e-01, 4.3663e+02],
+    [8.9225e-02, 3.7293e-01, 1.1270e+00, 3.9234e+02],
+    [1.9001e-01, 3.7240e-01, 8.4774e-01, 3.8872e+02],
+    [5.4849e-02, 3.5425e-01, 5.7478e-01, 4.3784e+02],
+    [1.7001e-01, 2.0241e-01, 1.2960e+00, 4.0159e+02],
+    [2.0606e-01, 3.1594e-01, 6.4077e-01, 4.2652e+02],
+    [2.5382e-01, 2.5859e-01, 4.8610e-01, 4.2481e+02],
+    [5.6038e-02, 8.2231e-02, 4.2029e-01, 5.3244e+02],
+    [3.1242e-01, 8.0489e-02, 1.1530e+00, 4.2453e+02],
+    [6.0186e-02, 4.4891e-01, 3.9941e-01, 3.4207e+02],
+    [1.5070e-01, 3.4794e-01, 1.5595e-01, 3.4750e+02],
+    [1.8215e-01, 3.4388e-01, 1.0478e+00, 3.9963e+02],
+    [1.1633e-01, 4.1011e-01, 5.5001e-01, 3.7611e+02],
+    [1.2377e-01, 3.3703e-01, 3.7672e-02, 3.1423e+02],
+    [4.6378e-02, 3.3653e-01, 1.4434e+00, 3.2345e+02],
+    [2.9063e-02, 3.2584e-02, 2.3977e-01, 4.5993e+02],
+    [2.1162e-02, 3.8590e-01, 2.5905e-01, 3.6901e+02]
+])
+
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      3[0m [38;5;66;03m# 20 data points presented in columns: | x | y | z | T |[39;00m
+[1;32m      5[0m data [38;5;241m=[39m np[38;5;241m.[39marray([
+[1;32m      6[0m     [[38;5;241m5.1690e-02[39m, [38;5;241m2.3766e-01[39m, [38;5;241m6.7059e-01[39m, [38;5;241m5.2645e+02[39m],
+[1;32m      7[0m     [[38;5;241m1.1353e-01[39m, [38;5;241m9.4708e-02[39m, [38;5;241m5.3856e-01[39m, [38;5;241m5.5201e+02[39m],
+[0;32m   (...)[0m
+[1;32m     25[0m     [[38;5;241m2.1162e-02[39m, [38;5;241m3.8590e-01[39m, [38;5;241m2.5905e-01[39m, [38;5;241m3.6901e+02[39m]
+[1;32m     26[0m ])
+
+[0;31mModuleNotFoundError[0m: No module named 'numpy'
+
