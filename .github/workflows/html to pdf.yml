@@ -3,6 +3,7 @@ name: HTML to PDF Conversion
 on:
   push:
     branches:
+      - jupyterbook
       - gh-pages
   pull_request:
     branches:
