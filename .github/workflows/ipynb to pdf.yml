@@ -3,7 +3,7 @@ name: Convert and Merge Notebooks
 on:
   push:
     branches:
-      - main
+      - jupyterbook
 
 jobs:
   convert_and_merge:
