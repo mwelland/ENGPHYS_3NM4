@@ -22,6 +22,11 @@ jobs:
       run: |
         pip install nbconvert PyPDF2
 
+    - name: Install pandoc
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y pandoc
+
     - name: Convert notebooks to PDF
       run: |
         mkdir pdfs
