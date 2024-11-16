@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: index
+
+chapters:
+- file: Lecture notes/Root finding/Root finding
+  sections:
+    - file: Lecture notes/Root finding/Polynomial roots
+    - file: Lecture notes/Root finding/Closed methods
+    - file: Lecture notes/Root finding/Open methods
+    - file: Lecture notes/Root finding/Global convergence methods
