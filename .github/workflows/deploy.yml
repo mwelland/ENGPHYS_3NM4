@@ -5,7 +5,6 @@ on:
     branches:
       - jupyterbook  # Adjust the branch name if needed
 
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
