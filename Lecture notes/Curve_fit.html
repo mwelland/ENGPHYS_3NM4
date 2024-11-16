@@ -1,0 +1,1180 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Example: An overdetermined, inconsistent linear system &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Curve_fit';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to My Book
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Lecture notes/Curve_fit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Example: An overdetermined, inconsistent linear system</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polyfit">Polyfit</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-determine-the-coefficients-of-a-cubic-polynomial">Example: Determine the coefficients of a cubic polynomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-a-series-of-best-fit-polynomials">Example 2: Find a series of ‘best fit polynomials’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-consider-the-condition-number-of-the-vermonde-matrix-for-increasing-n">Example 3: Consider the condition number of the Vermonde matrix for increasing n</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-basis-functions-revisted">Radial Basis Functions revisted!</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Curve_fit.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<p>Goals</p>
+<ul class="simple">
+<li><p>Understand how to obtain the ‘best fit’ of data for the linear case</p></li>
+<li><p>Be able to use calculate and use the pseudoinverse</p></li>
+<li><p>Watch out and exploit weighting</p></li>
+</ul>
+<p>#Least squares regression</p>
+<p>Generally, we will have some datapoint pairs <span class="math notranslate nohighlight">\(x_i, y_i\)</span>. We will have some function <span class="math notranslate nohighlight">\(y\)</span> with parameters <span class="math notranslate nohighlight">\(a\)</span> that will be evaluated at a point <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(y(a, x)\)</span>.</p>
+<p>Our goal is to find the set of parameters <span class="math notranslate nohighlight">\(a\)</span> that gives us the <em>best fit</em> of the data. Commonly, this implies minimizing the squared error between the prediction and the data,</p>
+<p>$<span class="math notranslate nohighlight">\(y(a,x_i)-y_i = r_i\)</span>$.</p>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the residual vector. The <em>least squares fit</em> is formulated as finding <span class="math notranslate nohighlight">\(a\)</span> so as to minimize <span class="math notranslate nohighlight">\(\| r\|\)</span>.</p>
+<p>In general, this is an optimization problem (much more complicated than you would expect!) since <span class="math notranslate nohighlight">\(y(a,x)\)</span> can be complex.</p>
+<p>#Linear least squares regression</p>
+<p>Let’s look at the <em>simpler</em> case first; in particular where <span class="math notranslate nohighlight">\(y\)</span> is the sum of basis functions weighted by <span class="math notranslate nohighlight">\(a\)</span> (e.g.: polynomial interpolation, radial basis functions… can you think of another one?).</p>
+<p>In this case, <span class="math notranslate nohighlight">\(y=Ax\)</span>, and the data is inserted into <span class="math notranslate nohighlight">\(b\)</span>.</p>
+<blockquote>
+<div><p>CAUTION! We have swapped notation to follow suit with standard practice! The matrix A is the function of the ‘position’, <span class="math notranslate nohighlight">\(x\)</span>, and the parameters are in the vector!</p>
+</div></blockquote>
+<p>Given a matrix system,
+$<span class="math notranslate nohighlight">\( A x = b\)</span><span class="math notranslate nohighlight">\(
+where \)</span>A<span class="math notranslate nohighlight">\( is an \)</span>m\times n<span class="math notranslate nohighlight">\( matrix, \)</span>x<span class="math notranslate nohighlight">\( is \)</span>n<span class="math notranslate nohighlight">\(, and \)</span>b<span class="math notranslate nohighlight">\( is \)</span><span class="math notranslate nohighlight">\(. We cannot solve this for an exact \)</span>x<span class="math notranslate nohighlight">\( with our normal techniques since \)</span>A$ is rectangular, not square.</p>
+<p>Recalling the residual is <span class="math notranslate nohighlight">\(Ax-b\)</span>, let’s broaden our concept to a ‘solution’ to say we want to minimize the (norm of the) residual.</p>
+<div class="math notranslate nohighlight">
+\[Min_x \ of \ \| Ax-b\|=\frac{1}{2} [Ax-b]^T [Ax-b]\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(\frac{d}{dx} = 0\)</span>, we get:</p>
+<p>\begin{align}
+2 A^T [Ax-b] &amp;= 0 \
+A^T A x &amp;= A^T b \
+x &amp;= [A^T A]^{-1} A^T b \
+x &amp;= A^† b
+\end{align}</p>
+<p>where <span class="math notranslate nohighlight">\(A^†=[A^T A]^{-1} A^T\)</span> is called the <em>(Moore-Penrose) pseudoinverse</em> of <span class="math notranslate nohighlight">\(A\)</span>. The pseudoinverse is defined for any rectangular matrix. Note <span class="math notranslate nohighlight">\(A^T A\)</span> is necessarily square, and is generally invertible.</p>
+<ul class="simple">
+<li><p>The pseudoinverse is defined for any rectangular matrix</p></li>
+<li><p>When used to solve <span class="math notranslate nohighlight">\(Ax=b\)</span> it results in the <em>best fit</em> (in the least squares sense)</p></li>
+<li><p>Since the ultimate <em>minimum</em> is <span class="math notranslate nohighlight">\(0\)</span>, the pseudoinverse is the true inverse for an exactly solvable system.</p></li>
+</ul>
+<p>##Conditioning of a rectangular matrix</p>
+<p>The determinant of a rectangual matrix is undefined, but we can resort to the definition of the condition number:
+$<span class="math notranslate nohighlight">\(cond(A) = \|A\| \|A^\dagger\|\)</span>$</p>
+<p>Terminology</p>
+<ul class="simple">
+<li><p>A <strong>consistent</strong> system of equations has a solution that satisfies <em>all</em> the equations.</p></li>
+<li><p>An <strong>inconsistent</strong> system has no solution that satisfies all equations simultaneously.</p></li>
+<li><ul>
+<li><p><strong>Overdetermined</strong> systems have more equations that unknowns which is typical of curve fitting. These systems are inconsistent in that there is <em>no simultaneous solution</em>, but a solution does exists that <em>simultaneously minimizes the error</em>.</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><strong>Underdetermined</strong> systems have fewer equations than unknowns and are also inconsistent but with an <em>infinite</em> number of solutions. E.g.: Parallel lines / 2 equations with 3 variables.</p></li>
+</ul>
+</li>
+</ul>
+<p>####Example: An overdetermined, consistent linear system (our headscratcher from the early lectures!)</p>
+<p><span class="math notranslate nohighlight">\(20 c + 50 t = 700\)</span></p>
+<p><span class="math notranslate nohighlight">\(  c+t = 20\)</span></p>
+<p><span class="math notranslate nohighlight">\( 50 c + 20 t = 700\)</span></p>
+<p>which gives the linear system:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix}
+ 20 &amp; 50  \\
+ 1 &amp; 1 \\
+ 50 &amp; 20
+ \end{bmatrix}
+ \begin{bmatrix}
+ c \\
+ t
+ \end{bmatrix} =
+ \begin{bmatrix}
+ 700 \\
+ 20 \\
+ 700
+ \end{bmatrix}
+ \end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plot it!</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Calculate the y values for the first equation (20c + 50t = 700)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">700</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">50</span>
+
+<span class="c1"># Calculate the y values for the second equation (c + t = 20)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">-</span> <span class="n">x</span>
+
+<span class="c1"># Calculate the y values for the third equation (50c + 20t = 700)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">700</span> <span class="o">-</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span>
+
+<span class="c1"># Plot the lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20c + 50t = 700&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;c + t = 20&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;50c + 20t = 700&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add a grid</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Plot it!</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Define the x values</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The arrays are:</span>
+<span class="c1"># ~~ Question - what is the linear system and how do we solve it?</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">700</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">700</span><span class="p">])</span>
+
+<span class="c1">#x = np.linalg.solve(A, b)</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span><span class="nd">@A</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">M</span><span class="nd">@b</span><span class="p">)</span>
+
+
+
+
+
+<span class="c1"># ~~ Answer</span>
+<span class="c1"># A = np.array([[20, 50], [1, 1], [50, 20]])</span>
+<span class="c1"># b = np.array([700, 20, 700])</span>
+
+<span class="c1"># #x = np.linalg.solve(A, b)</span>
+
+<span class="c1"># M = np.linalg.inv(A.T @ A)@A.T</span>
+<span class="c1"># print(M)</span>
+<span class="c1"># print(np.linalg.pinv(A))</span>
+<span class="c1"># print(M-np.linalg.pinv(A))</span>
+<span class="c1"># print(M@b)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.00952672  0.000204    0.02380661]
+ [ 0.02380661  0.000204   -0.00952672]]
+[[-1.73472348e-18  2.71050543e-19  6.93889390e-18]
+ [ 1.04083409e-17 -3.25260652e-19 -1.73472348e-18]]
+[10. 10.]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-an-overdetermined-inconsistent-linear-system">
+<h1>Example: An overdetermined, inconsistent linear system<a class="headerlink" href="#example-an-overdetermined-inconsistent-linear-system" title="Link to this heading">#</a></h1>
+<p><span class="math notranslate nohighlight">\(20 c + 50 t = 700\)</span></p>
+<p><span class="math notranslate nohighlight">\(  c+t = 20\)</span></p>
+<p><span class="math notranslate nohighlight">\( 60 c + 20 t = 700\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Calculate the y values for the first equation (20c + 50t = 700)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">700</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">50</span>
+
+<span class="c1"># Calculate the y values for the second equation (c + t = 20)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">-</span> <span class="n">x</span>
+
+<span class="c1"># Calculate the y values for the third equation (60c + 20t = 700)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">700</span> <span class="o">-</span> <span class="mi">60</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">20</span>
+
+<span class="c1"># Plot the lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20c + 50t = 700&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;c + t = 20&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;60c + 20t = 700&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Least Squares Solution for Inconsistent System&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" src="../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" />
+</div>
+</div>
+<p>Where do you think he solution is going to be?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">700</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">700</span><span class="p">])</span>
+
+<span class="c1">#np.linalg.(A, b)</span>
+<span class="n">x_lsq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="nd">@b</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_lsq</span><span class="p">)</span>
+<span class="n">x_lsq</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x_lsq</span><span class="p">)</span>
+
+<span class="c1"># Plot the lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20c + 50t = 700&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;c + t = 20&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;60c + 20t = 700&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_lsq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_lsq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Least Squares Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Least Squares Solution for Inconsistent System&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 8.07704251 10.76953789]
+[ 8.07704251 10.76953789]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-52bb65e377be&gt;:7: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  x_lsq,_,_,_ = np.linalg.lstsq(A,b)
+</pre></div>
+</div>
+<img alt="../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" src="../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" />
+</div>
+</div>
+<p>Was this what you were expecting?</p>
+<p>#Weights</p>
+<p>As with most approximate methods, the moment we start to move away from an <em>exact solution</em> subtle effects start to show up!</p>
+<p>Notice we are minimizing the <em>residuals</em> but there is a subtle problem with the problem definition above:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+20 c + 50 t &amp;= 700  \\
+c+t  &amp;= 20 \\
+60 c + 20 t &amp;= 700
+\end{align} \end{split}\]</div>
+<p>The coefficients of the second equation is about an order of magnitude lower than the others. Of course this system is equivilant to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+20 c + 50 t &amp;= 700  \\
+10c+10t  &amp;= 200 \\
+60 c + 20 t &amp;= 700
+\end{align} \end{split}\]</div>
+<p>or even</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+0.2 c + 0.5 t &amp;= 7  \\
+c+t  &amp;= 20 \\
+0.6 c + 0.2 t &amp;= 7
+\end{align} \end{split}\]</div>
+<p>What does this remind you of?</p>
+<p>Jacobi (diagonal) preconditioning!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P^{-1} = \begin{bmatrix} W_{1} &amp; 0 &amp; 0 \\ 0 &amp; W_{2} &amp; 0 \\ 0 &amp; 0 &amp; W_{3} \end{bmatrix}
+\end{split}\]</div>
+<p>If we define <span class="math notranslate nohighlight">\(r_1, r_2, r_3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+20 c + 50 t -700 &amp;= r_1 \\
+c+t -20 &amp;= r_2 \\
+60 c + 20 t -700 &amp;= r_3
+\end{align} \end{split}\]</div>
+<p>We say the residuals are / can be <em>weighted</em>, i.e.: the least squares problem becomes,</p>
+<div class="math notranslate nohighlight">
+\[ Min_x \ of \ \sum W_i^2 r_i \]</div>
+<p>Let’s code it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">20</span><span class="p">]])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">700</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">700</span><span class="p">])</span>
+
+<span class="c1">#~~ Question: What&#39;s the preconditioner? How do we apply it?</span>
+<span class="n">Pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Pi</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">Pi</span><span class="nd">@A</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Pi</span><span class="nd">@b</span>
+<span class="c1">###</span>
+
+<span class="c1">#~~ Answer</span>
+<span class="c1"># Pi = np.diag([1,70,1])</span>
+<span class="c1"># print(Pi)</span>
+<span class="c1"># A = Pi@A</span>
+<span class="c1"># b = Pi@b</span>
+<span class="c1">###</span>
+
+
+
+<span class="n">x_lsq</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x_lsq</span><span class="p">)</span>
+
+<span class="c1"># Plot the lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;20c + 50t = 700&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;c + t = 20&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;60c + 20t = 700&#39;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_lsq</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x_lsq</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Least Squares Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Least Squares Solution for Inconsistent System&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 0 0]
+ [0 7 0]
+ [0 0 1]]
+[ 8.08267345 10.78401744]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-13-2aa1c6412f60&gt;:20: FutureWarning: `rcond` parameter will change to the default of machine precision times ``max(M, N)`` where M and N are the input matrix dimensions.
+To use the future default and silence this warning we advise to pass `rcond=None`, to keep using the old, explicitly pass `rcond=-1`.
+  x_lsq,_,_,_ = np.linalg.lstsq(A,b)
+</pre></div>
+</div>
+<img alt="../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" src="../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" />
+</div>
+</div>
+<p>Weights are an excellent way to introduce measurement uncertainty into your fit!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="polyfit">
+<h1>Polyfit<a class="headerlink" href="#polyfit" title="Link to this heading">#</a></h1>
+<p>Let’s return to our polynomial fitting armed with our new tool, and use it to separate the order of the polynomial from the number of data points.</p>
+<p>An <span class="math notranslate nohighlight">\(n\)</span>th degree polynomial,</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = a_n x^n + a_{n-1} x^{n-1} \dots a_2 x^2 + a_1 x +a_0\]</div>
+<p>can be applied to <span class="math notranslate nohighlight">\(m\)</span> data points,</p>
+<p><span class="math notranslate nohighlight">\(y(x_i) = a_n x_i^n + a_{n-1} x_i^{n-1} \dots a_2 x_i^2 + a_1 x_i +a_0 = y_i\)</span></p>
+<p>to generate an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix, multiplied by an <span class="math notranslate nohighlight">\(n\)</span> vector of polynomial coefficients to equal an <span class="math notranslate nohighlight">\(m\)</span> vector of data:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{bmatrix}
+1 &amp; x_1 &amp; x_1^2 &amp; \cdots &amp; x_1^n \\
+1 &amp; x_2 &amp; x_2^2 &amp; \cdots &amp; x_2^n \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_m &amp; x_m^2 &amp; \cdots &amp; x_m^n
+\end{bmatrix}
+\begin{bmatrix}
+a_0 \\
+a_1 \\
+a_2 \\
+\vdots \\
+a_n
+\end{bmatrix} =
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+\vdots \\
+y_m
+\end{bmatrix}
+\end{split}\]</div>
+<section id="example-determine-the-coefficients-of-a-cubic-polynomial">
+<h2>Example: Determine the coefficients of a cubic polynomial<a class="headerlink" href="#example-determine-the-coefficients-of-a-cubic-polynomial" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: generate 100 samples of the function 3x^4-2x^2+x-9 with +-100 noise. Plot the true curve with dashed lines and the data with small points in red.</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Generate x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define the true function</span>
+<span class="k">def</span> <span class="nf">true_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">9</span>
+
+<span class="c1"># Calculate the true y values</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">true_function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Generate noisy data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># For reproducibility</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="n">true_function</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="c1"># Plot the true curve and the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noisy Data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;True Function and Noisy Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" src="../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Generate the vermonde matrix for a cubic polynomial, invert it using pinv and the y data to find the coefficients of the polynomial and then plot it along with the data</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Generate the Vandermonde matrix for a cubic polynomial</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># Degree of the polynomial</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Calculate the coefficients using the pseudoinverse</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">y_data</span>
+
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients calculated manually&#39;</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Coefficients calculated with polyfit&#39;</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">)</span>
+
+<span class="c1"># Generate y values for the fitted polynomial</span>
+<span class="n">fitted_polynomial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="n">y_fitted</span> <span class="o">=</span> <span class="n">fitted_polynomial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1"># Plot the fitted polynomial along with the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_fitted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted Polynomial&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noisy Data&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fitted Polynomial and Noisy Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1.25000000e+02  2.50000000e+01 -5.00000000e+00  1.00000000e+00]
+ [-1.17576257e+02  2.40001020e+01 -4.89898990e+00  1.00000000e+00]
+ [-1.10452422e+02  2.30206101e+01 -4.79797980e+00  1.00000000e+00]
+ [-1.03622311e+02  2.20615243e+01 -4.69696970e+00  1.00000000e+00]
+ [-9.70797404e+01  2.11228446e+01 -4.59595960e+00  1.00000000e+00]
+ [-9.08185260e+01  2.02045710e+01 -4.49494949e+00  1.00000000e+00]
+ [-8.48324846e+01  1.93067034e+01 -4.39393939e+00  1.00000000e+00]
+ [-7.91154325e+01  1.84292419e+01 -4.29292929e+00  1.00000000e+00]
+ [-7.36611859e+01  1.75721865e+01 -4.19191919e+00  1.00000000e+00]
+ [-6.84635612e+01  1.67355372e+01 -4.09090909e+00  1.00000000e+00]
+ [-6.35163748e+01  1.59192939e+01 -3.98989899e+00  1.00000000e+00]
+ [-5.88134431e+01  1.51234568e+01 -3.88888889e+00  1.00000000e+00]
+ [-5.43485822e+01  1.43480257e+01 -3.78787879e+00  1.00000000e+00]
+ [-5.01156087e+01  1.35930007e+01 -3.68686869e+00  1.00000000e+00]
+ [-4.61083388e+01  1.28583818e+01 -3.58585859e+00  1.00000000e+00]
+ [-4.23205888e+01  1.21441690e+01 -3.48484848e+00  1.00000000e+00]
+ [-3.87461751e+01  1.14503622e+01 -3.38383838e+00  1.00000000e+00]
+ [-3.53789141e+01  1.07769615e+01 -3.28282828e+00  1.00000000e+00]
+ [-3.22126221e+01  1.01239669e+01 -3.18181818e+00  1.00000000e+00]
+ [-2.92411154e+01  9.49137843e+00 -3.08080808e+00  1.00000000e+00]
+ [-2.64582103e+01  8.87919600e+00 -2.97979798e+00  1.00000000e+00]
+ [-2.38577232e+01  8.28741965e+00 -2.87878788e+00  1.00000000e+00]
+ [-2.14334705e+01  7.71604938e+00 -2.77777778e+00  1.00000000e+00]
+ [-1.91792685e+01  7.16508520e+00 -2.67676768e+00  1.00000000e+00]
+ [-1.70889334e+01  6.63452709e+00 -2.57575758e+00  1.00000000e+00]
+ [-1.51562817e+01  6.12437506e+00 -2.47474747e+00  1.00000000e+00]
+ [-1.33751297e+01  5.63462912e+00 -2.37373737e+00  1.00000000e+00]
+ [-1.17392938e+01  5.16528926e+00 -2.27272727e+00  1.00000000e+00]
+ [-1.02425902e+01  4.71635547e+00 -2.17171717e+00  1.00000000e+00]
+ [-8.87883529e+00  4.28782777e+00 -2.07070707e+00  1.00000000e+00]
+ [-7.64184545e+00  3.87970615e+00 -1.96969697e+00  1.00000000e+00]
+ [-6.52543700e+00  3.49199061e+00 -1.86868687e+00  1.00000000e+00]
+ [-5.52342628e+00  3.12468115e+00 -1.76767677e+00  1.00000000e+00]
+ [-4.62962963e+00  2.77777778e+00 -1.66666667e+00  1.00000000e+00]
+ [-3.83786338e+00  2.45128048e+00 -1.56565657e+00  1.00000000e+00]
+ [-3.14194388e+00  2.14518927e+00 -1.46464646e+00  1.00000000e+00]
+ [-2.53568745e+00  1.85950413e+00 -1.36363636e+00  1.00000000e+00]
+ [-2.01291045e+00  1.59422508e+00 -1.26262626e+00  1.00000000e+00]
+ [-1.56742922e+00  1.34935211e+00 -1.16161616e+00  1.00000000e+00]
+ [-1.19306008e+00  1.12488522e+00 -1.06060606e+00  1.00000000e+00]
+ [-8.83619379e-01  9.20824406e-01 -9.59595960e-01  1.00000000e+00]
+ [-6.32923460e-01  7.37169677e-01 -8.58585859e-01  1.00000000e+00]
+ [-4.34788658e-01  5.73921028e-01 -7.57575758e-01  1.00000000e+00]
+ [-2.83031313e-01  4.31078461e-01 -6.56565657e-01  1.00000000e+00]
+ [-1.71467764e-01  3.08641975e-01 -5.55555556e-01  1.00000000e+00]
+ [-9.39143501e-02  2.06611570e-01 -4.54545455e-01  1.00000000e+00]
+ [-4.41874103e-02  1.24987246e-01 -3.53535354e-01  1.00000000e+00]
+ [-1.61032836e-02  6.37690032e-02 -2.52525253e-01  1.00000000e+00]
+ [-3.47830926e-03  2.29568411e-02 -1.51515152e-01  1.00000000e+00]
+ [-1.28826269e-04  2.55076013e-03 -5.05050505e-02  1.00000000e+00]
+ [ 1.28826269e-04  2.55076013e-03  5.05050505e-02  1.00000000e+00]
+ [ 3.47830926e-03  2.29568411e-02  1.51515152e-01  1.00000000e+00]
+ [ 1.61032836e-02  6.37690032e-02  2.52525253e-01  1.00000000e+00]
+ [ 4.41874103e-02  1.24987246e-01  3.53535354e-01  1.00000000e+00]
+ [ 9.39143501e-02  2.06611570e-01  4.54545455e-01  1.00000000e+00]
+ [ 1.71467764e-01  3.08641975e-01  5.55555556e-01  1.00000000e+00]
+ [ 2.83031313e-01  4.31078461e-01  6.56565657e-01  1.00000000e+00]
+ [ 4.34788658e-01  5.73921028e-01  7.57575758e-01  1.00000000e+00]
+ [ 6.32923460e-01  7.37169677e-01  8.58585859e-01  1.00000000e+00]
+ [ 8.83619379e-01  9.20824406e-01  9.59595960e-01  1.00000000e+00]
+ [ 1.19306008e+00  1.12488522e+00  1.06060606e+00  1.00000000e+00]
+ [ 1.56742922e+00  1.34935211e+00  1.16161616e+00  1.00000000e+00]
+ [ 2.01291045e+00  1.59422508e+00  1.26262626e+00  1.00000000e+00]
+ [ 2.53568745e+00  1.85950413e+00  1.36363636e+00  1.00000000e+00]
+ [ 3.14194388e+00  2.14518927e+00  1.46464646e+00  1.00000000e+00]
+ [ 3.83786338e+00  2.45128048e+00  1.56565657e+00  1.00000000e+00]
+ [ 4.62962963e+00  2.77777778e+00  1.66666667e+00  1.00000000e+00]
+ [ 5.52342628e+00  3.12468115e+00  1.76767677e+00  1.00000000e+00]
+ [ 6.52543700e+00  3.49199061e+00  1.86868687e+00  1.00000000e+00]
+ [ 7.64184545e+00  3.87970615e+00  1.96969697e+00  1.00000000e+00]
+ [ 8.87883529e+00  4.28782777e+00  2.07070707e+00  1.00000000e+00]
+ [ 1.02425902e+01  4.71635547e+00  2.17171717e+00  1.00000000e+00]
+ [ 1.17392938e+01  5.16528926e+00  2.27272727e+00  1.00000000e+00]
+ [ 1.33751297e+01  5.63462912e+00  2.37373737e+00  1.00000000e+00]
+ [ 1.51562817e+01  6.12437506e+00  2.47474747e+00  1.00000000e+00]
+ [ 1.70889334e+01  6.63452709e+00  2.57575758e+00  1.00000000e+00]
+ [ 1.91792685e+01  7.16508520e+00  2.67676768e+00  1.00000000e+00]
+ [ 2.14334705e+01  7.71604938e+00  2.77777778e+00  1.00000000e+00]
+ [ 2.38577232e+01  8.28741965e+00  2.87878788e+00  1.00000000e+00]
+ [ 2.64582103e+01  8.87919600e+00  2.97979798e+00  1.00000000e+00]
+ [ 2.92411154e+01  9.49137843e+00  3.08080808e+00  1.00000000e+00]
+ [ 3.22126221e+01  1.01239669e+01  3.18181818e+00  1.00000000e+00]
+ [ 3.53789141e+01  1.07769615e+01  3.28282828e+00  1.00000000e+00]
+ [ 3.87461751e+01  1.14503622e+01  3.38383838e+00  1.00000000e+00]
+ [ 4.23205888e+01  1.21441690e+01  3.48484848e+00  1.00000000e+00]
+ [ 4.61083388e+01  1.28583818e+01  3.58585859e+00  1.00000000e+00]
+ [ 5.01156087e+01  1.35930007e+01  3.68686869e+00  1.00000000e+00]
+ [ 5.43485822e+01  1.43480257e+01  3.78787879e+00  1.00000000e+00]
+ [ 5.88134431e+01  1.51234568e+01  3.88888889e+00  1.00000000e+00]
+ [ 6.35163748e+01  1.59192939e+01  3.98989899e+00  1.00000000e+00]
+ [ 6.84635612e+01  1.67355372e+01  4.09090909e+00  1.00000000e+00]
+ [ 7.36611859e+01  1.75721865e+01  4.19191919e+00  1.00000000e+00]
+ [ 7.91154325e+01  1.84292419e+01  4.29292929e+00  1.00000000e+00]
+ [ 8.48324846e+01  1.93067034e+01  4.39393939e+00  1.00000000e+00]
+ [ 9.08185260e+01  2.02045710e+01  4.49494949e+00  1.00000000e+00]
+ [ 9.70797404e+01  2.11228446e+01  4.59595960e+00  1.00000000e+00]
+ [ 1.03622311e+02  2.20615243e+01  4.69696970e+00  1.00000000e+00]
+ [ 1.10452422e+02  2.30206101e+01  4.79797980e+00  1.00000000e+00]
+ [ 1.17576257e+02  2.40001020e+01  4.89898990e+00  1.00000000e+00]
+ [ 1.25000000e+02  2.50000000e+01  5.00000000e+00  1.00000000e+00]]
+Coefficients calculated manually [ 6.28230705e-02  6.87425501e+01 -2.93452380e+00 -2.14197455e+02] 
+
+Coefficients calculated with polyfit [ 6.28230705e-02  6.87425501e+01 -2.93452380e+00 -2.14197455e+02]
+</pre></div>
+</div>
+<img alt="../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" src="../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" />
+</div>
+</div>
+</section>
+<section id="example-2-find-a-series-of-best-fit-polynomials">
+<h2>Example 2: Find a series of ‘best fit polynomials’<a class="headerlink" href="#example-2-find-a-series-of-best-fit-polynomials" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: parameterize polyfit for degrees 0 to 10, plotting each on the same plot along with the sample data. Output the norm of the residuals for each fit along with the coefficients to 2 decimal places</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Generate x values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Define the true function</span>
+<span class="k">def</span> <span class="nf">true_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">9</span>
+
+<span class="c1"># Generate noisy data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># For reproducibility</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="n">true_function</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="c1"># Plot the true curve and the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Noisy Data&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="n">degree</span><span class="p">)</span>
+    <span class="n">fitted_polynomial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+    <span class="n">y_fitted</span> <span class="o">=</span> <span class="n">fitted_polynomial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_fitted</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">y_data</span> <span class="o">-</span> <span class="n">fitted_polynomial</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+    <span class="n">residual_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">residuals</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2">: Residual Norm = </span><span class="si">{</span><span class="n">residual_norm</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Coefficients = </span><span class="si">{</span><span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">coeffs</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fitted Polynomials of Varying Degrees&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 0: Residual Norm = 5515.03, Coefficients = [370.23]
+Degree 1: Residual Norm = 5514.73, Coefficients = [-1.97, 370.23]
+Degree 2: Residual Norm = 1759.53, Coefficients = [68.74, -1.97, -214.2]
+Degree 3: Residual Norm = 1759.49, Coefficients = [0.06, 68.74, -2.93, -214.2]
+Degree 4: Residual Norm = 923.52, Coefficients = [3.03, 0.06, 2.62, -2.93, -45.63]
+Degree 5: Residual Norm = 917.81, Coefficients = [-0.08, 3.03, 2.38, 2.62, -15.58, -45.63]
+Degree 6: Residual Norm = 917.57, Coefficients = [0.01, -0.08, 2.8, 2.38, 4.56, -15.58, -47.98]
+Degree 7: Residual Norm = 916.86, Coefficients = [-0.0, 0.01, 0.1, 2.8, 0.23, 4.56, -9.51, -47.98]
+Degree 8: Residual Norm = 916.67, Coefficients = [-0.0, -0.0, 0.05, 0.1, 2.15, 0.23, 7.55, -9.51, -50.1]
+Degree 9: Residual Norm = 916.49, Coefficients = [0.0, -0.0, -0.02, 0.05, 0.45, 2.15, -2.0, 7.55, -5.65, -50.1]
+Degree 10: Residual Norm = 916.28, Coefficients = [0.0, 0.0, -0.01, -0.02, 0.24, 0.45, 0.53, -2.0, 12.3, -5.65, -52.29]
+</pre></div>
+</div>
+<img alt="../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" src="../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" />
+</div>
+</div>
+<p>Interesting points: The curve actually is 4th order but because additional terms will always reduce the error, it is not trivial to tell which is the <em>best</em>, best fit!</p>
+</section>
+<section id="example-3-consider-the-condition-number-of-the-vermonde-matrix-for-increasing-n">
+<h2>Example 3: Consider the condition number of the Vermonde matrix for increasing n<a class="headerlink" href="#example-3-consider-the-condition-number-of-the-vermonde-matrix-for-increasing-n" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: print the condition number for an increasing series of vermonde matricies on 10 data points</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Generate x values</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="c1"># Generate the Vandermonde matrix for a given degree</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">degree</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Calculate the condition number</span>
+    <span class="n">condition_number</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Degree </span><span class="si">{</span><span class="n">degree</span><span class="si">}</span><span class="s2">: Condition Number = </span><span class="si">{</span><span class="n">condition_number</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Degree 1: Condition Number = 3.19
+Degree 2: Condition Number = 20.60
+Degree 3: Condition Number = 94.89
+Degree 4: Condition Number = 583.63
+Degree 5: Condition Number = 2841.25
+Degree 6: Condition Number = 17743.56
+Degree 7: Condition Number = 95457.72
+Degree 8: Condition Number = 648343.57
+Degree 9: Condition Number = 5082996.99
+Degree 10: Condition Number = 25360712.21
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that as the condition number strays from 1, numerical algorithms deteriorate. This is why low-order polynomials are more numerically robust to fit than high order!</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="radial-basis-functions-revisted">
+<h1>Radial Basis Functions revisted!<a class="headerlink" href="#radial-basis-functions-revisted" title="Link to this heading">#</a></h1>
+<p>The modern implementation of RBFs accoutns for the <em>global</em> trend of the data through a polynomial least squares fit alongside normal RBFs for local features.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}
+y(x) &amp;= \sum_i^N \omega_i \varphi_i(\|x-x_i\|) + \sum_i^N P_i(x_i) b_i
+\end{align} \]</div>
+<p>Where <span class="math notranslate nohighlight">\(P_i\)</span> is an order <span class="math notranslate nohighlight">\(n\lt m\)</span> polynomial. The Numpy RBFInterpolator object fits this equation to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+[\Phi(x_i, x_j) -\lambda I]\omega +P(x_i) b &amp;= y_i \\
+P(x_i)^T \omega &amp;=0
+\end{align} \end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda = 0\)</span> recovers an exact fit and <span class="math notranslate nohighlight">\(\lambda \gt 0\)</span> effecitvely shifts the fitting of the <span class="math notranslate nohighlight">\(x_i=x_j\)</span> terms to the bestfit polynomial.</p>
+<p>####Example: Toy gaussian over a quadratic</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Sampled gaussian</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the function</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mf">.1</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Create x values for plotting</span>
+<span class="n">x_toy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_toy</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_toy</span><span class="p">)</span>
+
+<span class="c1"># Sample 11 times at 1-interval intervals</span>
+<span class="n">x_d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y_d</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Use a numpy scipy.interpolate.RBFInterpolator over x_d and y_d and plot the result against the true function</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">RBFInterpolator</span>
+
+<span class="c1"># Create an RBFInterpolator object</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_d</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+<span class="n">rbf</span> <span class="o">=</span> <span class="n">RBFInterpolator</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_d</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y_d</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Interpolate at the x_toy values</span>
+<span class="n">y_rbf</span> <span class="o">=</span> <span class="n">rbf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_toy</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_toy</span><span class="p">,</span> <span class="n">y_toy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True Function&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">y_d</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_toy</span><span class="p">,</span> <span class="n">y_rbf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RBF Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;RBF Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+</pre></div>
+</div>
+<img alt="../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" src="../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lecture notes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polyfit">Polyfit</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-determine-the-coefficients-of-a-cubic-polynomial">Example: Determine the coefficients of a cubic polynomial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-a-series-of-best-fit-polynomials">Example 2: Find a series of ‘best fit polynomials’</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-consider-the-condition-number-of-the-vermonde-matrix-for-increasing-n">Example 3: Consider the condition number of the Vermonde matrix for increasing n</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#radial-basis-functions-revisted">Radial Basis Functions revisted!</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

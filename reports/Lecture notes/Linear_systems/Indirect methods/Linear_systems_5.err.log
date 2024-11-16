@@ -1,0 +1,66 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.12.7/x64/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Copy the surface plotter from the last lecture:
+import numpy as np
+import matplotlib.pyplot as plt
+
+def plot_surface(A, b, x0, x_true):
+  # Utility function to autoscale the plot limits to include x0 and x_true
+  def calculate_box_limits(point1, point2, padding=.5):
+    # Extract coordinates
+    x1, y1 = point1
+    x2, y2 = point2
+    # Calculate min and max coordinates with padding
+    min_x = min(x1, x2) - padding
+    max_x = max(x1, x2) + padding
+    min_y = min(y1, y2) - padding
+    max_y = max(y1, y2) + padding
+    return (min_x, max_x, min_y, max_y)
+
+  xb, xe, yb, ye = calculate_box_limits(x0, x_true)
+  # Plot the linear system
+  x = np.linspace(xb, xe, 100)
+  y = np.linspace(yb, ye, 100)
+  X, Y = np.meshgrid(x, y)
+  V = np.stack((X,Y),-1)
+  Z = 0.5 * (A[0, 0] * X**2 + A[1, 1] * Y**2 + 2 * A[0, 1] * X * Y) - (b[0] * X + b[1] * Y)
+  fig, ax = plt.subplots()
+
+  CS = ax.contour(X, Y, Z, levels = 15)
+  ax.set_xlim([xb, xe])  # Set x-axis limits
+  ax.set_ylim([yb, ye])  # Set y-axis limits
+  ax.clabel(CS, inline=True, fontsize=10)
+
+  return fig
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;66;03m# Copy the surface plotter from the last lecture:[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      5[0m [38;5;28;01mdef[39;00m [38;5;21mplot_surface[39m(A, b, x0, x_true):
+[1;32m      6[0m   [38;5;66;03m# Utility function to autoscale the plot limits to include x0 and x_true[39;00m
+
+[0;31mModuleNotFoundError[0m: No module named 'numpy'
+
