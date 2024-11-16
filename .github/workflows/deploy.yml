@@ -5,7 +5,7 @@ on:
     branches:
       - jupyterbook  # Adjust the branch name if needed
 
-      
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
@@ -31,25 +31,25 @@ jobs:
     - name: Build the Jupyter Book
       run: jupyter-book build .
 
-    # # Step 5: Deploy to GitHub Pages
-    # - name: Deploy to GitHub Pages
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   with:
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: ./_build/html
+    # Step 5: Deploy to GitHub Pages
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./_build/html
 
 
-    # Step 5: Deploy to a folder in the jupyterbook branch
-    - name: Deploy to folder in jupyterbook branch
-      run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git fetch origin
-        git checkout jupyterbook
-        mkdir -p docs
-        cp -r _build/html/* docs/
-        git add docs/
-        git commit -m "Deploy Jupyter Book to book folder"
-        git push origin jupyterbook
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # # Step 5: Deploy to a folder in the jupyterbook branch
+    # - name: Deploy to folder in jupyterbook branch
+    #   run: |
+    #     git config --global user.name 'github-actions[bot]'
+    #     git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+    #     git fetch origin
+    #     git checkout jupyterbook
+    #     mkdir -p docs
+    #     cp -r _build/html/* docs/
+    #     git add docs/
+    #     git commit -m "Deploy Jupyter Book to book folder"
+    #     git push origin jupyterbook
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
