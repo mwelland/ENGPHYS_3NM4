@@ -30,7 +30,7 @@ jobs:
     - name: Convert notebooks to PDF
       run: |
         mkdir pdfs
-        for notebook in $(find . -maxdepth 3 -name "*.ipynb"); do
+        for notebook in $(find ./Lecture_notes -maxdepth 3 -name "*.ipynb"); do
           jupyter nbconvert --to pdf "$notebook" --output-dir=pdfs
         done
 
