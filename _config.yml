@@ -1,3 +1,11 @@
 title: My Jupyter Book
 execute:
   execute_notebooks: auto  # Run notebooks during the build
+
+# Table of contents settings
+toc:
+  nav_title: Contents
+  base_url: /  # The base URL of your site
+  # Other TOC settings as needed
+
+# Add other necessary configurations
