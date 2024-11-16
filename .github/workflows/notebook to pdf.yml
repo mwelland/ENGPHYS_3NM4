@@ -1,10 +1,11 @@
 name: Jupyter to PDF
 on:
-  workflow_dispatch:
   push:
-    paths:
-      - 'Lecture notes/**.ipynb'
-      - 'Lecture notes/**/**.ipynb'
+    branches:
+      - jupyterbook  # Adjust the branch name if needed
+
+
+
 jobs:
   convertmd:
     runs-on: ubuntu-latest
