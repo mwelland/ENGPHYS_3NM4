@@ -25,7 +25,7 @@ jobs:
     - name: Convert notebooks to PDF
       run: |
         mkdir pdfs
-        for notebook in $(find "./Lecture notes/Differential equations" -name "*.ipynb"); do
+        for notebook in $(find "./Lecture\ notes/Differential\ equations" -name "*.ipynb"); do
           jupyter nbconvert --to pdf "$notebook" --output-dir=pdfs
         done
 
