@@ -2,8 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 format: jb-book
 root: index
+
 chapters:
-- file: Lecture notes/Root finding/Root_finding.ipynb
+- file: Lecture notes/Root finding/Root_finding
   sections:
     - file: Lecture notes/Root finding/Polynomial roots
     - file: Lecture notes/Root finding/Closed methods
