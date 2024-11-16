@@ -1,0 +1,49 @@
+name: Convert and Merge Notebooks
+
+on:
+  push:
+    branches:
+      - jupyterbook
+
+jobs:
+  convert_and_merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install nbconvert PyPDF2
+
+    - name: Convert notebooks to PDF
+      run: |
+        mkdir pdfs
+        for notebook in $(find ./Lecture\ notes -name "*.ipynb"); do
+          jupyter nbconvert --to pdf "$notebook" --output-dir=pdfs
+        done
+
+    - name: Merge PDFs
+      run: |
+        python - <<EOF
+        import os
+        from PyPDF2 import PdfMerger
+
+        merger = PdfMerger()
+        for pdf in os.listdir("pdfs"):
+            merger.append(os.path.join("pdfs", pdf))
+        merger.write("combined_notebooks.pdf")
+        merger.close()
+        EOF
+
+    - name: Upload combined PDF
+      uses: actions/upload-artifact@v3
+      with:
+        name: combined_notebooks
+        path: combined_notebooks.pdf
