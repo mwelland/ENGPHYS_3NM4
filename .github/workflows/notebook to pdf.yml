@@ -1,0 +1,4 @@
+            - name: Jupyter Notebooks to PDF
+  # You may pin to the exact commit or the version.
+  # uses: MohamedElashri/Jupyter-to-PDF@bcd9e92867a886b4c7511c57ecd7f1f1f2dd6f23
+  uses: MohamedElashri/Jupyter-to-PDF@v1.3
