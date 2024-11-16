@@ -22,11 +22,10 @@ jobs:
       run: |
         pip install nbconvert PyPDF2
 
-        
     - name: Convert notebooks to PDF
       run: |
         mkdir pdfs
-        for notebook in $(find . -name "*.ipynb"); do
+        for notebook in $(find . -maxdepth 1 -name "*.ipynb"); do
           jupyter nbconvert --to pdf "$notebook" --output-dir=pdfs
         done
 
