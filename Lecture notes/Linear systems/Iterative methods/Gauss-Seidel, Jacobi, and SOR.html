@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Iterative methods &#8212; My Jupyter Book</title>
+    <title>Jacobi iteration method &#8212; My Jupyter Book</title>
   
   
   
@@ -306,7 +306,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Iterative methods</h1>
+    <h1>Jacobi iteration method</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -316,14 +316,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Iterative methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach">Iterative approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-convergence">Quantifying convergence</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi-iteration-method">Jacobi iteration method</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Jacobi iteration method</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-seidel">Gauss-Seidel</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#successive-over-relaxation-sor">Successive Over Relaxation (SOR)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
@@ -357,46 +350,6 @@
 <li><p>Understand the pros and cons of each method</p></li>
 <li><p>Experience the benefit of iterative solvers</p></li>
 </ul>
-<section class="tex2jax_ignore mathjax_ignore" id="iterative-methods">
-<h1>Iterative methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h1>
-<p>Guass Elimination / LU decomposition are <em>direct</em> solvers in that they solve systems in a fixed number of operations. If we could calculate in infinite precision these answers would be exact. Direct solvers generally scale ~<span class="math notranslate nohighlight">\(O(n^3)\)</span> and are therefore impractical for large systems.</p>
-<p>We will now talk about <em>iterative / indirect methods</em> which start with an initial guess and iterate (hopefully) towards a solution. Each iteration is typically faster and more memory efficient than direct solvers, but convergence is only guaranteed under certain limited circumstances. Even then, the <em>rate of convergence</em> can still make these techniques impractical.</p>
-<p>Iterative techniques have some useful properties:</p>
-<ol class="arabic simple">
-<li><p>They are self-correcting in that roundoff (or arithmatic) errors are corrected through further cycles.</p></li>
-<li><p>They are more conducive to sparse matrix storage.</p></li>
-</ol>
-<p>Only the solution vector <span class="math notranslate nohighlight">\(x\)</span> is altered during these computations. Neither the matrix (nor anything we will do to it) is not altered during any of these steps!</p>
-<blockquote>
-<div><p>In fact, there are a class of solvers called <em>matrix free</em> solvers that avoid the explicit writing of <span class="math notranslate nohighlight">\(A\)</span> entirely… This is useful if the matrix product <span class="math notranslate nohighlight">\(Ax\)</span> can be calculated in a more effective manner such that we don’t bother writing out and storing A$!</p>
-</div></blockquote>
-<p>Each iteration will (hopefully) improve the answer asymptotically, so we estimate the error and say when it is stopped getting better. As discussed with error analysis, this involves defining tolerances for computation.</p>
-<section id="iterative-approach">
-<h2>Iterative approach<a class="headerlink" href="#iterative-approach" title="Link to this heading">#</a></h2>
-<p>Consider: What does it mean for a vector <span class="math notranslate nohighlight">\(x\)</span> to satisfy <span class="math notranslate nohighlight">\(Ax=b\)</span>?</p>
-<p>-&gt; All the elements in <span class="math notranslate nohighlight">\(x\)</span> must be <em>consistent</em>.</p>
-<p>What if one element was not consistent?</p>
-<p>-&gt; We could solve for it based on the others!</p>
-<p>##Big picture algorithm</p>
-<ol class="arabic simple">
-<li><p>Start with a guess</p></li>
-<li><p>For each iterative step, identify a single element in <span class="math notranslate nohighlight">\(x\)</span>, make it consistent with all the others.</p></li>
-<li><p>Check how well the guess solves the linear system</p></li>
-<li><p>Repeat (possibly updating a parameter first)</p></li>
-</ol>
-<section id="quantifying-convergence">
-<h3>Quantifying convergence<a class="headerlink" href="#quantifying-convergence" title="Link to this heading">#</a></h3>
-<p>The system has converged when <span class="math notranslate nohighlight">\(Ax=b\)</span>. Define the <em>residual vector</em>, <span class="math notranslate nohighlight">\(R = Ax-b\)</span> such that when <span class="math notranslate nohighlight">\(R\rightarrow 0\)</span> (the system is converged).</p>
-<p>Let’s use the norm (some measure of magnitude) of <span class="math notranslate nohighlight">\(R\)</span>  and say the system has converged when <span class="math notranslate nohighlight">\(||R|| \lt tolerance\)</span>.</p>
-<blockquote>
-<div><p>Should we use absolute tolerance or relative?</p>
-</div></blockquote>
-<blockquote>
-<div><p>What other tolerance could we imagine using? (Hint: We are actually interested <span class="math notranslate nohighlight">\(x\)</span>…)</p>
-</div></blockquote>
-</section>
-</section>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="jacobi-iteration-method">
 <h1>Jacobi iteration method<a class="headerlink" href="#jacobi-iteration-method" title="Link to this heading">#</a></h1>
 <p>Begin by writing out the linear system in index form:</p>
@@ -1057,14 +1010,7 @@ Converged after,  11  iterations.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Iterative methods</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach">Iterative approach</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-convergence">Quantifying convergence</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi-iteration-method">Jacobi iteration method</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Jacobi iteration method</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-seidel">Gauss-Seidel</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#successive-over-relaxation-sor">Successive Over Relaxation (SOR)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
