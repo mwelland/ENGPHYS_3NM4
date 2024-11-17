@@ -18,16 +18,47 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+# prompt: Plot the two lines with a grid
+
 import matplotlib.pyplot as plt
 import numpy as np
+# Define the x values
+x = np.linspace(0, 20, 100)
+
+# Calculate the y values for the first equation (20c + 50t = 700)
+y1 = (700 - 20 * x) / 50
+
+# Calculate the y values for the second equation (c + t = 20)
+y2 = 20 - x
+
+# Plot the lines
+plt.plot(x, y1, label='20c + 50t = 700')
+plt.plot(x, y2, label='c + t = 20')
+
+# Add labels and title
+plt.xlabel('Number of Chairs (c)')
+plt.ylabel('Number of Tables (t)')
+plt.title('Fundraising Event')
+
+# Add a grid
+plt.grid(True)
+
+# Add a legend
+plt.legend()
+
+# Display the plot
+plt.show()
+
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[1], line 1[0m
-[0;32m----> 1[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
-[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+Cell [0;32mIn[1], line 3[0m
+[1;32m      1[0m [38;5;66;03m# prompt: Plot the two lines with a grid[39;00m
+[0;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      5[0m [38;5;66;03m# Define the x values[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'matplotlib'
 
