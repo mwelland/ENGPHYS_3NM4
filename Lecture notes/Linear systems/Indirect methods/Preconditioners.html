@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Left preconditioning &#8212; My Jupyter Book</title>
+    <title>Preconditioners &#8212; My Jupyter Book</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear_systems/Indirect methods/Linear_systems_6';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear systems/Indirect methods/Preconditioners';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -166,11 +166,17 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 </ul>
 </details></li>
 </ul>
@@ -227,7 +233,7 @@
       
       
       
-      <li><a href="../../../_sources/Lecture notes/Linear_systems/Indirect methods/Linear_systems_6.ipynb" target="_blank"
+      <li><a href="../../../_sources/Lecture notes/Linear systems/Indirect methods/Preconditioners.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +309,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Left preconditioning</h1>
+    <h1>Preconditioners</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -313,10 +319,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Left preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#right-preconditioning">Right preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sided-preconditioning">Two sided preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#qualities">Qualities</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preconditioners</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#left-preconditioning">Left preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#right-preconditioning">Right preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sided-preconditioning">Two sided preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualities">Qualities</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi">Jacobi</a></li>
 </ul>
@@ -338,14 +347,9 @@
                 <article class="bd-article">
                   
   <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Linear_systems_6.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>Goals</p>
-<ul class="simple">
-<li><p>Be able to describe what makes a preconditioner good and bad</p></li>
-<li><p>Use package implementations to accelarate solving sparse linear systems.</p></li>
-<li><p>Recognize the <em>big picture</em> of how preconditioners are important in HPC</p></li>
-</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="preconditioners">
+<h1>Preconditioners<a class="headerlink" href="#preconditioners" title="Link to this heading">#</a></h1>
 <p>Examples for this lecture are drawn from <a class="reference external" href="https://tbetcke.github.io/hpc_lecture_notes/intro.html">here</a></p>
-<p>#Preconditioners</p>
 <p>The basic strategy of preconditioning is to modify the original linear system to one that <em>behaves better</em>:</p>
 <ul class="simple">
 <li><p>Direct solvers typically don’t need <em>user specified</em> preconditioning since they are already robust and/or the preconditioner can be integrated. E.g.: Row swapping via the permutation matrix before conducting Gaussian Elimination / LU decomposition to achieve diagonal dominance which is cheap and easy to implement.</p></li>
@@ -358,19 +362,19 @@
 <span class="math notranslate nohighlight">\(Ax=b\)</span>
 we want to multiply the equation by a matrix <span class="math notranslate nohighlight">\(P^{-1}\)</span> to make the system easier to solve. As long as <span class="math notranslate nohighlight">\(P^{-1}\)</span> isn’t singular, the answer won’t be changed.</p>
 <section id="left-preconditioning">
-<h1>Left preconditioning<a class="headerlink" href="#left-preconditioning" title="Link to this heading">#</a></h1>
+<h2>Left preconditioning<a class="headerlink" href="#left-preconditioning" title="Link to this heading">#</a></h2>
 <p>The most traditional and common preconditioner is:</p>
 <p><span class="math notranslate nohighlight">\(P^{-1} A x = P^{-1} b\)</span></p>
 </section>
 <section id="right-preconditioning">
-<h1>Right preconditioning<a class="headerlink" href="#right-preconditioning" title="Link to this heading">#</a></h1>
+<h2>Right preconditioning<a class="headerlink" href="#right-preconditioning" title="Link to this heading">#</a></h2>
 <p>A varient that is better for some cases</p>
 <p><span class="math notranslate nohighlight">\(A P^{-1} y = b\)</span></p>
 <p>with,</p>
 <p><span class="math notranslate nohighlight">\(P x = y \)</span></p>
 </section>
 <section id="two-sided-preconditioning">
-<h1>Two sided preconditioning<a class="headerlink" href="#two-sided-preconditioning" title="Link to this heading">#</a></h1>
+<h2>Two sided preconditioning<a class="headerlink" href="#two-sided-preconditioning" title="Link to this heading">#</a></h2>
 <p>The combination of left and right:</p>
 <p><span class="math notranslate nohighlight">\(Q A P^{-1} y = Q b\)</span></p>
 <p>again with,</p>
@@ -379,7 +383,7 @@ we want to multiply the equation by a matrix <span class="math notranslate nohig
 <p>Recall that the inverse of a sparse matrix is typically dense, and therefore we don’t usually want to store <span class="math notranslate nohighlight">\(P^{-1}\)</span> explicitly. It is better to store <span class="math notranslate nohighlight">\(P\)</span> and the method by which we would apply <span class="math notranslate nohighlight">\(P^{-1}\)</span> to a vector. This is similar to solving a system by LU decomposition, <span class="math notranslate nohighlight">\(A=LU\)</span>. We don’t calculate <span class="math notranslate nohighlight">\(A^{-1}\)</span> explicitly, we keep <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span> and solve systems sequentially.</p>
 </section>
 <section id="qualities">
-<h1>Qualities<a class="headerlink" href="#qualities" title="Link to this heading">#</a></h1>
+<h2>Qualities<a class="headerlink" href="#qualities" title="Link to this heading">#</a></h2>
 <p>The best preconditioner is <span class="math notranslate nohighlight">\(P = A\)</span>, which makes the system trivial. Failing this, we aim for <span class="math notranslate nohighlight">\(P^{-1} \approx A^{-1}\)</span> <em>in some sense</em>. This can be quantified by the <em>condition number</em> of the preconditioned matrix, which we aim to make <span class="math notranslate nohighlight">\(=1\)</span>.</p>
 <p>Preconditioner quality is based on:</p>
 <ul class="simple">
@@ -390,6 +394,7 @@ we want to multiply the equation by a matrix <span class="math notranslate nohig
 </ul>
 <p>Since calculation, storage, and application of <span class="math notranslate nohighlight">\(P^{-1}\)</span> is an additional computational expense, the benefit must be <em>worth it</em>. Often this translates to the total speed of solution (preconditioning and iteration) but it may also extend to the stability of the computation.</p>
 <p>E.g.: In time-dependent nonlinear PDEs, we will be solving linear systems thousands of times. A solver that takes twice as long every time but always converges may be better than one that solves fast but sometimes doesn’t converge (which may spoil any progress you’ve made!).</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
@@ -828,7 +833,7 @@ A^{-1} + A^{-1}B(D - CA^{-1}B)^{-1}CA^{-1} &amp; -A^{-1}B(D - CA^{-1}B)^{-1} \\
         },
         kernelOptions: {
             name: "python3",
-            path: "./Lecture notes/Linear_systems/Indirect methods"
+            path: "./Lecture notes/Linear systems/Indirect methods"
         },
         predefinedOutput: true
     }
@@ -862,10 +867,13 @@ A^{-1} + A^{-1}B(D - CA^{-1}B)^{-1}CA^{-1} &amp; -A^{-1}B(D - CA^{-1}B)^{-1} \\
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Left preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#right-preconditioning">Right preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sided-preconditioning">Two sided preconditioning</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#qualities">Qualities</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preconditioners</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#left-preconditioning">Left preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#right-preconditioning">Right preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sided-preconditioning">Two sided preconditioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qualities">Qualities</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi">Jacobi</a></li>
 </ul>

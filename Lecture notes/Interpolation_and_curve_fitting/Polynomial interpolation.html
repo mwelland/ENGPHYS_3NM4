@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Polynomial interpolation &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Interpolation_and_curve_fitting/Polynomial interpolation';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Polynomial%20roots.html">Polynomial roots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Closed%20methods.html">Closed root-finding methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Lecture notes/Interpolation_and_curve_fitting/Polynomial interpolation.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Polynomial interpolation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Polynomial interpolation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-polynomial-interpolation">Lagrange Polynomial Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-basis-polynomials">Lagrange basis polynomials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-find-and-plot-the-lagrange-basis-polynomials">Example: Find and plot the Lagrange basis polynomials</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assembling-the-polynomial">Assembling the polynomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error">Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barycentric-formula">Barycentric formula</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-divided-difference-method">Newton’s divided difference method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-solution">Direct solution</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-splines">Cubic splines</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-cubic-splines">Analysis of cubic splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-to-n-dimensions">Generalization to N-dimensions</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="polynomial-interpolation">
+<h1>Polynomial interpolation<a class="headerlink" href="#polynomial-interpolation" title="Link to this heading">#</a></h1>
+<p>Polynomial interpolation is a straightforward approach to interpolation.</p>
+<p>Three methods to obtain polynomials are established here. For a given set of data, they all <em>must</em> result in the same polynomial. The difference is the means by which they are achieved, which translates to the ways that they are used.</p>
+<section id="lagrange-polynomial-interpolation">
+<h2>Lagrange Polynomial Interpolation<a class="headerlink" href="#lagrange-polynomial-interpolation" title="Link to this heading">#</a></h2>
+<p>Legendre polynomial interpolation constructs the Legendre polynomial as,
+$<span class="math notranslate nohighlight">\(
+y(x) = \sum_{i = 1}^n y_i P_i(x)
+\)</span>$</p>
+<p>which is a weighted sum of the Lagrange basis polynomials, <span class="math notranslate nohighlight">\(P_i(x)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+P_i(x) = \prod_{j = 1, j\ne i}^n\frac{x - x_j}{x_i - x_j}.
+\]</div>
+<p>N.B.: <span class="math notranslate nohighlight">\(\prod\)</span> means <em>the product of</em>, like <span class="math notranslate nohighlight">\(\sum\)</span> means <em>the sum of</em>.</p>
+<section id="lagrange-basis-polynomials">
+<h3>Lagrange basis polynomials<a class="headerlink" href="#lagrange-basis-polynomials" title="Link to this heading">#</a></h3>
+<p>By construction,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P_i(x_j) = 1\)</span> when <span class="math notranslate nohighlight">\(i = j\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P_i(x_j) = 0\)</span> when <span class="math notranslate nohighlight">\(i \ne j\)</span>.</p></li>
+</ul>
+<section id="example-find-and-plot-the-lagrange-basis-polynomials">
+<h4>Example: Find and plot the Lagrange basis polynomials<a class="headerlink" href="#example-find-and-plot-the-lagrange-basis-polynomials" title="Link to this heading">#</a></h4>
+<p>Use the data:
+<em>x = [0, .5, 2]</em>
+<em>y = [1, 3, 2]</em></p>
+<p>\begin{eqnarray}
+P_1(x) &amp;=&amp; \frac{(x - x_2)(x - x_3)}{(x_1-x_2)(x_1-x_3)} = \frac{(x - 1)(x - 2)}{(0-1)(0-2)} = \frac{1}{2}(x^2 - 3x + 2),\
+P_2(x) &amp;=&amp; \frac{(x - x_1)(x - x_3)}{(x_2-x_1)(x_2-x_3)} = \frac{(x - 0)(x - 2)}{(1-0)(1-2)} = -x^2 + 2x,\
+P_3(x) &amp;=&amp; \frac{(x - x_1)(x - x_2)}{(x_3-x_1)(x_3-x_2)} = \frac{(x - 0)(x - 1)}{(2-0)(2-1)} = \frac{1}{2}(x^2 - x).
+\end{eqnarray}</p>
+<p>Plot each polynomial and verify the property that <span class="math notranslate nohighlight">\(P_i(x_j) = 1\)</span> when <span class="math notranslate nohighlight">\(i = j\)</span> and <span class="math notranslate nohighlight">\(P_i(x_j) = 0\)</span> when <span class="math notranslate nohighlight">\(i \ne j\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: show me the legendre basis polynomials for the data aove using the numpy.polynomial.legendre Legendre</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="kn">import</span> <span class="n">legendre</span>
+
+<span class="c1"># Data points</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Calculate the Lagrange basis polynomials</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="n">numerator</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="n">denominator</span> <span class="o">=</span> <span class="mi">1</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+      <span class="n">numerator</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polymul</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]]))</span>
+      <span class="n">denominator</span> <span class="o">=</span> <span class="n">denominator</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+  <span class="n">P</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polydiv</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">denominator</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+
+
+<span class="c1"># Plot the Lagrange basis polynomials</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">y_plot</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">](</span><span class="n">x_plot</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;P_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">(x)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;P_i(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lagrange Basis Polynomials&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># prompt: show me the legendre basis polynomials for the data aove using the numpy.polynomial.legendre Legendre</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">numpy.polynomial</span> <span class="kn">import</span> <span class="n">legendre</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="assembling-the-polynomial">
+<h3>Assembling the polynomial<a class="headerlink" href="#assembling-the-polynomial" title="Link to this heading">#</a></h3>
+<p>Since <span class="math notranslate nohighlight">\(P_{i\ne j}=0\)</span>, and <span class="math notranslate nohighlight">\(P_{i = j}=1\)</span>, it is trivial to see that for <span class="math notranslate nohighlight">\( y(x) = \sum_{i = 1}^n \omega_i P_i(x) \)</span>, the coefficients are simply:</p>
+<div class="math notranslate nohighlight">
+\[
+y(x) = \sum_{i = 1}^n y_i P_i(x)
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Plot the legendre polynomial from the basis above</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Construct the Lagrange polynomial</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+  <span class="n">L</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># Plot the Lagrange polynomial</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;L(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;L(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lagrange Polynomial Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h3>
+<p>We can observe some notes:</p>
+<ul class="simple">
+<li><p>For <span class="math notranslate nohighlight">\(n\)</span> data points we necessarily produce a unique polynominal that crosses each one.</p></li>
+<li><p>If we have two measurements at the same input, <span class="math notranslate nohighlight">\(x_i = x_j\)</span>, <span class="math notranslate nohighlight">\(P_i =\sim \frac{1}{0}\)</span> which is undefined <em>unless</em> <span class="math notranslate nohighlight">\(x_i=x_j\)</span> and <span class="math notranslate nohighlight">\(y_i=y_j\)</span> in which case the data pair is redundant and can be removed.</p></li>
+<li><p>Each evalulation of <span class="math notranslate nohighlight">\(P(x)\)</span> involves <span class="math notranslate nohighlight">\(n-1\)</span> products, and <span class="math notranslate nohighlight">\(L(x)\)</span> is the sum of <span class="math notranslate nohighlight">\(n\)</span> bases, therefore evaluation is <span class="math notranslate nohighlight">\(O(n^2)\)</span></p></li>
+<li><p>Adding new data means restarting the compuation.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Use sympy to fit a lagrange polynomial to the data above (with some extra points)</span>
+
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x_sym</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">term</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">term</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x_sym</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="n">L</span> <span class="o">+=</span> <span class="n">term</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;which is an ugly way of writing out:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">simplify</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="error">
+<h3>Error<a class="headerlink" href="#error" title="Link to this heading">#</a></h3>
+<p>It can be shown that the error in the interpolation is,</p>
+<div class="math notranslate nohighlight">
+\[
+y^{true}(x)-y(x) = \frac{[x-x_1][x-x_2][x-x_3]...[x-x_n]}{(n+1)!} f^{(n+1)}(\xi)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi\)</span> is in the interval <span class="math notranslate nohighlight">\((x_0, x_n)\)</span>.</p>
+<p>Since for <span class="math notranslate nohighlight">\(n\)</span> datapoints there is a unique polynomial of degree <span class="math notranslate nohighlight">\(n-1\)</span>, which can be expressed as a Lagrange polynomial, <strong>this analysis is universal to all polynomial interpolations!</strong>. The main takeaway is that:</p>
+<p><em>The further a data point is from <span class="math notranslate nohighlight">\(x\)</span>, the more it contributes to the error.</em></p>
+<p>##Barycentric Lagrange Interpolation</p>
+<p>Let’s try to improve the performance of Lagrange Interpolation. Let:</p>
+<p><span class="math notranslate nohighlight">\(
+\Omega(x) = \prod_{j = 1}^n [x - x_j]
+\)</span></p>
+<p>and the <em>barycentric weights</em>, <span class="math notranslate nohighlight">\(w_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+w_i = \prod_{j = 1, j\ne i}^n\frac{1}{x_i - x_j}.
+\]</div>
+<p>and write:</p>
+<div class="math notranslate nohighlight">
+\[
+P_i(x) = \Omega(x) \frac{w_i}{x - x_j}.
+\]</div>
+<p>and factor the <span class="math notranslate nohighlight">\(\Omega\)</span> out of the sum:</p>
+<div class="math notranslate nohighlight">
+\[
+y(x) = \Omega(x) \sum_{j = 1}^n \frac{w_i}{x - x_j} y_i.
+\]</div>
+<p>which is <span class="math notranslate nohighlight">\(O(n)\)</span> for evaluation. Calculation of <span class="math notranslate nohighlight">\(w_i\)</span> can be formulated recursively, such that each <span class="math notranslate nohighlight">\(w_i\)</span> takes <span class="math notranslate nohighlight">\(O(n)\)</span> and the full takes <span class="math notranslate nohighlight">\(O(n^2)\)</span> with updates n.</p>
+<p>NB: The weights depend only on <span class="math notranslate nohighlight">\(x_i\)</span>, not <span class="math notranslate nohighlight">\(y_i\)</span> - this means if we are measuring multiple functions on the same spacing, we can reuse the weights, leading to substantial computaitonal savings.</p>
+<p>The benefit being that the calucation of the <span class="math notranslate nohighlight">\(\omega_i\)</span>, <span class="math notranslate nohighlight">\(O(n^2)\)</span> is precomputed.</p>
+</section>
+<section id="barycentric-formula">
+<h3>Barycentric formula<a class="headerlink" href="#barycentric-formula" title="Link to this heading">#</a></h3>
+<p>We can write one more form which is commonly implemented. Let’s add one more piece of data:</p>
+<div class="math notranslate nohighlight">
+\[ 1 = \sum_{j=0}^n P_j = \Omega(x) \sum_{j=0}^n \frac{w_j}{x-x_j}\]</div>
+<p>then we divide the previous function and write:</p>
+<div class="math notranslate nohighlight">
+\[
+y(x) = \frac{\sum_{j = 0}^n \frac{w_i}{x - x_j} y_i}{\sum_{j = 0}^n \frac{w_i}{x - x_j}}
+\]</div>
+<p>where we have cancelled <span class="math notranslate nohighlight">\(\Omega\)</span>! Besides elegance, his avoids an issue when evaluating <span class="math notranslate nohighlight">\(x\rightarrow x_i\)</span> where roundoff can cause subtractive cancellation. Since the term appears in the numerator and denominator this cancels out!</p>
+</section>
+</section>
+<section id="newton-s-divided-difference-method">
+<h2>Newton’s divided difference method<a class="headerlink" href="#newton-s-divided-difference-method" title="Link to this heading">#</a></h2>
+<p>Newton’s polynomial interpolation has the form:</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = a_0 + a_1[x-x_0] + a_2 [x-x_0][x-x_1] + \dots + a_n[x-x_0][x-x_1]\dots[x-x_n]\]</div>
+<p>which has the advantage of <span class="math notranslate nohighlight">\(O(n)\)</span> evaluations due to recursion and nested multiplication. E.g. for 4 terms,</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = a_0 + [x-x_0] \bigg[a_1  + [x-x_1] \big[a_2  + [x-x_2] a_3 \big] \bigg] \]</div>
+<p>Newton’s method is also known as the <strong>divided differences</strong></p>
+<blockquote>
+<div><p>This was the algorithm was used to calculate function tables like logarithms and trignometry functions. It was then the basis for the <em>difference engine</em>, an early mechanical calculator.</p>
+</div></blockquote>
+<p>Let’s pick a data point to start at. Say <span class="math notranslate nohighlight">\(y(x_0) = a_0 = y_0\)</span>,
+$<span class="math notranslate nohighlight">\(a_0 = y_0\)</span>$</p>
+<p>Add the next data point: <span class="math notranslate nohighlight">\(y(x_1) = a_0 + a_1(x_1-x_0) = y_1\)</span>, or:</p>
+<div class="math notranslate nohighlight">
+\[a_1 = \frac{y_1 - y_0}{x_1 - x_0}\]</div>
+<p>Now, insert data point <span class="math notranslate nohighlight">\((x_2, y_2)\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[a_2 = \frac{\frac{y_2 - y_1}{x_2 - x_1} - \frac{y_1 - y_0}{x_1 - x_0}}{x_2 - x_0}\]</div>
+<p>and similarly,</p>
+<div class="math notranslate nohighlight">
+\[a_3 = \frac{\frac{\frac{y_3-y_2}{x_3-x_2} - \frac{y_2 - y_1}{x_2-x_1}}{x_3 - x_1} - \frac{\frac{y_2-y_1}{x_2-x_1}-\frac{y_1 - y_0}{x_1 - x_0}}{x_2-x_0}}{x_3 - x_0}\]</div>
+<p>Notice the recurrsion and the division of the differences.</p>
+<p>Let’s generalize this. Define the two-argument function:</p>
+<div class="math notranslate nohighlight">
+\[ y[x_1, x_0] = \frac{y_1 - y_0}{x_1 - x_0}\]</div>
+<p>and the ternary recursively:</p>
+<div class="math notranslate nohighlight">
+\[ y[x_2, x_1, x_0] = \frac{\frac{y_2 - y_1}{x_2 - x_1} - \frac{y_1 - y_0}{x_1 - x_0}}{x_2 - x_0} = \frac{y[x_2,x_1] - y[x_1,x_0]}{x_2-x_1}\]</div>
+<p>The <span class="math notranslate nohighlight">\(n-nary\)</span> function is:</p>
+<div class="math notranslate nohighlight">
+\[ y[x_k, x_{k-1}, \dots, x_{1}, x_0] = \frac{y[x_k, x_{k-1}, \dots, x_{2}, x_2] - y[x_{k-1}, x_{k-2}, \dots, x_{1}, x_0]}{x_k-x_0}\]</div>
+<p>We can visualize this is in a <em>tableau</em>:
+$<span class="math notranslate nohighlight">\(
+\begin{array}{cccccc}
+x_0 &amp; y_0 \\
+    &amp;     &amp; y[x_1,x_0] \\
+x_1 &amp; y_1 &amp;             &amp; y[x_2, x_1,x_0]\\
+    &amp;     &amp; y[x_2,x_1]  &amp;              &amp; y[x_3, x_2, x_1,x_0]\\
+x_2 &amp; y_2 &amp;             &amp; y[x_3, x_2,x_1] &amp;             &amp; y[x_4, x_3, x_2, x_1,x_0]\\
+    &amp;     &amp; y[x_3,x_2]  &amp;              &amp; y[x_4, x_3, x_2, x_1]\\
+x_3 &amp; y_3 &amp;             &amp; y[x_4, x_3,x_2]\\
+    &amp;     &amp; y[x_4,x_3] \\
+x_4 &amp; y_4
+\end{array}
+\)</span>$</p>
+<p>where element is the difference of the two to the left.
+Alternately, it is sometimes written in the form,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{c||cccccc}
+x_0 &amp; y_0 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\
+x_1 &amp; y_1 &amp; y[x_1,x_0] &amp; 0 &amp; 0 &amp; 0\\
+x_2 &amp; y_2 &amp; y[x_2,x_1] &amp; y[x_2, x_1,x_0] &amp; 0          &amp; 0 \\
+x_3 &amp; y_3 &amp; y[x_3,x_2] &amp; y[x_3, x_2,x_1] &amp; y[x_3, x_2, x_1,x_0] &amp; 0            \\
+x_4 &amp; y_4 &amp; y[x_4,x_3] &amp; y[x_4, x_3,x_2] &amp; y[x_4, x_3, x_2, x_1]  &amp; y[x_4, x_3, x_2, x_1,x_0]  
+\end{array}
+\end{split}\]</div>
+<p>Note that the diagonal is the coefficients that we need, i.e. <span class="math notranslate nohighlight">\(a_0, a_1, a_2, a_3, a_4\)</span> for the polynomial.</p>
+<section id="id1">
+<h3>Analysis<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="direct-solution">
+<h2>Direct solution<a class="headerlink" href="#direct-solution" title="Link to this heading">#</a></h2>
+<p>Lastly, there is a direct solution method that only became really poractical with the advent of modern computing since it focusses on linear systes:</p>
+<p>Consider fitting a function</p>
+<div class="math notranslate nohighlight">
+\[ y(x) = a_n x^n + a_{n-1} x^{n-1} \dots a_2 x^2 + a_1 x +a_0\]</div>
+<p>since</p>
+<p><span class="math notranslate nohighlight">\(y(x_i) = a_n x_i^n + a_{n-1} x_i^{n-1} \dots a_2 x_i^2 + a_1 x_i +a_0 = y_i\)</span></p>
+<p>we can write out in matrix form,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+ \begin{bmatrix}
+1 &amp; x_1 &amp; x_1^2 &amp; \cdots &amp; x_1^m \\
+1 &amp; x_2 &amp; x_2^2 &amp; \cdots &amp; x_2^m \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_n &amp; x_n^2 &amp; \cdots &amp; x_n^m
+\end{bmatrix}
+\begin{bmatrix}
+a_0 \\
+a_1 \\
+a_2 \\
+\vdots \\
+a_m
+\end{bmatrix} =
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+y_3 \\
+\vdots \\
+y_n
+\end{bmatrix}
+\end{split}\]</div>
+<p>where the matrix of coefficients is called a Vandermonde matrix. This system can be solved for <span class="math notranslate nohighlight">\(a_i\)</span> with a dense linear solver. The issue with this method is that the system is notoriously ill-conditioned and roundoff error accumulates rapidly for large <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>#Example: Interpolate our toy problem</p>
+<p>Let us know examine our toy problem. Since all the polynomial interpolation functions generate the same unique polynomial, any will suffice:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Interpolate the data in x_d and y_d using numpy Legendre, and plot along with the original curve from -5.5 to 5.5</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Interpolate using numpy Legendre</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">legendre</span><span class="o">.</span><span class="n">legfit</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">y_d</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_d</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">legendre_polynomial</span> <span class="o">=</span> <span class="n">legendre</span><span class="o">.</span><span class="n">Legendre</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
+
+<span class="c1"># Create x values for plotting the interpolated polynomial</span>
+<span class="n">x_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y_interp</span> <span class="o">=</span> <span class="n">legendre_polynomial</span><span class="p">(</span><span class="n">x_interp</span><span class="p">)</span>
+
+
+<span class="c1"># Plot the original curve, sampled points, and interpolated polynomial</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_toy</span><span class="p">,</span> <span class="n">y_toy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exp(-(x/2)^2)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">y_d</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampled points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_interp</span><span class="p">,</span> <span class="n">y_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Legendre Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Function, Sampled Points, and Legendre Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>YIKES!</p>
+<p>This is an example of <em>Runge’s phenomenon</em>: That even for a seeminlgly ideal case of equalspaced samples, higher order polynomials can show huge oscillations between samples!</p>
+<ul class="simple">
+<li><p>The order that the datapoints are added is arbitrary but will result in a different tableau (with the same diagonal).</p></li>
+<li><p>We can build this matrix / tableau diagonal-by-diagonal which means adding new data points doesn’t require recalculation of the others.</p></li>
+<li><p>Each new diagonal (datapoint) takes <span class="math notranslate nohighlight">\(O(n)\)</span> so assembly of the tableau takes <span class="math notranslate nohighlight">\(~O(n^2)\)</span>.</p></li>
+<li><p>Evaluation of f(x) takes <span class="math notranslate nohighlight">\(O(n)\)</span></p></li>
+<li><p>These coefficients are independant of <span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cubic-splines">
+<h1>Cubic splines<a class="headerlink" href="#cubic-splines" title="Link to this heading">#</a></h1>
+<p>Splines were formulated to relieve these oscillations by piecing together a series of lower-order polynomials and requiring <em>smoothness</em>. Consider a polynomial over the interval between <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_{i+1}\)</span>, and assert:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y(x_i) = y_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y(x_{i+1}) = y_{i+1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(y'(x_i)\)</span> be continuous</p></li>
+<li><p><span class="math notranslate nohighlight">\(y''(x_i)\)</span> be continuous</p></li>
+</ul>
+<p>with these 4 constraints, it is clear we are looking for cubic functions, and therefore these splines are <em>piecewise cubic curves</em>.</p>
+<p>We will be describing the splines in terms of the <em>knots</em>, <span class="math notranslate nohighlight">\(k_i\)</span> which parameterize the curves. For these splines, these knots are the second derivatives at a point <span class="math notranslate nohighlight">\(x_i\)</span>.</p>
+<p>To find the coefficients of the cubic splines, consider that the second derivative is linear and represent it with a 2-point Lagrange interpolation:
+\begin{align}
+y’’<em>{i, i+1} &amp;= k_i P_i(x) + k</em>{i+1} P_{i+1}(x) \
+&amp;= \frac{k_i [x-x_{i+1}] + k_{i+1} [x-x_i]}{x_i-x_{i+1}}
+\end{align}</p>
+<p>Using the constraints above we end up with:</p>
+<div class="math notranslate nohighlight">
+\[k_{i-1}[x_{i-1}-x_i]  + 2 k_i [x_{i-1} - x_{i+1}] + k_{i+1}[x_i-x_{i+1}] = 6\left[ \frac{y_{i-1}-y_i}{x_{i-1}-x_i} - \frac{y_{i}-y_{i+1}}{x_{i}-x_{i+1}} \right]\]</div>
+<p>which is a tridiagonal matrix!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 4 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\begin{bmatrix}
+k_1 \\
+k_2\\
+k_3\\
+k_4\\
+k_5\\
+k_6\\
+k_7\\
+k_8\\
+k_9\\
+k_{10}\\
+k_{11}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0\\
+-0.424 \\
+-1.052 \\
+-0.891 \\
+1.138 \\
+2.654 \\
+1.138 \\
+-0.891 \\
+-1.052 \\
+-0.424 \\
+0
+\end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Do a cubic spline of x_d and y_d and plot against the original function from -5.5 to 5.5</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">CubicSpline</span>
+
+<span class="c1"># Create a cubic spline interpolation</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">CubicSpline</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">y_d</span><span class="p">)</span>
+
+<span class="c1"># Create x values for plotting the interpolated spline</span>
+<span class="n">x_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y_interp</span> <span class="o">=</span> <span class="n">cs</span><span class="p">(</span><span class="n">x_interp</span><span class="p">)</span>
+
+<span class="c1"># Plot the original curve, sampled points, and interpolated spline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_toy</span><span class="p">,</span> <span class="n">y_toy</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exp(-(x/2)^2)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_d</span><span class="p">,</span> <span class="n">y_d</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampled points&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_interp</span><span class="p">,</span> <span class="n">y_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cubic Spline Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Function, Sampled Points, and Cubic Spline Interpolation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="analysis-of-cubic-splines">
+<h2>Analysis of cubic splines<a class="headerlink" href="#analysis-of-cubic-splines" title="Link to this heading">#</a></h2>
+<p>We note:</p>
+<ul class="simple">
+<li><p>Cubic splines are <em>stiffer</em> in that they don’t have high-frequency oscillations (thus avoiding Runge’s phenomenon).</p></li>
+<li><p>The concept of <em>smoothness</em> is easy in 1D, but what does it mean for 2D+? How would you ensure continuity along an edge?</p></li>
+<li><p>Specifying <em>smoothness</em> as part of the goals going in suggest this is more of a global scheme. This requires simultaneous linears systems to be solved.</p></li>
+</ul>
+</section>
+<section id="generalization-to-n-dimensions">
+<h2>Generalization to N-dimensions<a class="headerlink" href="#generalization-to-n-dimensions" title="Link to this heading">#</a></h2>
+<p>Let’s recap and generalize:</p>
+<ul class="simple">
+<li><p>For any <span class="math notranslate nohighlight">\(n\)</span> points there is a polynomial that fits it, but because of Runge’s phenomenon you don’t want to use that!</p></li>
+<li><p>Piecewise polynomials are <em>stiffer</em> and avoids Runge’s phenomenon, but smoothness causes issues for N-D</p></li>
+</ul>
+<p>So what do we do? Standard pacakges offer simplistic but pragmatic interpolators (optimized for either rectangular or irregular grids) :</p>
+<ul class="simple">
+<li><p>Nearest ND interpolator: Find the nearest data point and use that.</p></li>
+<li><p>Linear ND interpolators: For each input, a triangulation finds the nearest data points and a linear barycentric Lagrange interpolation is performed.</p></li>
+</ul>
+<p>Neither of these are completely satisfactory, so we will have to respost to more advanced methods.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Lecture notes/Interpolation_and_curve_fitting"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Polynomial interpolation</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-polynomial-interpolation">Lagrange Polynomial Interpolation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-basis-polynomials">Lagrange basis polynomials</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-find-and-plot-the-lagrange-basis-polynomials">Example: Find and plot the Lagrange basis polynomials</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assembling-the-polynomial">Assembling the polynomial</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#error">Error</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#barycentric-formula">Barycentric formula</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#newton-s-divided-difference-method">Newton’s divided difference method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#direct-solution">Direct solution</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-splines">Cubic splines</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis-of-cubic-splines">Analysis of cubic splines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalization-to-n-dimensions">Generalization to N-dimensions</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="../../" >
 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Example: An overdetermined, inconsistent linear system &#8212; My Jupyter Book</title>
+    <title>Least squares regression &#8212; My Jupyter Book</title>
   
   
   
@@ -27,44 +27,44 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Curve_fit';</script>
-    <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Interpolation_and_curve_fitting/Curve_fit';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -86,7 +86,7 @@
   <dialog id="pst-search-dialog">
     
 <form class="bd-search d-flex align-items-center"
-      action="../search.html"
+      action="../../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -137,7 +137,7 @@
     
   
 
-<a class="navbar-brand logo" href="../index.html">
+<a class="navbar-brand logo" href="../../index.html">
   
   
   
@@ -159,18 +159,24 @@
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
-                <a class="reference internal" href="../index.html">
+                <a class="reference internal" href="../../index.html">
                     Welcome
                 </a>
             </li>
         </ul>
         <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Polynomial%20roots.html">Polynomial roots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Closed%20methods.html">Closed root-finding methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Open%20methods.html">Open methods</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 </ul>
 </details></li>
 </ul>
@@ -227,7 +233,7 @@
       
       
       
-      <li><a href="../_sources/Lecture notes/Curve_fit.ipynb" target="_blank"
+      <li><a href="../../_sources/Lecture notes/Interpolation_and_curve_fitting/Curve_fit.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +309,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Example: An overdetermined, inconsistent linear system</h1>
+    <h1>Least squares regression</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -313,7 +319,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Least squares regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-least-squares-regression">Linear least squares regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditioning-of-a-rectangular-matrix">Conditioning of a rectangular matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-an-overdetermined-consistent-linear-system-our-headscratcher-from-the-early-lectures">Example: An overdetermined, consistent linear system (our headscratcher from the early lectures!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-an-overdetermined-inconsistent-linear-system">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights">Weights</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polyfit">Polyfit</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-determine-the-coefficients-of-a-cubic-polynomial">Example: Determine the coefficients of a cubic polynomial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-a-series-of-best-fit-polynomials">Example 2: Find a series of ‘best fit polynomials’</a></li>
@@ -334,19 +349,16 @@
                 <article class="bd-article">
                   
   <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Curve_fit.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>Goals</p>
-<ul class="simple">
-<li><p>Understand how to obtain the ‘best fit’ of data for the linear case</p></li>
-<li><p>Be able to use calculate and use the pseudoinverse</p></li>
-<li><p>Watch out and exploit weighting</p></li>
-</ul>
-<p>#Least squares regression</p>
+<section class="tex2jax_ignore mathjax_ignore" id="least-squares-regression">
+<h1>Least squares regression<a class="headerlink" href="#least-squares-regression" title="Link to this heading">#</a></h1>
 <p>Generally, we will have some datapoint pairs <span class="math notranslate nohighlight">\(x_i, y_i\)</span>. We will have some function <span class="math notranslate nohighlight">\(y\)</span> with parameters <span class="math notranslate nohighlight">\(a\)</span> that will be evaluated at a point <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(y(a, x)\)</span>.</p>
 <p>Our goal is to find the set of parameters <span class="math notranslate nohighlight">\(a\)</span> that gives us the <em>best fit</em> of the data. Commonly, this implies minimizing the squared error between the prediction and the data,</p>
 <p>$<span class="math notranslate nohighlight">\(y(a,x_i)-y_i = r_i\)</span>$.</p>
 <p>where <span class="math notranslate nohighlight">\(r\)</span> is the residual vector. The <em>least squares fit</em> is formulated as finding <span class="math notranslate nohighlight">\(a\)</span> so as to minimize <span class="math notranslate nohighlight">\(\| r\|\)</span>.</p>
 <p>In general, this is an optimization problem (much more complicated than you would expect!) since <span class="math notranslate nohighlight">\(y(a,x)\)</span> can be complex.</p>
-<p>#Linear least squares regression</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="linear-least-squares-regression">
+<h1>Linear least squares regression<a class="headerlink" href="#linear-least-squares-regression" title="Link to this heading">#</a></h1>
 <p>Let’s look at the <em>simpler</em> case first; in particular where <span class="math notranslate nohighlight">\(y\)</span> is the sum of basis functions weighted by <span class="math notranslate nohighlight">\(a\)</span> (e.g.: polynomial interpolation, radial basis functions… can you think of another one?).</p>
 <p>In this case, <span class="math notranslate nohighlight">\(y=Ax\)</span>, and the data is inserted into <span class="math notranslate nohighlight">\(b\)</span>.</p>
 <blockquote>
@@ -371,7 +383,8 @@ x &amp;= A^† b
 <li><p>When used to solve <span class="math notranslate nohighlight">\(Ax=b\)</span> it results in the <em>best fit</em> (in the least squares sense)</p></li>
 <li><p>Since the ultimate <em>minimum</em> is <span class="math notranslate nohighlight">\(0\)</span>, the pseudoinverse is the true inverse for an exactly solvable system.</p></li>
 </ul>
-<p>##Conditioning of a rectangular matrix</p>
+<section id="conditioning-of-a-rectangular-matrix">
+<h2>Conditioning of a rectangular matrix<a class="headerlink" href="#conditioning-of-a-rectangular-matrix" title="Link to this heading">#</a></h2>
 <p>The determinant of a rectangual matrix is undefined, but we can resort to the definition of the condition number:
 $<span class="math notranslate nohighlight">\(cond(A) = \|A\| \|A^\dagger\|\)</span>$</p>
 <p>Terminology</p>
@@ -387,7 +400,8 @@ $<span class="math notranslate nohighlight">\(cond(A) = \|A\| \|A^\dagger\|\)</s
 </ul>
 </li>
 </ul>
-<p>####Example: An overdetermined, consistent linear system (our headscratcher from the early lectures!)</p>
+<section id="example-an-overdetermined-consistent-linear-system-our-headscratcher-from-the-early-lectures">
+<h3>Example: An overdetermined, consistent linear system (our headscratcher from the early lectures!)<a class="headerlink" href="#example-an-overdetermined-consistent-linear-system-our-headscratcher-from-the-early-lectures" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(20 c + 50 t = 700\)</span></p>
 <p><span class="math notranslate nohighlight">\(  c+t = 20\)</span></p>
 <p><span class="math notranslate nohighlight">\( 50 c + 20 t = 700\)</span></p>
@@ -496,8 +510,9 @@ $<span class="math notranslate nohighlight">\(cond(A) = \|A\| \|A^\dagger\|\)</s
 </div>
 </div>
 </div>
+</section>
 <section id="example-an-overdetermined-inconsistent-linear-system">
-<h1>Example: An overdetermined, inconsistent linear system<a class="headerlink" href="#example-an-overdetermined-inconsistent-linear-system" title="Link to this heading">#</a></h1>
+<h3>Example: An overdetermined, inconsistent linear system<a class="headerlink" href="#example-an-overdetermined-inconsistent-linear-system" title="Link to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(20 c + 50 t = 700\)</span></p>
 <p><span class="math notranslate nohighlight">\(  c+t = 20\)</span></p>
 <p><span class="math notranslate nohighlight">\( 60 c + 20 t = 700\)</span></p>
@@ -533,7 +548,7 @@ $<span class="math notranslate nohighlight">\(cond(A) = \|A\| \|A^\dagger\|\)</s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" src="../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" />
+<img alt="../../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" src="../../_images/b0b1257a277de45d962dd54b9d18080c9b9e71d93dc7afa5b3c69a9e88a999d3.png" />
 </div>
 </div>
 <p>Where do you think he solution is going to be?</p>
@@ -574,11 +589,13 @@ To use the future default and silence this warning we advise to pass `rcond=None
   x_lsq,_,_,_ = np.linalg.lstsq(A,b)
 </pre></div>
 </div>
-<img alt="../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" src="../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" />
+<img alt="../../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" src="../../_images/2092c0c00d7118eb394f7543d8b6bb8250e1996c73e6a90fd7ebf1620d99160a.png" />
 </div>
 </div>
 <p>Was this what you were expecting?</p>
-<p>#Weights</p>
+</section>
+<section id="weights">
+<h3>Weights<a class="headerlink" href="#weights" title="Link to this heading">#</a></h3>
 <p>As with most approximate methods, the moment we start to move away from an <em>exact solution</em> subtle effects start to show up!</p>
 <p>Notice we are minimizing the <em>residuals</em> but there is a subtle problem with the problem definition above:</p>
 <div class="math notranslate nohighlight">
@@ -670,15 +687,17 @@ To use the future default and silence this warning we advise to pass `rcond=None
   x_lsq,_,_,_ = np.linalg.lstsq(A,b)
 </pre></div>
 </div>
-<img alt="../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" src="../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" />
+<img alt="../../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" src="../../_images/3f2e2941f85b4bf8c2e06f83062a70dd00dd6912f76d91c96798bfa20efd34c7.png" />
 </div>
 </div>
 <p>Weights are an excellent way to introduce measurement uncertainty into your fit!</p>
 </section>
+</section>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="polyfit">
 <h1>Polyfit<a class="headerlink" href="#polyfit" title="Link to this heading">#</a></h1>
 <p>Let’s return to our polynomial fitting armed with our new tool, and use it to separate the order of the polynomial from the number of data points.</p>
-<p>An <span class="math notranslate nohighlight">\(n\)</span>th degree polynomial,</p>
+<p>An <span class="math notranslate nohighlight">\(n\)</span> th degree polynomial,</p>
 <div class="math notranslate nohighlight">
 \[ y(x) = a_n x^n + a_{n-1} x^{n-1} \dots a_2 x^2 + a_1 x +a_0\]</div>
 <p>can be applied to <span class="math notranslate nohighlight">\(m\)</span> data points,</p>
@@ -746,7 +765,7 @@ y_m
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" src="../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" />
+<img alt="../../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" src="../../_images/9bf39563f8da8467c7a856ee81b0b0ec805875119fea688a21b1092362e45aef.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -890,7 +909,7 @@ Coefficients calculated manually [ 6.28230705e-02  6.87425501e+01 -2.93452380e+0
 Coefficients calculated with polyfit [ 6.28230705e-02  6.87425501e+01 -2.93452380e+00 -2.14197455e+02]
 </pre></div>
 </div>
-<img alt="../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" src="../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" />
+<img alt="../../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" src="../../_images/c885005a0fe097aba05933bd22e8d3335fc2748772192568f06bd7dc53200a9e.png" />
 </div>
 </div>
 </section>
@@ -951,7 +970,7 @@ Degree 9: Residual Norm = 916.49, Coefficients = [0.0, -0.0, -0.02, 0.05, 0.45, 
 Degree 10: Residual Norm = 916.28, Coefficients = [0.0, 0.0, -0.01, -0.02, 0.24, 0.45, 0.53, -2.0, 12.3, -5.65, -52.29]
 </pre></div>
 </div>
-<img alt="../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" src="../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" />
+<img alt="../../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" src="../../_images/0282171f194759f49225fae901426c29a9483bf124516a5602947e5b075e1779.png" />
 </div>
 </div>
 <p>Interesting points: The curve actually is 4th order but because additional terms will always reduce the error, it is not trivial to tell which is the <em>best</em>, best fit!</p>
@@ -1062,7 +1081,7 @@ P(x_i)^T \omega &amp;=0
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
 </pre></div>
 </div>
-<img alt="../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" src="../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" />
+<img alt="../../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" src="../../_images/cbffb9da558d611adb10f0ef27feaa971c7a9c5309d5f125837642ae2c18636e.png" />
 </div>
 </div>
 </section>
@@ -1080,7 +1099,7 @@ P(x_i)^T \omega &amp;=0
         },
         kernelOptions: {
             name: "python3",
-            path: "./Lecture notes"
+            path: "./Lecture notes/Interpolation_and_curve_fitting"
         },
         predefinedOutput: true
     }
@@ -1114,7 +1133,16 @@ P(x_i)^T \omega &amp;=0
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Least squares regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-least-squares-regression">Linear least squares regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditioning-of-a-rectangular-matrix">Conditioning of a rectangular matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-an-overdetermined-consistent-linear-system-our-headscratcher-from-the-early-lectures">Example: An overdetermined, consistent linear system (our headscratcher from the early lectures!)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-an-overdetermined-inconsistent-linear-system">Example: An overdetermined, inconsistent linear system</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights">Weights</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#polyfit">Polyfit</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-determine-the-coefficients-of-a-cubic-polynomial">Example: Determine the coefficients of a cubic polynomial</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-find-a-series-of-best-fit-polynomials">Example 2: Find a series of ‘best fit polynomials’</a></li>
@@ -1171,8 +1199,8 @@ By The Jupyter Book community
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
   </footer>

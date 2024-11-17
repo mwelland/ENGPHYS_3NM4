@@ -18,46 +18,52 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# prompt: Plot the function exp(-(x/2)^2) from -5 to 5. Then sample 11 times at 1 intervals,  marking the points on the plot and outputting the results as x_d and y_d
+# prompt: Plot the above radial basis functions for epsilon = 1
 
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Define the function
-def f(x):
-  return np.exp(-(x/2)**2)
+# Define the radial basis functions
+def gaussian(r, epsilon):
+  return np.exp(-(epsilon * r)**2)
 
-# Create x values for plotting
-x_toy = np.linspace(-6, 6, 100)
-y_toy = f(x_toy)
+def inverse_quadratic(r, epsilon):
+  return 1 / (1 + (epsilon * r)**2)
 
-# Sample 11 times at 1-interval intervals
-x_d = np.arange(-5, 6, 1)
-y_d = f(x_d)
+def inverse_multiquadric(r, epsilon):
+  return 1 / np.sqrt(1 + (epsilon * r)**2)
 
-# Plot the function and sampled points
-plt.plot(x_toy, y_toy, label='exp(-(x/2)^2)')
-plt.scatter(x_d, y_d, color='red', label='Sampled points')
-plt.xlabel('x')
-plt.ylabel('y')
+epsilon = 1
+
+# Create a range of r values
+r_values = np.linspace(0, 10, 100)
+
+# Calculate the function values for each kernel
+gaussian_values = gaussian(r_values, epsilon)
+inverse_quadratic_values = inverse_quadratic(r_values, epsilon)
+inverse_multiquadric_values = inverse_multiquadric(r_values, epsilon)
+
+# Plot the radial basis functions
+plt.plot(r_values, gaussian_values, label='Gaussian')
+plt.plot(r_values, inverse_quadratic_values, label='Inverse Quadratic')
+plt.plot(r_values, inverse_multiquadric_values, label='Inverse Multiquadric')
+
+plt.xlabel('r')
+plt.ylabel('φ(r)')
+plt.title('Radial Basis Functions (epsilon = 1)')
 plt.legend()
-plt.title('Function and Sampled Points')
 plt.grid(True)
 plt.show()
-
-print("x_d:", x_d)
-print("y_d:", y_d)
-
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
 Cell [0;32mIn[1], line 3[0m
-[1;32m      1[0m [38;5;66;03m# prompt: Plot the function exp(-(x/2)^2) from -5 to 5. Then sample 11 times at 1 intervals,  marking the points on the plot and outputting the results as x_d and y_d[39;00m
+[1;32m      1[0m [38;5;66;03m# prompt: Plot the above radial basis functions for epsilon = 1[39;00m
 [0;32m----> 3[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
 [1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
-[1;32m      6[0m [38;5;66;03m# Define the function[39;00m
+[1;32m      6[0m [38;5;66;03m# Define the radial basis functions[39;00m
 
 [0;31mModuleNotFoundError[0m: No module named 'numpy'
 

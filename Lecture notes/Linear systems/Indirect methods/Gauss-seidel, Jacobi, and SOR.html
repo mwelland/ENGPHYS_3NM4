@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quantifying convergence &#8212; My Jupyter Book</title>
+    <title>Iterative methods &#8212; My Jupyter Book</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear_systems/Indirect methods/Linear_systems_4';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear systems/Indirect methods/Gauss-seidel, Jacobi, and SOR';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -166,11 +166,17 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 </ul>
 </details></li>
 </ul>
@@ -227,7 +233,7 @@
       
       
       
-      <li><a href="../../../_sources/Lecture notes/Linear_systems/Indirect methods/Linear_systems_4.ipynb" target="_blank"
+      <li><a href="../../../_sources/Lecture notes/Linear systems/Indirect methods/Gauss-seidel, Jacobi, and SOR.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +309,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Quantifying convergence</h1>
+    <h1>Iterative methods</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -313,13 +319,26 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Quantifying convergence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iteratively-solve-a-large-matrix">Example: Iteratively solve a large matrix</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-4">n=4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-100">n = 100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-1000">n = 1000</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-3000">n = 3000</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-5000">n = 5000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Iterative methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach">Iterative approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-convergence">Quantifying convergence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi-iteration-method">Jacobi iteration method</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-seidel">Gauss-Seidel</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#successive-over-relaxation-sor">Successive Over Relaxation (SOR)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-code">Let’s code!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iteratively-solve-a-large-matrix">Example: Iteratively solve a large matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-4">n=4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-100">n = 100</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-1000">n = 1000</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-3000">n = 3000</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-5000">n = 5000</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -341,7 +360,8 @@
 <li><p>Understand the pros and cons of each method</p></li>
 <li><p>Experience the benefit of iterative solvers</p></li>
 </ul>
-<p>#Iterative systems</p>
+<section class="tex2jax_ignore mathjax_ignore" id="iterative-methods">
+<h1>Iterative methods<a class="headerlink" href="#iterative-methods" title="Link to this heading">#</a></h1>
 <p>Guass Elimination / LU decomposition are <em>direct</em> solvers in that they solve systems in a fixed number of operations. If we could calculate in infinite precision these answers would be exact. Direct solvers generally scale ~<span class="math notranslate nohighlight">\(O(n^3)\)</span> and are therefore impractical for large systems.</p>
 <p>We will now talk about <em>iterative / indirect methods</em> which start with an initial guess and iterate (hopefully) towards a solution. Each iteration is typically faster and more memory efficient than direct solvers, but convergence is only guaranteed under certain limited circumstances. Even then, the <em>rate of convergence</em> can still make these techniques impractical.</p>
 <p>Iterative techniques have some useful properties:</p>
@@ -354,7 +374,8 @@
 <div><p>In fact, there are a class of solvers called <em>matrix free</em> solvers that avoid the explicit writing of <span class="math notranslate nohighlight">\(A\)</span> entirely… This is useful if the matrix product <span class="math notranslate nohighlight">\(Ax\)</span> can be calculated in a more effective manner such that we don’t bother writing out and storing A$!</p>
 </div></blockquote>
 <p>Each iteration will (hopefully) improve the answer asymptotically, so we estimate the error and say when it is stopped getting better. As discussed with error analysis, this involves defining tolerances for computation.</p>
-<p>##Iterative approach</p>
+<section id="iterative-approach">
+<h2>Iterative approach<a class="headerlink" href="#iterative-approach" title="Link to this heading">#</a></h2>
 <p>Consider: What does it mean for a vector <span class="math notranslate nohighlight">\(x\)</span> to satisfy <span class="math notranslate nohighlight">\(Ax=b\)</span>?</p>
 <p>-&gt; All the elements in <span class="math notranslate nohighlight">\(x\)</span> must be <em>consistent</em>.</p>
 <p>What if one element was not consistent?</p>
@@ -367,7 +388,7 @@
 <li><p>Repeat (possibly updating a parameter first)</p></li>
 </ol>
 <section id="quantifying-convergence">
-<h1>Quantifying convergence<a class="headerlink" href="#quantifying-convergence" title="Link to this heading">#</a></h1>
+<h3>Quantifying convergence<a class="headerlink" href="#quantifying-convergence" title="Link to this heading">#</a></h3>
 <p>The system has converged when <span class="math notranslate nohighlight">\(Ax=b\)</span>. Define the <em>residual vector</em>, <span class="math notranslate nohighlight">\(R = Ax-b\)</span> such that when <span class="math notranslate nohighlight">\(R\rightarrow 0\)</span> (the system is converged).</p>
 <p>Let’s use the norm (some measure of magnitude) of <span class="math notranslate nohighlight">\(R\)</span>  and say the system has converged when <span class="math notranslate nohighlight">\(||R|| \lt tolerance\)</span>.</p>
 <blockquote>
@@ -376,7 +397,11 @@
 <blockquote>
 <div><p>What other tolerance could we imagine using? (Hint: We are actually interested <span class="math notranslate nohighlight">\(x\)</span>…)</p>
 </div></blockquote>
-<p>#Jacobi iteration method</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jacobi-iteration-method">
+<h1>Jacobi iteration method<a class="headerlink" href="#jacobi-iteration-method" title="Link to this heading">#</a></h1>
 <p>Begin by writing out the linear system in index form:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -482,7 +507,9 @@ The true answer is  [0.81818182 1.72727273]
 </div>
 </div>
 </div>
-<p>#Gauss-Seidel</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="gauss-seidel">
+<h1>Gauss-Seidel<a class="headerlink" href="#gauss-seidel" title="Link to this heading">#</a></h1>
 <p>Gauss-Seidel uses the same concept except that the next guess for <span class="math notranslate nohighlight">\(x_i\)</span> is based on the <em>current</em> version of <span class="math notranslate nohighlight">\(x\)</span>. I.e.: If we are moving downwards through the rows, the <span class="math notranslate nohighlight">\(i\)</span>th element is updated based on the updated rows above.</p>
 <div class="math notranslate nohighlight">
 \[\begin{aligned}
@@ -554,7 +581,9 @@ The true answer is  [0.81818182 1.72727273]
 </div>
 </div>
 </div>
-<p>#Successive Over Relaxation (SOR)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="successive-over-relaxation-sor">
+<h1>Successive Over Relaxation (SOR)<a class="headerlink" href="#successive-over-relaxation-sor" title="Link to this heading">#</a></h1>
 <p>The convergence of Gauss-Sidel can be improved through <em>relaxation</em>: Let’s take a weighted average of the new and old <span class="math notranslate nohighlight">\(x_i^{k+1}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{aligned}
@@ -620,7 +649,9 @@ The true answer is  [0.81818182 1.72727273]
 </div>
 </div>
 </div>
-<p>#Summary</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h1>
 <ul class="simple">
 <li><p>Jacobi, Gauss-Seidel, and SOR are all suitable for large, sparse matricies.</p></li>
 <li><p>Since the matrix, and therefore the L D U partitions don’t change, terms can be precomputed outside of the iteration loop for computational efficiency.</p></li>
@@ -644,7 +675,9 @@ The true answer is  [0.81818182 1.72727273]
 <li><p>Success hinges on choice of <span class="math notranslate nohighlight">\(\omega\)</span>.</p></li>
 <li><p>Shares guaranteed convergence of Gauss-Seidel if <span class="math notranslate nohighlight">\(0 \lt \omega \lt 2\)</span>.</p></li>
 </ul>
-<p>#Let’s code!</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="let-s-code">
+<h1>Let’s code!<a class="headerlink" href="#let-s-code" title="Link to this heading">#</a></h1>
 <p>Let’s code in these methods and compare the results. (The python standard libraries don’t have implementaitons).</p>
 <p>All the schemes:</p>
 <ol class="arabic simple">
@@ -732,9 +765,8 @@ Converged after,  12  iterations to:  [0.81818196 1.72727282]
 <img alt="../../../_images/79b04e2888ba72fb7846587b218700919fb6b425f3ebe5734dac09b09bfaf124.png" src="../../../_images/79b04e2888ba72fb7846587b218700919fb6b425f3ebe5734dac09b09bfaf124.png" />
 </div>
 </div>
-</section>
 <section id="example-iteratively-solve-a-large-matrix">
-<h1>Example: Iteratively solve a large matrix<a class="headerlink" href="#example-iteratively-solve-a-large-matrix" title="Link to this heading">#</a></h1>
+<h2>Example: Iteratively solve a large matrix<a class="headerlink" href="#example-iteratively-solve-a-large-matrix" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Form a large, sparse linear system with a diagonally dominant random matrix</span>
@@ -783,7 +815,7 @@ Converged after,  12  iterations to:  [0.81818196 1.72727282]
 </div>
 </div>
 <section id="n-4">
-<h2>n=4<a class="headerlink" href="#n-4" title="Link to this heading">#</a></h2>
+<h3>n=4<a class="headerlink" href="#n-4" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>  <span class="c1"># Size of the matrix</span>
@@ -823,7 +855,7 @@ Converged after,  6  iterations.
 </div>
 </section>
 <section id="n-100">
-<h2>n = 100<a class="headerlink" href="#n-100" title="Link to this heading">#</a></h2>
+<h3>n = 100<a class="headerlink" href="#n-100" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Size of the matrix</span>
@@ -863,7 +895,7 @@ Converged after,  11  iterations.
 </div>
 </section>
 <section id="n-1000">
-<h2>n = 1000<a class="headerlink" href="#n-1000" title="Link to this heading">#</a></h2>
+<h3>n = 1000<a class="headerlink" href="#n-1000" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Size of the matrix</span>
@@ -895,7 +927,7 @@ Converged after,  10  iterations.
 </div>
 </section>
 <section id="n-3000">
-<h2>n = 3000<a class="headerlink" href="#n-3000" title="Link to this heading">#</a></h2>
+<h3>n = 3000<a class="headerlink" href="#n-3000" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>  <span class="c1"># Size of the matrix</span>
@@ -927,7 +959,7 @@ Converged after,  10  iterations.
 </div>
 </section>
 <section id="n-5000">
-<h2>n = 5000<a class="headerlink" href="#n-5000" title="Link to this heading">#</a></h2>
+<h3>n = 5000<a class="headerlink" href="#n-5000" title="Link to this heading">#</a></h3>
 <p>HERE WE GO!
 Remember, this is a terrible implementation of GS! Numpy with loops is going to be slow!</p>
 <div class="cell docutils container">
@@ -961,6 +993,7 @@ Converged after,  11  iterations.
 </div>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -975,7 +1008,7 @@ Converged after,  11  iterations.
         },
         kernelOptions: {
             name: "python3",
-            path: "./Lecture notes/Linear_systems/Indirect methods"
+            path: "./Lecture notes/Linear systems/Indirect methods"
         },
         predefinedOutput: true
     }
@@ -1009,13 +1042,26 @@ Converged after,  11  iterations.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Quantifying convergence</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iteratively-solve-a-large-matrix">Example: Iteratively solve a large matrix</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-4">n=4</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-100">n = 100</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-1000">n = 1000</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-3000">n = 3000</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#n-5000">n = 5000</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Iterative methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-approach">Iterative approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-convergence">Quantifying convergence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobi-iteration-method">Jacobi iteration method</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-seidel">Gauss-Seidel</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#successive-over-relaxation-sor">Successive Over Relaxation (SOR)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-code">Let’s code!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-iteratively-solve-a-large-matrix">Example: Iteratively solve a large matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-4">n=4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-100">n = 100</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-1000">n = 1000</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-3000">n = 3000</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#n-5000">n = 5000</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

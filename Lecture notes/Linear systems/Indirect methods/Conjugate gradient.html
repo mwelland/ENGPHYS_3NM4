@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>The Hessian &#8212; My Jupyter Book</title>
+    <title>Nomenclature &#8212; My Jupyter Book</title>
   
   
   
@@ -62,7 +62,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear_systems/Indirect methods/Linear_systems_5';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Lecture notes/Linear systems/Indirect methods/Conjugate gradient';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -166,11 +166,17 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+</ul>
+</details></li>
 </ul>
 </details></li>
 </ul>
@@ -227,7 +233,7 @@
       
       
       
-      <li><a href="../../../_sources/Lecture notes/Linear_systems/Indirect methods/Linear_systems_5.ipynb" target="_blank"
+      <li><a href="../../../_sources/Lecture notes/Linear systems/Indirect methods/Conjugate gradient.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +309,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>The Hessian</h1>
+    <h1>Nomenclature</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -313,10 +319,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hessian</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Nomenclature</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-gradient-cg">Conjugate gradient (CG)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hessian">The Hessian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-steepest-descent">Choose the step direction: Steepest descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-minimal-residual-method-gmres">Generalized Minimal Residual Method (GMRES)</a></li>
 </ul>
 
@@ -331,17 +342,15 @@
                 <article class="bd-article">
                   
   <p><a href="https://colab.research.google.com/github/mwelland/ENGPYHS_3NM4/blob/main/Linear_systems_5.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>Goals</p>
-<ul class="simple">
-<li><p>Understand how iterative methods approach the solution through building a basis</p></li>
-<li><p>Be able to use Conjugate Gradient and GMRES</p></li>
-</ul>
-<p>#Nomenclature</p>
+<section class="tex2jax_ignore mathjax_ignore" id="nomenclature">
+<h1>Nomenclature<a class="headerlink" href="#nomenclature" title="Link to this heading">#</a></h1>
 <p>Capital letters are Matricies: <span class="math notranslate nohighlight">\(A\)</span></p>
 <p>Vectors have arrows above: <span class="math notranslate nohighlight">\(\vec{x}\)</span></p>
 <p>Scalars are lower case: <span class="math notranslate nohighlight">\(\alpha\)</span></p>
 <p>Superscripts generally denote iteration number: <span class="math notranslate nohighlight">\(\vec{x}^k\)</span>.</p>
-<p>#Conjugate gradient (CG)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conjugate-gradient-cg">
+<h1>Conjugate gradient (CG)<a class="headerlink" href="#conjugate-gradient-cg" title="Link to this heading">#</a></h1>
 <p>Conjugate gradient method is a standard tool for solving symmetric positive definite systems.</p>
 <p>Consider a quadratic surface, defined by:</p>
 <p><span class="math notranslate nohighlight">\(f(\vec{x}^k) = \frac{1}{2} \vec{x}^T A \vec{x} -\vec{b}^T \vec{x}\)</span>.</p>
@@ -356,7 +365,7 @@
 A \vec{x}^k-\vec{b} =\vec{r}^k \ne 0 \
 \end{align}</p>
 <section id="the-hessian">
-<h1>The Hessian<a class="headerlink" href="#the-hessian" title="Link to this heading">#</a></h1>
+<h2>The Hessian<a class="headerlink" href="#the-hessian" title="Link to this heading">#</a></h2>
 <p>Note: The matrix <span class="math notranslate nohighlight">\(A\)</span> in this case is the <em>hessian</em>, <span class="math notranslate nohighlight">\(H\)</span>, of <span class="math notranslate nohighlight">\(f\)</span>, which is the matrix made by the mixed second derivatives:</p>
 <p><span class="math notranslate nohighlight">\(H = \begin{bmatrix}
 \frac{\partial^2 f}{\partial x_1^2} &amp; \frac{\partial^2 f}{\partial x_1 \partial x_2} &amp; \cdots &amp; \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
@@ -378,7 +387,7 @@ A \vec{x}^k-\vec{b} =\vec{r}^k \ne 0 \
 <p><span class="math notranslate nohighlight">\(\vec{x}^{k+1} = \vec{x}^k + \alpha^k \vec{s}^k\)</span></p>
 </section>
 <section id="choose-the-step-length">
-<h1>Choose the step length<a class="headerlink" href="#choose-the-step-length" title="Link to this heading">#</a></h1>
+<h2>Choose the step length<a class="headerlink" href="#choose-the-step-length" title="Link to this heading">#</a></h2>
 <p>An obvious choice for <span class="math notranslate nohighlight">\(\alpha^k\)</span> is whatever minimizes <span class="math notranslate nohighlight">\(f(\vec{x}^{k+1})\)</span>!</p>
 <p><span class="math notranslate nohighlight">\(f(\vec{x}+\alpha^k \vec{s}^k) = \frac{1}{2} [\vec{x}+\alpha^k \vec{s}^k]^T A [\vec{x}+\alpha^k \vec{s}^k] -\vec{b}^T [\vec{x}+\alpha^k \vec{s}^k]\)</span>.</p>
 <p>The minimum is found when:</p>
@@ -389,7 +398,9 @@ A \vec{x}^k-\vec{b} =\vec{r}^k \ne 0 \
 \alpha_k &amp;= \frac{{\vec{s}^k}^T \vec{r}^k}{{\vec{s}^k}^T A  \vec{s}^k}
 \end{align}</p>
 <p>So given a step direction <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> we can take an optimal step length <span class="math notranslate nohighlight">\(\alpha_k\)</span> which is determined by the current residual <span class="math notranslate nohighlight">\(\vec{r}^k\)</span>.</p>
-<p>###Choose the step direction: Steepest descent</p>
+</section>
+<section id="choose-the-step-direction-steepest-descent">
+<h2>Choose the step direction: Steepest descent<a class="headerlink" href="#choose-the-step-direction-steepest-descent" title="Link to this heading">#</a></h2>
 <p>The magic of these methods comes from the choice of step direction.</p>
 <p>How do we go about choosing <span class="math notranslate nohighlight">\(\vec{s}^k\)</span>?</p>
 <p>The intuitive answer is the negative gradient of <span class="math notranslate nohighlight">\(f(x^k)\)</span>, which is simply,</p>
@@ -532,7 +543,7 @@ Iteration  9  :  [0.81818174 1.72727256]
 <p>-&gt; How do we ensure the next step doesn’t undo the previous step?</p>
 </section>
 <section id="choose-the-step-direction-conjugate-gradient">
-<h1>Choose the step direction: Conjugate gradient<a class="headerlink" href="#choose-the-step-direction-conjugate-gradient" title="Link to this heading">#</a></h1>
+<h2>Choose the step direction: Conjugate gradient<a class="headerlink" href="#choose-the-step-direction-conjugate-gradient" title="Link to this heading">#</a></h2>
 <p>The problem is that certain steps undo the effect of the previous step(s). We can instead choose successive step directions to <em>not undo each other</em>, by requiring the next step be <em>conjugate</em> to each other.</p>
 <p>This means we must base the <span class="math notranslate nohighlight">\(\vec{s}^{k+1}\)</span> step on the <span class="math notranslate nohighlight">\(\vec{s}^{k}\)</span> step and the gradient descent (which we just saw was <span class="math notranslate nohighlight">\(\vec{r}^k\)</span>).</p>
 <p><span class="math notranslate nohighlight">\(\vec{s}^{k+1} = \vec{r}^{k+1}+\beta^k \vec{s}^k\)</span></p>
@@ -651,7 +662,7 @@ Iteration  9  :  [0.81818174 1.72727256]
 <p>which helps with computational efficiency.</p>
 </section>
 <section id="analysis">
-<h1>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h1>
+<h2>Analysis<a class="headerlink" href="#analysis" title="Link to this heading">#</a></h2>
 <p>Beginning at <span class="math notranslate nohighlight">\(\vec{x}^0\)</span>, we are tasked with finding <span class="math notranslate nohighlight">\(\vec{x}^{approx}\)</span> through an expansion:</p>
 <p><span class="math notranslate nohighlight">\(\vec{x}^{approx} - \vec{x}^0 =  \alpha^1 \vec{s}^1 + \alpha^2 \vec{s}^2 + ...\)</span>.</p>
 <p>but this is simply vector addition using a set of directions. Our algorithms has generated the directions <span class="math notranslate nohighlight">\(\vec{s}^k\)</span> which form a set of <em>vector bases</em> for:</p>
@@ -715,6 +726,7 @@ Info: 0
 <p>Note that successive iterations are getting closer and closer. Usually, the estimates converge before <span class="math notranslate nohighlight">\(n\)</span> iterations (which is especially useful for large sparse matricies!)</p>
 <p>###Restart</p>
 <p>Sometimes, the set of <span class="math notranslate nohighlight">\(s^k\)</span> gets too large and round-off error can accumulate. Therefore, some implementation have an integer ‘restart’ parameter which will trigger a restart of the bases after a set number have been generated.</p>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="generalized-minimal-residual-method-gmres">
 <h1>Generalized Minimal Residual Method (GMRES)<a class="headerlink" href="#generalized-minimal-residual-method-gmres" title="Link to this heading">#</a></h1>
@@ -797,7 +809,7 @@ Info: 0
         },
         kernelOptions: {
             name: "python3",
-            path: "./Lecture notes/Linear_systems/Indirect methods"
+            path: "./Lecture notes/Linear systems/Indirect methods"
         },
         predefinedOutput: true
     }
@@ -831,10 +843,15 @@ Info: 0
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Hessian</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Nomenclature</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-gradient-cg">Conjugate gradient (CG)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hessian">The Hessian</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-length">Choose the step length</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-steepest-descent">Choose the step direction: Steepest descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choose-the-step-direction-conjugate-gradient">Choose the step direction: Conjugate gradient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analysis">Analysis</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-minimal-residual-method-gmres">Generalized Minimal Residual Method (GMRES)</a></li>
 </ul>
 
