@@ -336,7 +336,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error analysis</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicholson-method">Crank-Nicholson method</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-crank-nicholson-accuracy-vs-euler">Example of Crank Nicholson accuracy vs. Euler</a></li>
 </ul>
 </li>
@@ -517,7 +518,7 @@ T^{t+1}_i &amp;= T_i^t + r [T^t_{i-1} - 2 T^t_i + T^t_{i+1}]
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d0e101d26ae647ab80ff86e33a63a65e"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d0e101d26ae647ab80ff86e33a63a65e", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 </section>
 <section id="error-analysis">
@@ -639,9 +640,11 @@ $<span class="math notranslate nohighlight">\( \frac{\partial T}{\partial t} = \
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "52a6dca9f8c349bab38206242b274062"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "52a6dca9f8c349bab38206242b274062", "version_major": 2, "version_minor": 0}</script></div>
 </div>
-<p>#Crank-Nicholson method</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="crank-nicholson-method">
+<h1>Crank-Nicholson method<a class="headerlink" href="#crank-nicholson-method" title="Link to this heading">#</a></h1>
 <p>One shortcoming of the backward Euler method is that it is only 1st order accurate in time whereas the central difference spatial discretization is second order. This means that one would need smaller time steps compared to spatial steps to ensure accuracy is optimized.</p>
 <p>The Crank-Nicholson method is an alternative implicit method  that is second order in both time and space. As with the central difference derivation (and many others!) the key is to average the explicit and implicit methods!</p>
 <p>Take,
@@ -752,7 +755,7 @@ $<span class="math notranslate nohighlight">\( (1 + 2r) T_i^{t+1} - r T_{i+1}^{t
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a5b60933d62b41c1942e408ac007440d"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a5b60933d62b41c1942e408ac007440d", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <p>#Summary</p>
 <p>Once again, we have seen the value of implicit timesteppers for solving stiff problems. However, as discussed in the Initial Value Problem section, they require a root finder to converge on a system, which generally relies on linear solvers. For large systems, direct solution (LU) is intractable, and so iterative methods are required.</p>
@@ -838,7 +841,8 @@ $<span class="math notranslate nohighlight">\( (1 + 2r) T_i^{t+1} - r T_{i+1}^{t
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error analysis</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicholson-method">Crank-Nicholson method</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-crank-nicholson-accuracy-vs-euler">Example of Crank Nicholson accuracy vs. Euler</a></li>
 </ul>
 </li>

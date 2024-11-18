@@ -319,11 +319,43 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-weighted-residuals">The Method of Weighted Residuals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-relevance-of-the-method-of-weighted-residuals">Aside: relevance of the Method of Weighted Residuals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Finite Element Method</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrative-example">Illustrative example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-direct-substitution">Option 1: Direct substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-least-square-minimization-of-the-residual">Option 2: Least square minimization of the residual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-integrate-the-mwr-to-find-the-parameters">Option 3: Integrate the MWR to find the parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-the-approach">Recap of the approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-the-finite-element-method-bvps">Derivation of the finite element method BVPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximate-the-solution-with-shape-functions">Approximate the solution with <em>shape functions</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-residual-with-the-method-of-weighted-residuals">Minimizing the residual with the <em>Method of Weighted Residuals</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-frac-partial-r-partial-w-least-squares"><span class="math notranslate nohighlight">\(v = \frac{\partial R}{\partial w}\)</span> : Least Squares</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-delta-x-collocation-methods"><span class="math notranslate nohighlight">\(v = \delta (x) \)</span>: Collocation methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-sum-i-phi-i-the-galerkin-method"><span class="math notranslate nohighlight">\(v = \sum_i \phi_i\)</span>: The Galerkin method</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-weak-form">The weak form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization">Discretization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-domain">Partitioning the domain</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-functions">Shape functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Partitioning the domain</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-case">Linear case</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Shape functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-shape-functions">Lagrange shape functions</a></li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -347,10 +379,14 @@
 <li><p>Ability to solve <em>boundary physics</em></p></li>
 <li><p>Excellent accuracy</p></li>
 </ul>
+<section id="illustrative-example">
+<h2>Illustrative example<a class="headerlink" href="#illustrative-example" title="Link to this heading">#</a></h2>
 <p>Consider an ODE <span class="math notranslate nohighlight">\( y^\prime = -y \quad y(0) = 1\)</span>, which has an analytical answer <span class="math notranslate nohighlight">\(y = e^{-t}\)</span>.</p>
-<p>We wish to approximate this function numerically between <span class="math notranslate nohighlight">\([0,1]\)</span> with a line defined by the boundary points, <span class="math notranslate nohighlight">\(f(0) = a = 1\)</span> and <span class="math notranslate nohighlight">\(f(1) = b\)</span>, $<span class="math notranslate nohighlight">\(f(x) =  1+x [b-1]\)</span>$</p>
+<p>We wish to approximate this function numerically between <span class="math notranslate nohighlight">\([0,1]\)</span> with a line defined by the boundary points, <span class="math notranslate nohighlight">\(f(0) = a = 1\)</span> and <span class="math notranslate nohighlight">\(f(1) = b\)</span>, $<span class="math notranslate nohighlight">\(f(x) =  [1-x] + x b\)</span>$</p>
 <p>How do we find <span class="math notranslate nohighlight">\(b\)</span>?</p>
-<p><strong>Option 1</strong>: Following the Finite Difference method, we can subsitute <span class="math notranslate nohighlight">\(f(1)\)</span> into the ODE and solve for b:</p>
+<section id="option-1-direct-substitution">
+<h3>Option 1: Direct substitution<a class="headerlink" href="#option-1-direct-substitution" title="Link to this heading">#</a></h3>
+<p>Following the Finite Difference method, we can subsitute <span class="math notranslate nohighlight">\(f(1)\)</span> into the ODE and solve for b:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 f'(1) &amp;= f(1) \\
@@ -387,20 +423,27 @@ b &amp;= 1/2
 <img alt="../../_images/aa321aa316d8a980bf3802f11f1197f2871644effdac1305735185094aabf142.png" src="../../_images/aa321aa316d8a980bf3802f11f1197f2871644effdac1305735185094aabf142.png" />
 </div>
 </div>
-<p><strong>Option 2</strong>: Let’s integrate the residual of f(x) plugged into the ODE, <span class="math notranslate nohighlight">\(y^\prime + y\)</span></p>
+</section>
+<section id="option-2-least-square-minimization-of-the-residual">
+<h3>Option 2: Least square minimization of the residual<a class="headerlink" href="#option-2-least-square-minimization-of-the-residual" title="Link to this heading">#</a></h3>
+<p>Let’s integrate the squared residual of f(x) plugged into the ODE, <span class="math notranslate nohighlight">\(y^\prime + y\)</span></p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 R &amp;= f^\prime(x) +f(x) \\
-&amp;= [b-1] + 1+x[b-1] \\
+&amp;= [b-1] + 1-x + x b \\
 &amp;= b+x[b-1] \\
 R^2 &amp;= b^2 + 2 b x[b - 1] + [x[b - 1]]^2 \\
-F = \int_0^1 R^2 \ dx &amp;= 1/3 (7 b^2 - 5 b + 1) \\
+F = \int_0^1 R^2 \ dx &amp;= \frac{1}{3} [7 b^2 - 5 b + 1] \\
 \end{align} \end{split}\]</div>
-<p>Note that in the end the integral of the residual, <span class="math notranslate nohighlight">\(F\)</span> is a function of the parameters. In this case, it is a parabola in <span class="math notranslate nohighlight">\(b\)</span> which has a minimum at <span class="math notranslate nohighlight">\(\frac{5}{14}\)</span> and therefore the approximate solution is <span class="math notranslate nohighlight">\(f(x) = 1-\frac{9}{14}x\)</span>.</p>
+<p>Note that in the end the integral of the residual, <span class="math notranslate nohighlight">\(F\)</span> is a parabolic function of the parameter <span class="math notranslate nohighlight">\(b\)</span>. The minimum is found at:
+<span class="math notranslate nohighlight">\(\frac{\partial F}{\partial b}(b) = 0, for \)</span>b = \frac{5}{14}<span class="math notranslate nohighlight">\(. The approximate solution is \)</span>f(x) = 1-\frac{9}{14}x$.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the new function</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">f_new</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">9.</span><span class="o">/</span><span class="mi">14</span><span class="o">*</span><span class="n">x</span>
+<span class="n">f_new_values</span> <span class="o">=</span> <span class="n">f_new</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
 
 <span class="c1"># Plot the functions</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 - x/2&#39;</span><span class="p">)</span>
@@ -424,17 +467,20 @@ F = \int_0^1 R^2 \ dx &amp;= 1/3 (7 b^2 - 5 b + 1) \\
 <img alt="../../_images/3e620acea06803aba2d58fc5b6508d4dd9b0c8a70a8e25104a288e27a6bad504.png" src="../../_images/3e620acea06803aba2d58fc5b6508d4dd9b0c8a70a8e25104a288e27a6bad504.png" />
 </div>
 </div>
-<p>We see that option 2 does a better job of approximating the function in the domain since it focusses on the integral of the residual, but it involved some analytical calculus which we would rather avoid.</p>
-<section id="the-method-of-weighted-residuals">
-<h2>The Method of Weighted Residuals<a class="headerlink" href="#the-method-of-weighted-residuals" title="Link to this heading">#</a></h2>
-<p>You may have noticed that we did something funny here: we integrated <span class="math notranslate nohighlight">\(R^2\)</span> and then took its derivative with respect to <span class="math notranslate nohighlight">\(b\)</span> in order to find the minimum of the integral! Let’s try to be smarter…</p>
-<p>To minimize F(b):
-$<span class="math notranslate nohighlight">\(\begin{align}
+<p>We see that option 2 does a better job of approximating the function over the full domain since it focusses on the integral of the residual.</p>
+<p>You may have noticed that we did something funny here: we integrated <span class="math notranslate nohighlight">\(R^2\)</span> and then took its derivative with respect to <span class="math notranslate nohighlight">\(b\)</span> in order to find the minimum of the integral! I.e.:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
 \frac{\partial F}{\partial b} = 0 &amp;= \frac{\partial }{\partial b} \int_0^1 R^2 \ dx  \\
 &amp;= \int_0^1 R \frac{\partial R}{\partial b}  \ dx \\
 &amp;= \int_0^1 R W  \ dx
-\end{align} \)</span>$</p>
-<p>where <span class="math notranslate nohighlight">\(W\)</span> is called a weighting / test function. Deferring the explaination for later, lets take <span class="math notranslate nohighlight">\(W = x\)</span> and integrate:</p>
+\end{align} \end{split}\]</div>
+<p>where the residual has now been weighted by the function <span class="math notranslate nohighlight">\(W\)</span>. This is called the Method of Weighted Residual [MWR]. Let’s try a different function and see what happens.</p>
+</section>
+<section id="option-3-integrate-the-mwr-to-find-the-parameters">
+<h3>Option 3: Integrate the MWR to find the parameters<a class="headerlink" href="#option-3-integrate-the-mwr-to-find-the-parameters" title="Link to this heading">#</a></h3>
+<p>Integrate the weighted residual function directly with a convenient choice of <span class="math notranslate nohighlight">\(W\)</span>.</p>
+<p>lets take <span class="math notranslate nohighlight">\(W = x\)</span> (to be motivated later) and integrate:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{align}
 \frac{\partial F}{\partial b} =0 &amp;= \int_0^1 R x  \ dx \\
@@ -443,17 +489,286 @@ $<span class="math notranslate nohighlight">\(\begin{align}
 &amp;= \bigg[ \frac{1}{6} x^2\big[3b+2[b-1]x\big]\bigg]_0^1 \\
 &amp;= b-\frac{2}{5} \\
 \end{align} \end{split}\]</div>
-<p>which is very close to our previous solution <span class="math notranslate nohighlight">\(b = \frac{5}{14}\)</span> but with a simpler integration.</p>
-<section id="aside-relevance-of-the-method-of-weighted-residuals">
-<h3>Aside: relevance of the Method of Weighted Residuals<a class="headerlink" href="#aside-relevance-of-the-method-of-weighted-residuals" title="Link to this heading">#</a></h3>
-<p>The equation involved minimizing an integral quantity</p>
-<div class="math notranslate nohighlight">
-\[F(f) = \int_0^1 R^2 \ dx\]</div>
-<p>The quantity <span class="math notranslate nohighlight">\(F\)</span> is called a <em>funcitonal</em> of <span class="math notranslate nohighlight">\(f(x)\)</span> since it depends on not just <span class="math notranslate nohighlight">\(f(x)\)</span> for a particular point but <span class="math notranslate nohighlight">\(f\)</span> over the full domain.</p>
-<p>The Calculus of Variations tells us that <span class="math notranslate nohighlight">\(F(f)\)</span> is minimized when any small change in the function <span class="math notranslate nohighlight">\(f(x)\)</span> called the <em>variation</em> <span class="math notranslate nohighlight">\(\delta f\)</span> is zero <em>everywhere in the integration domain</em>. This is useful since  functional derivatives follow normal derivation laws!</p>
-<div class="math notranslate nohighlight">
-\[ \delta R^2 = 2R \delta R \]</div>
+<p>which is very close to our previous solution <span class="math notranslate nohighlight">\(b = \frac{5}{14}\)</span> but with a simpler integration. BUT, we are still let with analytically integrating! If only there were a way to express integrals as the sum of the integrand evaluated at certain points…</p>
 </section>
+<section id="option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">
+<h3>Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.<a class="headerlink" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points" title="Link to this heading">#</a></h3>
+<p>Integrate the weighted residual function directly with a convenient choice of <span class="math notranslate nohighlight">\(W\)</span> as the sum of the integrand evaluated at certain points:</p>
+<p>Recall Gaussian Quadrature allows us to evaluate an integral by summing the integrand at the Gauss Points. The Gauss Points for the domain <span class="math notranslate nohighlight">\([-1,1]\)</span> are <span class="math notranslate nohighlight">\(\pm\frac{1}{\sqrt{3}}\)</span>, scaled to this integral domain become,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+x_{[0,1]]} &amp;= 0.5 (x_{[-1,1]} + 1) \\
+&amp;= \frac{1}{2} \bigg[1 \pm\frac{1}{\sqrt{3}} \bigg] \\
+&amp;\approx [0.21132487, 0.78867513]
+\end{align} \end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+0 &amp;= \int_0^1 R x  \ dx \\
+&amp;= Rx (x=.21132487) + Rx(x = .78867513) \\
+&amp;= -0.0446582 + 0.255983 b  -0.622008 + 1.41068 b \\
+b &amp;= \frac{2}{5}
+\end{align} \end{split}\]</div>
+</section>
+<section id="recap-of-the-approach">
+<h3>Recap of the approach<a class="headerlink" href="#recap-of-the-approach" title="Link to this heading">#</a></h3>
+<p>Let’s recap what we’ve done:</p>
+<ol class="arabic simple">
+<li><p>parameterized a function as a weighted sum of simpler functions (a linear basis)</p></li>
+<li><p>found a (simple) integral expression that minimizes the error in the approxiation (Minimized Weighted Residual)</p></li>
+<li><p>performed the integration <em>exactly</em> using only function evaluations into a linear system (Gaussian quadrature)</p></li>
+<li><p>Solved the linear system (I <strong>told</strong> you everything boiled down to linear systems!)</p></li>
+</ol>
+<p>Practical solution of linear systems requires sparsity! Let’s formalize our proceedure and see how we can ensure sparsity.</p>
+</section>
+</section>
+<section id="derivation-of-the-finite-element-method-bvps">
+<h2>Derivation of the finite element method BVPs<a class="headerlink" href="#derivation-of-the-finite-element-method-bvps" title="Link to this heading">#</a></h2>
+<p>Consider a linear differential equation,
+$<span class="math notranslate nohighlight">\( \mathcal{L}(u) = f \quad \text{in } \Omega, \)</span>$</p>
+<p>in one dimension for convenience.</p>
+<p>** Boundary conditions in <span class="math notranslate nohighlight">\(\partial \Omega\)</span>?</p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is a differential operator</p></li>
+<li><p><span class="math notranslate nohighlight">\(u(x)\)</span> is the unknown <em>exact</em> solution</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x)\)</span> is a given source term dependant only on space.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Omega\)</span> is the ND domain of the problem, with boundary <span class="math notranslate nohighlight">\(\partial \Omega\)</span>.</p></li>
+</ul>
+<p>Define the residual,
+$<span class="math notranslate nohighlight">\( R(u) = \mathcal{L}(u) - f\)</span><span class="math notranslate nohighlight">\(
+For the exact solution, \)</span>R(u) = 0<span class="math notranslate nohighlight">\( everywhere in \)</span>\Omega$.</p>
+<section id="approximate-the-solution-with-shape-functions">
+<h3>Approximate the solution with <em>shape functions</em><a class="headerlink" href="#approximate-the-solution-with-shape-functions" title="Link to this heading">#</a></h3>
+<p>In liue of an exact solution, we will have to settle for an approximate solution, <span class="math notranslate nohighlight">\(u_h\)</span>, for which <span class="math notranslate nohighlight">\(R(u_h) \ne 0\)</span> but will be made as small as possible. As discussed in the Interpolation sections, a function can be approximated as a weighted sum of basis functions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+u_h(x) &amp;= \sum_{i=1}^N w_i \phi_i(x) \\
+\end{align}\end{split}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span> are the weights / coefficients of the approximation</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi_i(x)\)</span> are a set of suitable <em>shape functions</em>.</p></li>
+</ul>
+<p>It is trivial to see that,
+$<span class="math notranslate nohighlight">\( \nabla u_h = \sum_i w_i \nabla \phi_i \)</span>$</p>
+</section>
+<section id="minimizing-the-residual-with-the-method-of-weighted-residuals">
+<h3>Minimizing the residual with the <em>Method of Weighted Residuals</em><a class="headerlink" href="#minimizing-the-residual-with-the-method-of-weighted-residuals" title="Link to this heading">#</a></h3>
+<p>The best approximation will minimize the residual everywhere in <span class="math notranslate nohighlight">\(\Omega\)</span>. In previous work (e.g.: curve fit) we minimzed the square of the residual, but here we will use the Method of Weighted Residuals:</p>
+<div class="math notranslate nohighlight">
+\[ \int_\Omega R v \  dx = 0 \]</div>
+<p>The MWR is a <em>weaker</em> statement of minimization.
+<span class="math notranslate nohighlight">\(v(x)\)</span> is a <em>test</em> function for which we have options.</p>
+<section id="v-frac-partial-r-partial-w-least-squares">
+<h4><span class="math notranslate nohighlight">\(v = \frac{\partial R}{\partial w}\)</span> : Least Squares<a class="headerlink" href="#v-frac-partial-r-partial-w-least-squares" title="Link to this heading">#</a></h4>
+<p>If we take <span class="math notranslate nohighlight">\(v = \frac{\partial R}{\partial w}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\int_\Omega R \frac{\partial R}{\partial w_i} d\Omega &amp;= 0 \\
+\frac{\partial }{\partial w_i} \int_\Omega R^2 d\Omega &amp;= 0
+\end{align}\end{split}\]</div>
+<p>which is exactly the condition for finding the parameters for Least Squares minimization.</p>
+</section>
+<section id="v-delta-x-collocation-methods">
+<h4><span class="math notranslate nohighlight">\(v = \delta (x) \)</span>: Collocation methods<a class="headerlink" href="#v-delta-x-collocation-methods" title="Link to this heading">#</a></h4>
+<p>If <span class="math notranslate nohighlight">\(v = \delta (x)\)</span> then for a discrete set of points <span class="math notranslate nohighlight">\(x_i\)</span>, the integral turns into a sum:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\int_\Omega R \delta(x_i) d\Omega &amp;= 0 \\
+\sum_i R(x_i) = 0
+\end{align}\end{split}\]</div>
+<p>which requires that the residual be zero at all discretization points (the collocation method).</p>
+</section>
+<section id="v-sum-i-phi-i-the-galerkin-method">
+<h4><span class="math notranslate nohighlight">\(v = \sum_i \phi_i\)</span>: The Galerkin method<a class="headerlink" href="#v-sum-i-phi-i-the-galerkin-method" title="Link to this heading">#</a></h4>
+<p>The Galerkin method chooses the test functions to be in the same basis as the solution <span class="math notranslate nohighlight">\(u_h = \sum_i w_i \phi_i\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}
+\int_\Omega R \phi_i \  d\Omega &amp;= 0 
+\end{align}\]</div>
+<p>Why does this work? Note that the MWR is an expression of orthogonality between <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(W\)</span>. What this means is that the residual has no component in the space defined by the basis functions, or more simply, it can’t be improved by changing the weights <span class="math notranslate nohighlight">\(w_i\)</span>. This is a more general expression for the minimum which is more in line with our discrete / numerical approach. It also opens avenues to choose <span class="math notranslate nohighlight">\(\phi_i\)</span> carefully for computational efficiency!</p>
+</section>
+</section>
+</section>
+<section id="the-weak-form">
+<h2>The weak form<a class="headerlink" href="#the-weak-form" title="Link to this heading">#</a></h2>
+<p>Our usual formulation of BVPs is called the <em>strong</em> form because it assumes a lot of continuity in a solution. E.g.: if is equation contains <span class="math notranslate nohighlight">\(\nabla^2 u\)</span>, the solution assumes that that derivative exists!</p>
+<p>The MWR leads to the <em>weak form</em> which has less requirements on the solution amoungst other benefits. Essentially, all we have to do is multiply through by our test function <span class="math notranslate nohighlight">\(v\)</span> and integrate. Something <em>very</em> useful happens to our divergence-of-flux terms, which are prevelant in conservation equations.</p>
+<p>As an example, consider a time dependant heat balance (temperature = <span class="math notranslate nohighlight">\(u\)</span>), using the backward Euler time marching scheme.
+$<span class="math notranslate nohighlight">\( \begin{align}
+\frac{\partial u}{\partial t} &amp;= -\nabla \cdot \vec{J} \\
+\frac{u - u^{t-1}}{\Delta t} &amp;= -\nabla \cdot \vec{J} \\
+0 &amp;= u - u^{t-1} + \Delta t [\nabla \cdot \vec{J}]
+\end{align}\)</span>$</p>
+<p>To get to the weak form, multiply through by the test funciton <span class="math notranslate nohighlight">\(v\)</span> and integrate:</p>
+<div class="math notranslate nohighlight">
+\[ 0 = \int_{\Omega} u v - \int_{\Omega} u^{t-1}v \  + \Delta t \int_{\Omega}v \nabla \cdot \vec{J} \]</div>
+<p>Examining the divergence-of-flux term, we see that we can apply integration by parts followed by the Divergence Theorem:
+$<span class="math notranslate nohighlight">\( \begin{align}
+\int_\Omega v \nabla \cdot \vec{J}  &amp;= \int_\Omega \nabla v \cdot \vec{J}  - \int_{\Omega} \nabla \cdot v\vec{J}  \\
+&amp;=-\int_\Omega \nabla v \cdot \vec{J}  + \int_{\partial \Omega} v \ \vec{J} \cdot \hat{n} \\
+&amp;=\int_\Omega \lambda \nabla v \nabla u  + \int_{\partial \Omega} v \ \vec{J} \cdot \hat{n}    
+\end{align}\)</span>$</p>
+<p>which is a remarkable thing since we:</p>
+<ul class="simple">
+<li><p>replaced a second derivative with the product of two first derivatives.</p></li>
+<li><p>no longer require our solution to <em>have</em> a second derivative (it can be less smooth and satisfy the equation in an average sense which is <em>weaker</em> than the <em>strong</em> form)!</p></li>
+<li><p>incorporated boundary fluxes directly into the residual calculation.</p></li>
+<li><p>do not require anything from <span class="math notranslate nohighlight">\(\lambda\)</span>, which means this is still valid for <span class="math notranslate nohighlight">\(\lambda(u,x,t...)\)</span>, however it is now outside of the gradient!</p></li>
+</ul>
+<p>The weak form of the equation becomes (collecting all unknowns on the fight hand side),</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\int_{\Omega} u v + \Delta t \int_\Omega \lambda \nabla v \nabla u   + \Delta t \int_{\partial \Omega} v \ \vec{J} \cdot \hat{n} &amp;= \int_{\Omega} u^{t-1}v \\
+\end{align}\end{split}\]</div>
+</section>
+<section id="discretization">
+<h2>Discretization<a class="headerlink" href="#discretization" title="Link to this heading">#</a></h2>
+<p>We are now in a position to discretize the equation into a form we are able to solve.</p>
+<section id="partitioning-the-domain">
+<h3>Partitioning the domain<a class="headerlink" href="#partitioning-the-domain" title="Link to this heading">#</a></h3>
+<p>The domain</p>
+</section>
+</section>
+<section id="shape-functions">
+<h2>Shape functions<a class="headerlink" href="#shape-functions" title="Link to this heading">#</a></h2>
+<p>The basis functions can take a number of forms (polynomials, fourier series, etc) leading to a multitude of methods. Certaint bases will have features that more faithfully capture features of the physics.</p>
+<p>A general purpose basis though is our good, old LaGrange interpolation functions taken piecewise over the elements! These functions are parameterized by value of the function at the nodes of the mesh and are zero everywhere else:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Order</strong></p></th>
+<th class="head"><p><strong>Node</strong></p></th>
+<th class="head"><p><strong>Basis Function</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zeroth</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0 = 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_0(x) = 1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>First</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0 = 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_0(x) = 1 - x\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_1 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_1(x) = x\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Second</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0 = 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_0(x) = 2(1 - x)(0.5 - x)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_1 = 0.5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_1(x) = 4x(1 - x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_2 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_2(x) = 2x(x - 0.5)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Third</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_0 = 0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_0(x) = -9/2 (x - 1/3)(x - 2/3)(x - 1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_1 = 1/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_1(x) = 27/2 x(x - 2/3)(x - 1)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_2 = 2/3\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_2(x) = -27/2 x(x - 1/3)(x - 1)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><span class="math notranslate nohighlight">\(x_3 = 1\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\phi_3(x) = 9/2 x(x - 1/3)(x - 2/3)\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="math notranslate nohighlight">
+\[ \int_{i \ne j} \phi_i \phi_j = 0 \]</div>
+<p>Other derivatives?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define Lagrange basis functions for each order</span>
+<span class="k">def</span> <span class="nf">lagrange_basis</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the Lagrange basis function for a given node and order.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">    - order: Order of the Lagrange polynomial (0, 1, 2, 3).</span>
+<span class="sd">    - x: The points where the function is evaluated (numpy array).</span>
+<span class="sd">    - node: The index of the current basis function (0, 1, ..., order).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    - The values of the Lagrange basis function at points `x`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">basis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">node</span><span class="p">:</span>
+            <span class="n">basis</span> <span class="o">*=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">]</span> <span class="o">-</span> <span class="n">nodes</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">basis</span>
+
+<span class="c1"># Function to plot the Lagrange basis functions</span>
+<span class="k">def</span> <span class="nf">plot_lagrange_basis</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>  <span class="c1"># Points to evaluate the basis functions</span>
+    <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">]</span>  <span class="c1"># Colors for each order</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">lagrange_basis</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Node </span><span class="si">{</span><span class="n">node</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nodes</span><span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">order</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)],</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lagrange Basis Functions of Order </span><span class="si">{</span><span class="n">order</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Basis Function Value&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Create an interactive slider for the order</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_lagrange_basis</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cbfc8b0c9765483ab101a85fa666b405", "version_major": 2, "version_minor": 0}</script><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function __main__.plot_lagrange_basis(order)&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Partitioning the domain<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="linear-case">
+<h2>Linear case<a class="headerlink" href="#linear-case" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[b_j = \int_{\Omega} f(x) v_i \ d\Omega\]</div>
+<p>can be calculated directly through, e.g. Guassian Quadrature. Or we can expand the solution,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f(x) &amp;= \sum_{i=1}^N f_k v_k \\
+\int f(x) v &amp;= \sum_{i=1}^N f_k \int_{i=1}^N v_k v_j \\
+&amp;=  M f
+\end{align} \end{split}\]</div>
+<p>If <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> is a linear operator, then <span class="math notranslate nohighlight">\(\mathcal{L}(u_h) = w_i \mathcal{L}(\phi_i)\)</span>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Shape functions<a class="headerlink" href="#id2" title="Link to this heading">#</a></h1>
+<section id="lagrange-shape-functions">
+<h2>Lagrange shape functions<a class="headerlink" href="#lagrange-shape-functions" title="Link to this heading">#</a></h2>
+<p>Lagrange shape functions are a common basis for</p>
 </section>
 </section>
 
@@ -504,11 +819,43 @@ $<span class="math notranslate nohighlight">\(\begin{align}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-method-of-weighted-residuals">The Method of Weighted Residuals</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-relevance-of-the-method-of-weighted-residuals">Aside: relevance of the Method of Weighted Residuals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Finite Element Method</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#illustrative-example">Illustrative example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-direct-substitution">Option 1: Direct substitution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-least-square-minimization-of-the-residual">Option 2: Least square minimization of the residual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-integrate-the-mwr-to-find-the-parameters">Option 3: Integrate the MWR to find the parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-the-approach">Recap of the approach</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation-of-the-finite-element-method-bvps">Derivation of the finite element method BVPs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximate-the-solution-with-shape-functions">Approximate the solution with <em>shape functions</em></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#minimizing-the-residual-with-the-method-of-weighted-residuals">Minimizing the residual with the <em>Method of Weighted Residuals</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-frac-partial-r-partial-w-least-squares"><span class="math notranslate nohighlight">\(v = \frac{\partial R}{\partial w}\)</span> : Least Squares</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-delta-x-collocation-methods"><span class="math notranslate nohighlight">\(v = \delta (x) \)</span>: Collocation methods</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#v-sum-i-phi-i-the-galerkin-method"><span class="math notranslate nohighlight">\(v = \sum_i \phi_i\)</span>: The Galerkin method</a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-weak-form">The weak form</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discretization">Discretization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partitioning-the-domain">Partitioning the domain</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-functions">Shape functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Partitioning the domain</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-case">Linear case</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Shape functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrange-shape-functions">Lagrange shape functions</a></li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
