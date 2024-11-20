@@ -343,8 +343,16 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-support-for-shape-functions">Small support for shape functions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembly">Assembly</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-heat-equation">Example: 1D heat equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembly">Assembly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-pde">Linear PDE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-heat-equation">Example: 1D heat equation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-case">Nonlinear case</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-nonlinear-heat-equation">Example: 1D nonlinear heat equation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -412,7 +420,16 @@ b &amp;= 1/2
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/9de6d5e6f89b9dcb437aeac69c2aa0dcd87990ba227db3ed48004f2f1b2737cb.png" src="../../_images/9de6d5e6f89b9dcb437aeac69c2aa0dcd87990ba227db3ed48004f2f1b2737cb.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Define the functions</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -687,8 +704,15 @@ u_i M_{ij} + \Delta t \lambda u_i K_{ij}  &amp;= b_i - J_n \\
 </tbody>
 </table>
 </div>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Link to this heading">#</a></h2>
+<p>We now arrive at a matrix equation for the unknows <span class="math notranslate nohighlight">\(u_i\)</span>, which is mearly a system of equations as we’ve spoken about beforehand.</p>
+<section id="linear-pde">
+<h3>Linear PDE<a class="headerlink" href="#linear-pde" title="Link to this heading">#</a></h3>
+<p>If the PDE is linear, we can solve it with a linear solver which is sparse due to the small support requirement of the elements. The matrix will not in general be banded however, due to the irregular conectivity of the mesh verticies.</p>
 <section id="example-1d-heat-equation">
-<h3>Example: 1D heat equation<a class="headerlink" href="#example-1d-heat-equation" title="Link to this heading">#</a></h3>
+<h4>Example: 1D heat equation<a class="headerlink" href="#example-1d-heat-equation" title="Link to this heading">#</a></h4>
 <p>Solve the 1D heat balance equation with <span class="math notranslate nohighlight">\(\lambda = 1\)</span> for <span class="math notranslate nohighlight">\(x\)</span> from 0 to 10 subject to <span class="math notranslate nohighlight">\(J(0)\)</span> = 1 and <span class="math notranslate nohighlight">\(T(10) = 0\)</span>. Initial condition is <span class="math notranslate nohighlight">\(T(x,t=0) = 0\)</span>.</p>
 <p>The mass matrix is:
 $<span class="math notranslate nohighlight">\(M_{ij} = \int_{x_1}^{x_2} \phi_i(x) \phi_j(x) dx\)</span>$</p>
@@ -718,12 +742,15 @@ K_{ij} &amp;= \lambda \int_{x_1}^{x_2} \nabla \phi_i(x) \nabla \phi_j(x) dx\\
 -1 &amp; 1
 \end{bmatrix}
 \end{align}\)</span>$</p>
+<p>These <em>blocks</em> belong to each element, so we have to build the full matrix by <em>summing them</em>. Note this implies an overlap at common verticies between elements!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Assemble a a linear system for the heat equation above using the finite element method with Lagrange order 1 elements, using implicit Euler time stepping and a mesh resolution that is concentrated near the left boundary.</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
 
 <span class="c1"># Define the domain and parameters</span>
 <span class="n">L</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Length of the domain</span>
@@ -753,6 +780,9 @@ K_{ij} &amp;= \lambda \int_{x_1}^{x_2} \nabla \phi_i(x) \nabla \phi_j(x) dx\\
     <span class="n">Me</span> <span class="o">=</span> <span class="n">element_mass</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
     <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Ke</span>
     <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Me</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Apply boundary conditions</span>
 <span class="c1"># Dirichlet BC at x = L (T(L) = 0)</span>
@@ -791,8 +821,195 @@ K_{ij} &amp;= \lambda \int_{x_1}^{x_2} \nabla \phi_i(x) \nabla \phi_j(x) dx\\
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7e289bd5a4714632a291616e4ed446db"}</script></div>
+<img alt="../../_images/dfbfb8be7b33364ae53cca324a0e49e133650797a0ca9ef4c49dec5b5873e031.png" src="../../_images/dfbfb8be7b33364ae53cca324a0e49e133650797a0ca9ef4c49dec5b5873e031.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "7e851747a548490f8c17d3ca27556dd1"}</script></div>
 </div>
+<p>Note that we could build the <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(K\)</span> matricies once, outside the time loop and reuse them for each time step! Even if we had adaptive time stepping, the matrix wouldn’t change!</p>
+</section>
+</section>
+<section id="nonlinear-case">
+<h3>Nonlinear case<a class="headerlink" href="#nonlinear-case" title="Link to this heading">#</a></h3>
+<p>If the PDE is nonlinear, we simply have to use a root finder. Note that in this case we are looking for the parameters <span class="math notranslate nohighlight">\(u_i\)</span> directly - the shape functions are unaffected and therefore only the coefficients of the matrix <em>blocks</em> are altered. This brings up the concept of <em>sparsity patterns</em> which can help reduce the overhead of sparse matrix representaitons.</p>
+<p>Since modern finite element software needs to construct the weak form, it is usually equiped with symbolic logic capabilities and therefore able to calculate the Jacobian.</p>
+<section id="example-1d-nonlinear-heat-equation">
+<h4>Example: 1D nonlinear heat equation<a class="headerlink" href="#example-1d-nonlinear-heat-equation" title="Link to this heading">#</a></h4>
+<p>Repeat the above exercise with <span class="math notranslate nohighlight">\(\lambda = 1 + u/10\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Solve the heat transport problem again but this time with \lambda = 1+T/10</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
+
+<span class="c1"># Define the domain and parameters</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Length of the domain</span>
+<span class="n">n_elements</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Number of elements</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Time step</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Final time</span>
+
+<span class="c1"># Create a mesh with concentration near the left boundary</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                          <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))))</span>
+
+<span class="c1"># Define the element stiffness and mass matrices for linear elements</span>
+<span class="k">def</span> <span class="nf">element_stiffness</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+    <span class="n">lambda_val</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">T</span> <span class="o">/</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="o">*</span> <span class="n">lambda_val</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">element_mass</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span>
+
+<span class="c1"># Assemble the global stiffness and mass matrices</span>
+<span class="k">def</span> <span class="nf">assemble_matrices</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)))</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">Ke</span> <span class="o">=</span> <span class="n">element_stiffness</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="n">Me</span> <span class="o">=</span> <span class="n">element_mass</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+        <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Ke</span>
+        <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Me</span>
+
+    <span class="k">return</span> <span class="n">K</span><span class="p">,</span> <span class="n">M</span>
+
+
+<span class="c1"># Apply boundary conditions</span>
+<span class="k">def</span> <span class="nf">apply_boundary_conditions</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">M</span><span class="p">):</span>
+    <span class="c1"># Dirichlet BC at x = L (T(L) = 0)</span>
+    <span class="n">K</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">K</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">,</span> <span class="n">M</span>
+
+<span class="c1"># Function to solve and plot for a given time</span>
+<span class="k">def</span> <span class="nf">solve_and_plot</span><span class="p">(</span><span class="n">t_final</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_final</span><span class="p">:</span>
+        <span class="n">K</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">assemble_matrices</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">K</span><span class="p">,</span> <span class="n">M</span> <span class="o">=</span> <span class="n">apply_boundary_conditions</span><span class="p">(</span><span class="n">K</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">T</span>
+        <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">M</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="n">K</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Set the y-axis limits to [0, 1]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Temperature Profile at t = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t_final</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Create a slider for the final time</span>
+<span class="n">time_slider</span> <span class="o">=</span> <span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Final Time:&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use interact to link the slider to the function</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">solve_and_plot</span><span class="p">,</span> <span class="n">t_final</span><span class="o">=</span><span class="n">time_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2b929f0126e24329a867470ff9b9e6b2"}</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Solve the heat transport problem again but this time with \lambda = 1+T/10 using a root finder don&#39;t copy any other text blocks</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">sparse</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
+
+
+<span class="c1"># Define the domain and parameters</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Length of the domain</span>
+<span class="n">n_elements</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># Number of elements</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Time step</span>
+<span class="n">t_final</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># Final time</span>
+
+<span class="c1"># Create a mesh with concentration near the left boundary</span>
+<span class="n">x_nodes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                          <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">L</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_elements</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))))</span>
+
+<span class="c1"># Define the element stiffness and mass matrices for linear elements</span>
+<span class="k">def</span> <span class="nf">element_stiffness</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">lambda_val</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span> <span class="o">*</span> <span class="n">lambda_val</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">element_mass</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span> <span class="o">*</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">6</span>
+
+<span class="c1"># Assemble the global stiffness and mass matrices</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">Me</span> <span class="o">=</span> <span class="n">element_mass</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+    <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Me</span>
+
+<span class="c1"># Apply boundary conditions</span>
+<span class="c1"># Dirichlet BC at x = L (T(L) = 0)</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">M</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Neumann BC at x = 0 (J(0) = 1)</span>
+<span class="c1"># We&#39;ll implement this in the right-hand side vector later.</span>
+
+<span class="c1"># Function to solve for T at the next time step using a root finder</span>
+<span class="k">def</span> <span class="nf">solve_for_next_T</span><span class="p">(</span><span class="n">T_prev</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">residual</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">x1</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">x2</span> <span class="o">=</span> <span class="n">x_nodes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">lambda_val</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span>  <span class="c1"># Update lambda based on T</span>
+            <span class="n">Ke</span> <span class="o">=</span> <span class="n">element_stiffness</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">lambda_val</span><span class="p">)</span>
+            <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Ke</span>
+
+        <span class="n">b</span> <span class="o">=</span> <span class="n">M</span> <span class="o">@</span> <span class="n">T_prev</span>
+        <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dt</span> <span class="o">*</span> <span class="mi">1</span>
+        <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">M</span> <span class="o">@</span> <span class="n">T</span><span class="p">)</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">*</span> <span class="p">(</span><span class="n">K</span> <span class="o">@</span> <span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">residual</span><span class="p">,</span> <span class="n">T_prev</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">sol</span><span class="o">.</span><span class="n">x</span>
+
+<span class="c1"># Function to solve and plot for a given time</span>
+<span class="k">def</span> <span class="nf">solve_and_plot</span><span class="p">(</span><span class="n">t_final</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">t_final</span><span class="p">:</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">solve_for_next_T</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">dt</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_nodes</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Temperature Profile at t = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t_final</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Create a slider for the final time</span>
+<span class="n">time_slider</span> <span class="o">=</span> <span class="n">FloatSlider</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Final Time:&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use interact to link the slider to the function</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">solve_and_plot</span><span class="p">,</span> <span class="n">t_final</span><span class="o">=</span><span class="n">time_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "e44ebf180bd04e74a25ffb1f4a4f5ab9"}</script></div>
+</div>
+</section>
 </section>
 </section>
 </section>
@@ -868,8 +1085,16 @@ K_{ij} &amp;= \lambda \int_{x_1}^{x_2} \nabla \phi_i(x) \nabla \phi_j(x) dx\\
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#small-support-for-shape-functions">Small support for shape functions</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembly">Assembly</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-heat-equation">Example: 1D heat equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assembly">Assembly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-pde">Linear PDE</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-heat-equation">Example: 1D heat equation</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-case">Nonlinear case</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1d-nonlinear-heat-equation">Example: 1D nonlinear heat equation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
