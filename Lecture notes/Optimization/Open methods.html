@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Powel’s method &#8212; My Jupyter Book</title>
+    <title>Open methods &#8212; My Jupyter Book</title>
   
   
   
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -227,7 +227,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="Optimization.html">Optimization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Closed%20methods.html">Bracketed minimization</a></li>
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Powel’s method</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Open methods</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Indefinite%20systems.html">Indefinite systems</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Trust%20region%20methods.html">Trust region methods</a></li>
@@ -479,7 +479,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Powel’s method</h1>
+    <h1>Open methods</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -506,9 +506,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="powel-s-method">
-<h1>Powel’s method<a class="headerlink" href="#powel-s-method" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="open-methods">
+<h1>Open methods<a class="headerlink" href="#open-methods" title="Link to this heading">#</a></h1>
 <p>The easiest way to generalize to ND is to take our 1D methods and use them as a search routine (this should sound familiar!)</p>
 <p>NB: We have moved beyond <em>bounds</em> which are a type of constraint. We are now into <em>unconstrained minimization</em>.</p>
 <p>Powell’s method uses a starting point and some initial direction vectors. The function is optimized along each direction vector.</p>
