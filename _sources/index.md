@@ -11,3 +11,7 @@ Decompose into simpler problems.
 * Achieve higher order accuracy by 
 * * approximating higher order derivatives.
 * * cancelling over and under prediction by averaging. 
+
+AI is fast. Use your head before the computer or it will run away with you! 
+Nondimensionalize
+Symmetries
