@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Partial differential equations &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/Differential equations/Partial differential equations/Partial_differential_equations';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="The Finite Element Method" href="../../Finite%20element%20method/Finite%20element%20method.html" />
+    <link rel="prev" title="Finite volume methods" href="../Boundary%20value%20problems/Finite_volume.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Roundoff%20error/Roundoff%20error.html">Round-off Error</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Finite%20precision%20representations.html">Finite precision representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/True_and_approximate_error.html">Quantifying error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Truncation_error.html">Truncation error</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear%20systems/Linear%20systems.html">Linear systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Solvability.html">Solvability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Complexity.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Conditioning.html">Conditioning</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Linear%20systems/Direct%20methods.html">Direct methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/Gaussian%20elimination.html">Solving linear systems with Gauss elimination</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/LU%20decomposition.html">LU decomposition</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/Matrix%20types%20and%20decompositions.html">Matrix types</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods.html">Iterative methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Gauss-Seidel%2C%20Jacobi%2C%20and%20SOR.html">Jacobi iteration method</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Conjugate%20gradient%20and%20GMRES.html">Nomenclature</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Preconditioners.html">Preconditioners</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation%20and%20curve%20fitting.html">Interpolation and Curve-fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Polynomial%20interpolation.html">Polynomial interpolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Splines.html">Cubic splines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Radial%20basis%20functions.html">Radial Basis Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Curve%20fitting.html">Curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Linear%20least%20squares%20regression.html">Linear least squares regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Polyfit.html">Polyfit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Best%20fit%20radial%20basis%20functions.html">Radial Basis Functions revisted!</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Optimization/Optimization.html">Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Closed%20methods.html">Bracketed minimization</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Indefinite%20systems.html">Indefinite systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Trust%20region%20methods.html">Trust region methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Nonlinear%20least%20squares.html">Nonlinear least-squares regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Equality%20constraints.html">Equality constrained optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Differentiation%20and%20integration.html">Differentiation and integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Finite%20difference.html">Finite difference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/First%20order%20derivatives.html">First order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Second%20order%20derivatives.html">Second order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Higher%20dimensions.html">Higher dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Even%20vs%20uneven%20spacing.html">Even vs uneven spacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Uncertainty%20amplification.html">Uncertainty amplification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Numerical%20integration.html">Numerical integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Newton-Cotes%20formulae.html">Newton-Cotes integration formulae</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Romberg%20rule.html">Romberg rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Gaussian%20quadrature.html">Gaussian quadrature</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Differential%20equations.html">Differential equations</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Initial%20value%20problems/Initial%20value%20problems.html">Initial value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Initial%20value%20problems/Explicit%20methods.html">Explicit methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Initial%20value%20problems/Implicit%20methods.html">Implicit methods</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Boundary%20value%20problems/Boundary_value_problems.html">Boundary value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Boundary%20value%20problems/Shooting%20method.html">The Shooting method</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Boundary%20value%20problems/Collocation%20methods.html">Collocation algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Boundary%20value%20problems/Finite_difference_method.html">The Finite Difference method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Boundary%20value%20problems/Finite_volume.html">Finite volume methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Partial differential equations</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Finite%20element%20method/Finite%20element%20method.html">The Finite Element Method</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Motivating%20example.html">Motivating example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Theoretical%20background.html">Theoretical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Discretization%20and%20assembly.html">Discretization and assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Solution.html">Solution</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/mwelland/ENGPHYS_3NM4/blob/main/Book/Chapters/Differential equations/Partial differential equations/Partial_differential_equations.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Chapters/Differential equations/Partial differential equations/Partial_differential_equations.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Partial differential equations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Partial differential equations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-pdes">Classification of PDEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elliptic-equations">Elliptic equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-approaches">Solution approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parabolic-equations">Parabolic equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperbolic-equations">Hyperbolic equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-schemes">Solution schemes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-euler-timestepping">Explicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-forward-euler-time-stepping">Example of Forward Euler time stepping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error analysis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-backward-euler-time-stepping">Example of Backward Euler time stepping</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicholson-method">Crank-Nicholson method</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-crank-nicholson-accuracy-vs-euler">Example of Crank Nicholson accuracy vs. Euler</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="partial-differential-equations">
+<h1>Partial differential equations<a class="headerlink" href="#partial-differential-equations" title="Link to this heading">#</a></h1>
+<p>Partial differential equations expand ODEs to include multiple independant variables (coordinates).</p>
+<ul class="simple">
+<li><p>Other <em>spatial</em> coordinates are typically extensions of the ODE case and are usually posed and treated as boundary value problems.</p></li>
+<li><p>The <em>time</em> coordinate is almost always posed as an initial value problem and tends to introduces complexity in the form of numerical stability issues.</p></li>
+</ul>
+<section id="classification-of-pdes">
+<h2>Classification of PDEs<a class="headerlink" href="#classification-of-pdes" title="Link to this heading">#</a></h2>
+<p>Introduction of time as a coordinate in PDEs raises the question of <em>how  information propogates</em>, from the initial condition or other events that occur during solution.</p>
+</section>
+<section id="elliptic-equations">
+<h2>Elliptic equations<a class="headerlink" href="#elliptic-equations" title="Link to this heading">#</a></h2>
+<p>Equations of the form, $<span class="math notranslate nohighlight">\( A\frac{\partial^2 u}{\partial x^2} + B\frac{\partial^2 u}{\partial x \partial y} + C\frac{\partial^2 u}{\partial y^2} \)</span>$ are termed <em>elliptic</em>. The lack of a rate of change term implies that information is <em>not being propogated</em>, but rather is either instantaneously available everywere in space, or all propagations have finished and you are left with a steady state.</p>
+<p>Note this does not imply the system isn’t changing with time (imagine the coefficients could be functions of time, <span class="math notranslate nohighlight">\(A(t)\)</span>), just that the impact of the change has reach an equilibrium.</p>
+<p>Examples include steady-state, or quasistatic equations:</p>
+<p>Laplace’s and and Poisson’s equation: <span class="math notranslate nohighlight">\(\nabla^2 u = 0\)</span>, <span class="math notranslate nohighlight">\(\nabla^2 u = f(x)\)</span></p>
+<ul class="simple">
+<li><p>Electrostatics: Electric potential with a charge</p></li>
+<li><p>Heat transport: Steady state heat distribution with a source</p></li>
+<li><p>Fluid flow: Velocity potential of an incompressible, irrotational fluid with a sink</p></li>
+</ul>
+<p>Helmholtz equation, <span class="math notranslate nohighlight">\(\nabla^2 u +k^2 u = 0\)</span></p>
+<ul class="simple">
+<li><p>Accoustics: vibrations of a membrane of a cavity</p></li>
+<li><p>Quantum mechanics: wave functions in a potential well</p></li>
+</ul>
+<blockquote>
+<div><p>Inclusion of Helmholtz’s equation may be surprising since it describes wave phenomena! Recall that wave propogation can be solved by the method of separation of variables to separate the time and space dependance, the latter of which is of the Helmholtz’s form (and defines the eigenfunctions!)</p>
+</div></blockquote>
+<section id="solution-approaches">
+<h3>Solution approaches<a class="headerlink" href="#solution-approaches" title="Link to this heading">#</a></h3>
+<p>Elliptic equations generally amount to solving a system of (nonlinear) equations simultaneously, which we can do with root finders. Let’s recall the shortfalls of rootfinders in this context:</p>
+<ul class="simple">
+<li><p>A good initial guess: This can be a substantial problem in common systems. A mitigation strategy might be to parametrically ramp-up a parameter from an easily solvable condition to your desired condition. E.g.: gradually ‘turn up the heat’ on a natural convection problem.</p></li>
+<li><p>Convergence: You may need to discretize the problem with a large mesh which is a high dimensional problem. The root finder may <em>wander</em> easily in this space and fall into local minima or step completely out of the feasible region. Trust-region methods can help mitigate this but consume additional resources.</p></li>
+</ul>
+<p>There is another subtle issue with parallelization on modern high performance platforms. A common approach is to perform <em>domain decomposition</em> which partitions the domain geometrically and passes pieces to different nodes. Elliptic systems imply each node instantaneously <em>talks</em> to all the others, which can be an overhead / node synchronization nightmare! For this reason <em>multigrid methods / preconditioners</em> are tremendously effective.</p>
+</section>
+</section>
+<section id="parabolic-equations">
+<h2>Parabolic equations<a class="headerlink" href="#parabolic-equations" title="Link to this heading">#</a></h2>
+<p>Equations of the form,
+$<span class="math notranslate nohighlight">\( A \frac{\partial u}{\partial t} - C \frac{\partial^2 u}{\partial x^2} \)</span>$</p>
+<p>propogate information in one direction (forward in time) and the process is <em>diffusive</em>.</p>
+<p>Diffusive processes tend to <em>smooth</em> out discontinuities and any small oscillations, which is a favourable feature but doesn’t gaurantee stability as we will see.</p>
+<p>This still implies an infinite rate of propogation of information, but now in the flux which instantaneously <em>knows</em> about a force everywhere at once.</p>
+<p>##Solution schemes</p>
+<p>Solving diffusion problems generally amounts to a time-marching scheme in which time is discretized with the spactial equation solved at each time step. We still have to be wary of stiffness!</p>
+<p>It is common to want to solve the <em>inverse</em> problem, in which one uses a result to attempt to back-calculate a parameter of the model (e.g.: Use the rate of cooling to infer the thermal conductivity). It is here that the tendancy of diffusion to smooth the features (information only flows forward in time) works against you. Many paths can lead to the same result (consider trying to sharpen a blurry image!) this can be very problematic to arrive at anything more than a statistical answer.</p>
+</section>
+<section id="hyperbolic-equations">
+<h2>Hyperbolic equations<a class="headerlink" href="#hyperbolic-equations" title="Link to this heading">#</a></h2>
+<p>Equations of the form, $<span class="math notranslate nohighlight">\( A \frac{\partial^2 u}{\partial t^2} - C \frac{\partial^2 u}{\partial x^2} \)</span><span class="math notranslate nohighlight">\( propogate information forward *and* backward in time. This implies time-reversal symmetry, wherein you could replace \)</span>t<span class="math notranslate nohighlight">\( with \)</span>-t<span class="math notranslate nohighlight">\( and the physics would remain unchanged. This describes waves (second order equations) and advective terms (first order equations) e.g.: \)</span>A \frac{\partial u}{\partial t} - C \frac{\partial u}{\partial x}$</p>
+<section id="solution-schemes">
+<h3>Solution schemes<a class="headerlink" href="#solution-schemes" title="Link to this heading">#</a></h3>
+<p>Second time derivatives can generally be decomposed into a series of parabolic equations, which is a standard approach. Systems with periodic boundary conditions are treatable with fourier spectral analysis which can be much more efficient.</p>
+<p>Time reversal symmetry implies the model may be <em>reversible</em> which is interesting for the inverse problem and reconstruction of earlier times before what is measured / simulated.</p>
+<p>#Solving time dependent PDEs</p>
+<p>The general approach to solving time dependent PDEs is to transform them into a BVP through a time-marching scheme:</p>
+<ol class="arabic simple">
+<li><p>Discretize the time derivative as an IVP into current and previous solution(s) with the initial value known</p></li>
+<li><p>Discretize space as a BVP and add the term from the time descritization.</p></li>
+<li><p>Step forward in time, updating the  BVP accordingly.</p></li>
+</ol>
+<p>Consider the parabolic case, since we can usually use reduction of order to transform a hyperbolic equation into parabolic equations.</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial T}{\partial t} = \alpha \frac{\partial^2 T}{\partial x^2} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> is the thermal diffusivity, which is necessarily postive.</p>
+<p>The finite difference scheme for the spatial component is:
+$<span class="math notranslate nohighlight">\(\alpha \frac{\partial^2 T}{\partial x^2} = \alpha \frac{T_{i-1} - 2 T_i + T_{i+1}}{\Delta x^2}\)</span>$</p>
+</section>
+<section id="notation">
+<h3>Notation<a class="headerlink" href="#notation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The spatial index will be noted as a subscript and indexed with <span class="math notranslate nohighlight">\(i\)</span>, e.g.: <span class="math notranslate nohighlight">\(T_i\)</span>.</p></li>
+<li><p>The temporal index will be index with superscript <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>The known timestep will always be <span class="math notranslate nohighlight">\(T^t\)</span> and we will be calculating <span class="math notranslate nohighlight">\(T^{t+1}\)</span>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="explicit-euler-timestepping">
+<h1>Explicit Euler timestepping<a class="headerlink" href="#explicit-euler-timestepping" title="Link to this heading">#</a></h1>
+<p>As in the IVP section, the explicit Euler scheme calculates the next solution based on the current one,
+$<span class="math notranslate nohighlight">\( \frac{\partial T}{\partial t} = \frac{T^{t+1} -T^{t}}{\Delta t}\)</span>$</p>
+<p>and the full equation becomes,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+\frac{\partial T}{\partial t} &amp;= \alpha \frac{\partial^2 T}{{\partial x}^2} \\
+\frac{T^{t+1}_i -T^{t}_i}{\Delta t} &amp;= \alpha \frac{T^t_{i-1} - 2 T^t_i + T^t_{i+1}}{\Delta x^2} \\
+T^{t+1}_i &amp;= T_i^t + r [T^t_{i-1} - 2 T^t_i + T^t_{i+1}]
+\end{align}\end{split}\]</div>
+<p>with $<span class="math notranslate nohighlight">\( r = \frac{\alpha \Delta t} {\Delta x^2}\)</span>$ for compactness.</p>
+<p>As a stencil for forward Euler time stepping is:</p>
+<p>![forward Euler stencil.svg](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDUuMjA2OTgybW0iCiAgIGhlaWdodD0iMTkuNDI3MTE2bW0iCiAgIHZpZXdCb3g9IjAgMCA0NS4yMDY5ODIgMTkuNDI3MTE2IgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxIgogICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9ImZvcndhcmQgRXVsZXIgc3RlbmNpbC5zdmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJMYXllciAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSIKICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIuMzc2MzgyLC02OC45Nzg3ODEpIj4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9InBhdGgxIgogICAgICAgY3g9IjQ0LjIwMjk1IgogICAgICAgY3k9Ijg2LjU3OTMzIgogICAgICAgcj0iMS44MjY1NjgyIgogICAgICAgaW5rc2NhcGU6ZXhwb3J0LWZpbGVuYW1lPSIuXHBhdGgxLnN2ZyIKICAgICAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgICAgIGlua3NjYXBlOmV4cG9ydC15ZHBpPSI5NiIgLz4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTEiCiAgICAgICBjeD0iNTguMjI1ODgiCiAgICAgICBjeT0iODYuNTc5MzMiCiAgICAgICByPSIxLjgyNjU2ODIiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgIGlkPSJjaXJjbGUyIgogICAgICAgY3g9IjcyLjI0ODgxIgogICAgICAgY3k9Ijg2LjU3OTMzIgogICAgICAgcj0iMS44MjY1NjgyIiAvPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBpZD0iY2lyY2xlMyIKICAgICAgIGN4PSI1OC4yMjU4OCIKICAgICAgIGN5PSI3MS4yMzM0ODIiCiAgICAgICByPSIxLjgyNjU2ODIiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBkPSJNIDU4LjA4NDg3LDcxLjYwMTQ3NSBWIDg2LjIxNDAyIgogICAgICAgaWQ9InBhdGgzIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgZD0iTSA0NC4yMDI5NTMsODYuNTc5MzM2IEggNzIuNjk3NDE2IgogICAgICAgaWQ9InBhdGg0IiAvPgogICAgPGNpcmNsZQogICAgICAgaWQ9InBhdGg1IgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBjeD0iNzIuNjk3NDE4IgogICAgICAgY3k9Ijg2LjU3OTMzOCIKICAgICAgIHI9IjAuNzkzNzQ5OTkiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODM7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgIGQ9Im0gNDQuMjAyOTUzLDg2LjU3OTMzNiBoIDI4LjEyOTE1IgogICAgICAgaWQ9InBhdGg2IiAvPgogICAgPGNpcmNsZQogICAgICAgaWQ9InBhdGg3IgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBjeD0iNzIuMzMyMTA4IgogICAgICAgY3k9Ijg2LjIxNDAyIgogICAgICAgcj0iMC4zOTY4NzQ5OSIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MztzdHJva2Utb3BhY2l0eToxIgogICAgICAgZD0iTSA1OC4yMjU4OCw4Ni40MDY2MjEgViA3MS4yOTUxNTEiCiAgICAgICBpZD0icGF0aDgiIC8+CiAgICA8dGV4dAogICAgICAgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIKICAgICAgIHN0eWxlPSJmb250LXNpemU6NC4yMzMzM3B4O2ZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODM7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgIHk9Ijg3LjgyNzM2MiIKICAgICAgIGlkPSJ0ZXh0OCI+PHRzcGFuCiAgICAgICAgIHNvZGlwb2RpOnJvbGU9ImxpbmUiCiAgICAgICAgIGlkPSJ0c3BhbjgiCiAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgICAgeT0iODcuODI3MzYyIj50PC90c3Bhbj48L3RleHQ+CiAgICA8dGV4dAogICAgICAgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIKICAgICAgIHN0eWxlPSJmb250LXNpemU6NC4yMzMzM3B4O2ZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODM7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgIHk9IjcyLjE5OTI1NyIKICAgICAgIGlkPSJ0ZXh0OSI+PHRzcGFuCiAgICAgICAgIHNvZGlwb2RpOnJvbGU9ImxpbmUiCiAgICAgICAgIGlkPSJ0c3BhbjkiCiAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgICAgeT0iNzIuMTk5MjU3Ij50KzE8L3RzcGFuPjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=)</p>
+<p>This implies that the value at a point at the next timestep depends <em>only</em> on the values at the previous time-step.</p>
+<section id="example-of-forward-euler-time-stepping">
+<h2>Example of Forward Euler time stepping<a class="headerlink" href="#example-of-forward-euler-time-stepping" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Give me an example of forward euler timestepping for a 1D heat balance equation with a slider for the time step size</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
+
+<span class="k">def</span> <span class="nf">forward_euler_heat</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Solves the 1D heat equation using forward Euler timestepping.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    T: Initial temperature distribution (numpy array).</span>
+<span class="sd">    alpha: Thermal diffusivity.</span>
+<span class="sd">    dx: Spatial step size.</span>
+<span class="sd">    dt: Time step size.</span>
+<span class="sd">    num_steps: Number of time steps.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A list of temperature distributions at each time step.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">T_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="n">T_new</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="n">T_new</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">T</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">T_new</span>
+    <span class="n">T_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+  <span class="k">return</span> <span class="n">T_history</span>
+
+
+<span class="k">def</span> <span class="nf">plot_heat_equation</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Plots the solution of the heat equation for a given time step size.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    dt: Time step size.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="c1"># Parameters</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Thermal diffusivity</span>
+  <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Spatial step size</span>
+  <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">num_steps</span><span class="p">)</span>
+  <span class="n">T_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">T_initial</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Initial heat source in the middle</span>
+
+  <span class="c1"># Solve the heat equation</span>
+  <span class="n">T_history</span> <span class="o">=</span> <span class="n">forward_euler_heat</span><span class="p">(</span><span class="n">T_initial</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+
+  <span class="c1"># Plotting</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_history</span><span class="p">),</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_history</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Time step </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Position (x)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (T)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Forward Euler Solution of 1D Heat Equation&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_heat_equation</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.01</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d0e101d26ae647ab80ff86e33a63a65e", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+<section id="error-analysis">
+<h2>Error analysis<a class="headerlink" href="#error-analysis" title="Link to this heading">#</a></h2>
+<p>Analysing the error using the Explicit Euler timestepper is more sophisticated than for the ODE since we now need to consider the behaviouir of a (spatial) function at a given time.</p>
+<p>We can do this through <em>von Neumann stability analysis</em> which checks the stability of a solution to oscillations. Mathematically, we express the soultion as a Fourier series and see which waves damp and which waves grow.</p>
+<p>Consider Fourier modes of the solution: <span class="math notranslate nohighlight">\(^kT_i^t = e^{j k i \Delta x}\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is the wave number and <span class="math notranslate nohighlight">\(j\)</span> is the imaginary number. For a particular wave with number <span class="math notranslate nohighlight">\(k\)</span>, we check how the future solution, <span class="math notranslate nohighlight">\(^kT_i^{t+1}\)</span> depends on the current, <span class="math notranslate nohighlight">\(^kT_i^n\)</span>, and define the growth factor <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(^kT_i^{t+1} = G ^kT_i^{t}.\)</span> A method is deemed stable if the amplitude of the oscillations don’t grow over time; i.e.: <span class="math notranslate nohighlight">\(|G| \le 1\)</span>.</p>
+<p>Substitute this into the update equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+^k T^{t+1}_i &amp;= e^{j k i \Delta x} + \big[e^{j k [i-1] \Delta x} - 2 e^{j k i \Delta x} + e^{j k [i+1] \Delta x}\big] r \\
+&amp;= e^{j k i \Delta x} \big[1+ r [e^{j k \Delta x} +e^{-j k \Delta x} -2] \big] \\
+^k T^{t+1}_i &amp;= \ ^kT^{t}_i \big[1+ r [e^{j k \Delta x} +e^{-j k \Delta x} -2] \big]  \\
+G &amp;= 1+2 r [\cos(\Delta x)-1]
+\end{align}\end{split}\]</div>
+<p>Looking at the cosign, we can see <span class="math notranslate nohighlight">\(G\)</span> is in the range <span class="math notranslate nohighlight">\(\bigg[1-4\frac{\alpha \Delta t}{\Delta x^2}, 1\bigg]\)</span>. The maximum already satisfies the stability, but the minimum must satisfy,
+$<span class="math notranslate nohighlight">\( \frac{\alpha \Delta t}{\Delta x^2} \le \frac{1}{2}\)</span>$</p>
+<p>or more simply
+$<span class="math notranslate nohighlight">\( \Delta t \le \frac{\Delta x^2}{2 \alpha}\)</span>$</p>
+<p>For higher dimensions, additional waves add to the instabilities. For a square grid with step size <span class="math notranslate nohighlight">\(h\)</span>,</p>
+<p>2D: $<span class="math notranslate nohighlight">\( \Delta t \le \frac{h}{4 \alpha}\)</span><span class="math notranslate nohighlight">\(
+3D: \)</span><span class="math notranslate nohighlight">\( \Delta t \le \frac{h}{6 \alpha}\)</span>$</p>
+<p>Once again we have come up against a stiffness issue wherein our timestep is limited by numerical stability rather than accuracy. Unsurprisingly and unfortunatley, this is true of all our explicit time stepping schemes.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implicit-euler-timestepping">
+<h1>Implicit Euler timestepping<a class="headerlink" href="#implicit-euler-timestepping" title="Link to this heading">#</a></h1>
+<p>As with the ODE case, we can attempt an Implicit Euler timestepping scheme:
+$<span class="math notranslate nohighlight">\( \frac{\partial T}{\partial t} = \frac{T^{t+1} -T^{t}}{\Delta t}\)</span>$</p>
+<p>and now discretize space at the <em>new timestep</em>:</p>
+<div class="math notranslate nohighlight">
+\[ T^{t+1}_i = T_i^{t} + [T^{t+1}_{i-1} - 2 T^{t+1}_i + T^{t+1}_{i+1}] r\]</div>
+<p>The stencil is:</p>
+<p>![backward Euler stencil.svg](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDUuMjA2OTgybW0iCiAgIGhlaWdodD0iMTkuNDI3MTQxbW0iCiAgIHZpZXdCb3g9IjAgMCA0NS4yMDY5ODIgMTkuNDI3MTQxIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxIgogICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9ImZvcndhcmQgRXVsZXIgc3RlbmNpbC5zdmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJMYXllciAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSIKICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIuMzc2MzgyLC0xMDEuNzg3MTEpIj4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTkiCiAgICAgICBjeD0iNDQuMjAyOTUiCiAgICAgICBjeT0iLTEwNC4wNDE4NSIKICAgICAgIHI9IjEuODI2NTY4MiIKICAgICAgIGlua3NjYXBlOmV4cG9ydC1maWxlbmFtZT0iYmFja3dhcmQgRXVsZXIgc3RlbmNpbC5zdmciCiAgICAgICBpbmtzY2FwZTpleHBvcnQteGRwaT0iOTYiCiAgICAgICBpbmtzY2FwZTpleHBvcnQteWRwaT0iOTYiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBpZD0iY2lyY2xlMTAiCiAgICAgICBjeD0iNTguMjI1ODgiCiAgICAgICBjeT0iLTEwNC4wNDE4NSIKICAgICAgIHI9IjEuODI2NTY4MiIKICAgICAgIHRyYW5zZm9ybT0ic2NhbGUoMSwtMSkiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgIGlkPSJjaXJjbGUxMSIKICAgICAgIGN4PSI3Mi4yNDg4MSIKICAgICAgIGN5PSItMTA0LjA0MTg1IgogICAgICAgcj0iMS44MjY1NjgyIgogICAgICAgdHJhbnNmb3JtPSJzY2FsZSgxLC0xKSIgLz4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTEyIgogICAgICAgY3g9IjU4LjIyNTg4IgogICAgICAgY3k9Ii0xMTkuMzg3NjgiCiAgICAgICByPSIxLjgyNjU2ODIiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgZD0iTSA1OC4wODQ4NywxMTkuMDE5NjggViAxMDQuNDA3MDYiCiAgICAgICBpZD0icGF0aDEyIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgZD0iTSA0NC4yMDI5NTMsMTA0LjA0MTc0IEggNzIuNjk3NDE2IgogICAgICAgaWQ9InBhdGgxMyIgLz4KICAgIDxjaXJjbGUKICAgICAgIGlkPSJjaXJjbGUxMyIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgY3g9IjcyLjY5NzQxOCIKICAgICAgIGN5PSItMTA0LjA0MTg1IgogICAgICAgcj0iMC43OTM3NDk5OSIKICAgICAgIHRyYW5zZm9ybT0ic2NhbGUoMSwtMSkiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODM7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgIGQ9Im0gNDQuMjAyOTUzLDEwNC4wNDE3NCBoIDI4LjEyOTE1IgogICAgICAgaWQ9InBhdGgxNCIgLz4KICAgIDxjaXJjbGUKICAgICAgIGlkPSJjaXJjbGUxNCIKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgY3g9IjcyLjMzMjEwOCIKICAgICAgIGN5PSItMTA0LjQwNzE1IgogICAgICAgcj0iMC4zOTY4NzQ5OSIKICAgICAgIHRyYW5zZm9ybT0ic2NhbGUoMSwtMSkiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODM7c3Ryb2tlLW9wYWNpdHk6MSIKICAgICAgIGQ9Im0gNTguMjI1ODgsMTA0LjIxNDQ2IHYgMTUuMTExNTUiCiAgICAgICBpZD0icGF0aDE1IiAvPgogICAgPHRleHQKICAgICAgIHhtbDpzcGFjZT0icHJlc2VydmUiCiAgICAgICBzdHlsZT0iZm9udC1zaXplOjQuMjMzMzNweDtmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICB4PSI4MC4wNzc4ODgiCiAgICAgICB5PSIxMjAuNjM1NyIKICAgICAgIGlkPSJ0ZXh0MTUiPjx0c3BhbgogICAgICAgICBzb2RpcG9kaTpyb2xlPSJsaW5lIgogICAgICAgICBpZD0idHNwYW4xNSIKICAgICAgICAgc3R5bGU9InN0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgICAgeD0iODAuMDc3ODg4IgogICAgICAgICB5PSIxMjAuNjM1NyI+dDwvdHNwYW4+PC90ZXh0PgogICAgPHRleHQKICAgICAgIHhtbDpzcGFjZT0icHJlc2VydmUiCiAgICAgICBzdHlsZT0iZm9udC1zaXplOjQuMjMzMzNweDtmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICB4PSI4MC4wNzc4ODgiCiAgICAgICB5PSIxMDUuMDA3NTgiCiAgICAgICBpZD0idGV4dDE2Ij48dHNwYW4KICAgICAgICAgc29kaXBvZGk6cm9sZT0ibGluZSIKICAgICAgICAgaWQ9InRzcGFuMTYiCiAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgICAgeT0iMTA1LjAwNzU4Ij50KzE8L3RzcGFuPjwvdGV4dD4KICA8L2c+Cjwvc3ZnPgo=)</p>
+<p>A quick glance at the error analysis will see that it is now <span class="math notranslate nohighlight">\(\frac{1}{G}\)</span> which is in the range <span class="math notranslate nohighlight">\(\bigg[1-4\frac{\alpha \Delta t}{\Delta x^2}, 1\bigg]\)</span> and which always satisfies the stability condition.</p>
+<p>Once again the Forward Euler method, and implicit method more generally, are unconditional stability but at the cost of solving a system of equations.</p>
+<section id="example-of-backward-euler-time-stepping">
+<h2>Example of Backward Euler time stepping<a class="headerlink" href="#example-of-backward-euler-time-stepping" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Repeat solving hte heat transport equation but thistime with a backward Euler method</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">FloatSlider</span>
+
+<span class="k">def</span> <span class="nf">backward_euler_heat</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Solves the 1D heat equation using backward Euler timestepping.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    T: Initial temperature distribution (numpy array).</span>
+<span class="sd">    alpha: Thermal diffusivity.</span>
+<span class="sd">    dx: Spatial step size.</span>
+<span class="sd">    dt: Time step size.</span>
+<span class="sd">    num_steps: Number of time steps.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A list of temperature distributions at each time step.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">T_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Apply boundary conditions (Dirichlet in this example, T=0 at edges)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># plt.spy(A, markersize=1)  # Creates a sparsity plot</span>
+    <span class="c1"># plt.title(&#39;Sparsity Pattern of Matrix A&#39;)</span>
+    <span class="c1"># plt.show()</span>
+
+    <span class="c1"># Solve the linear system for T at the next time step</span>
+    <span class="n">T_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="c1"># Update T and store the solution</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">T_new</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">T_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+  <span class="k">return</span> <span class="n">T_history</span>
+
+<span class="k">def</span> <span class="nf">plot_heat_equation</span><span class="p">(</span><span class="n">dt</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Plots the solution of the heat equation for a given time step size.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    dt: Time step size.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="c1"># Parameters</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Thermal diffusivity</span>
+  <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># Spatial step size</span>
+  <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">50</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">num_steps</span><span class="p">)</span>
+  <span class="n">T_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">T_initial</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Initial heat source in the middle</span>
+
+  <span class="c1"># Solve the heat equation</span>
+  <span class="n">T_history</span> <span class="o">=</span> <span class="n">backward_euler_heat</span><span class="p">(</span><span class="n">T_initial</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+
+  <span class="c1"># Plotting</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">T_history</span><span class="p">),</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T_history</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Time step </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Position (x)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (T)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Backward Euler Solution of 1D Heat Equation&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_heat_equation</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="n">FloatSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">0.05</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "52a6dca9f8c349bab38206242b274062", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="crank-nicholson-method">
+<h1>Crank-Nicholson method<a class="headerlink" href="#crank-nicholson-method" title="Link to this heading">#</a></h1>
+<p>One shortcoming of the backward Euler method is that it is only 1st order accurate in time whereas the central difference spatial discretization is second order. This means that one would need smaller time steps compared to spatial steps to ensure accuracy is optimized.</p>
+<p>The Crank-Nicholson method is an alternative implicit method  that is second order in both time and space. As with the central difference derivation (and many others!) the key is to average the explicit and implicit methods!</p>
+<p>Take,
+$<span class="math notranslate nohighlight">\( \frac{\partial T}{\partial t} = \frac{T^{t+1} -T^{t}}{\Delta t}\)</span>$</p>
+<p>and now average the spatial distretizations at <span class="math notranslate nohighlight">\(t+1\)</span> and <span class="math notranslate nohighlight">\(t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial^2 T}{\partial x^2} = \frac{1}{2} [T^{t+1}_{i-1} - 2 T^{t+1}_i + T^{t+1}_{i+1} + T^{t}_{i-1} - 2 T^{t}_i + T^{t}_{i+1}] {\Delta x^2}\]</div>
+<p>Such that the increment scheme is:
+$<span class="math notranslate nohighlight">\( (1 + 2r) T_i^{t+1} - r T_{i+1}^{t+1} - r T_{i-1}^{t+1} = (1 - 2r) T_i^{t} + r T_{i+1}^{t} + r T_{i-1}^{t}\)</span>$</p>
+<p>which seems ugly at first but is actually the exact same matrix sparsity as backward Euler, so achieves better accuracy for comparable computational cost.</p>
+<p>The stencil is,</p>
+<p>![Crank Nicholson stencil.svg](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhLS0gQ3JlYXRlZCB3aXRoIElua3NjYXBlIChodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy8pIC0tPgoKPHN2ZwogICB3aWR0aD0iNDUuMjA2OTgybW0iCiAgIGhlaWdodD0iMTkuMDI2MTczbW0iCiAgIHZpZXdCb3g9IjAgMCA0NS4yMDY5ODIgMTkuMDI2MTczIgogICB2ZXJzaW9uPSIxLjEiCiAgIGlkPSJzdmcxIgogICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9ImZvcndhcmQgRXVsZXIgc3RlbmNpbC5zdmciCiAgIGlua3NjYXBlOmV4cG9ydC14ZHBpPSI5NiIKICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxzb2RpcG9kaTpuYW1lZHZpZXcKICAgICBpZD0ibmFtZWR2aWV3MSIKICAgICBwYWdlY29sb3I9IiNmZmZmZmYiCiAgICAgYm9yZGVyY29sb3I9IiMwMDAwMDAiCiAgICAgYm9yZGVyb3BhY2l0eT0iMC4yNSIKICAgICBpbmtzY2FwZTpzaG93cGFnZXNoYWRvdz0iMiIKICAgICBpbmtzY2FwZTpwYWdlb3BhY2l0eT0iMC4wIgogICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiCiAgICAgaW5rc2NhcGU6ZGVza2NvbG9yPSIjZDFkMWQxIgogICAgIGlua3NjYXBlOmRvY3VtZW50LXVuaXRzPSJtbSIgLz4KICA8ZGVmcwogICAgIGlkPSJkZWZzMSIgLz4KICA8ZwogICAgIGlua3NjYXBlOmxhYmVsPSJMYXllciAxIgogICAgIGlua3NjYXBlOmdyb3VwbW9kZT0ibGF5ZXIiCiAgICAgaWQ9ImxheWVyMSIKICAgICB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDIuMzc2MzgyLC0xMjYuMTI4NzUpIj4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTE2IgogICAgICAgY3g9IjQ0LjIwMjk1IgogICAgICAgY3k9Ii0xMjguMzgzNTEiCiAgICAgICByPSIxLjgyNjU2ODIiCiAgICAgICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9ImJhY2t3YXJkIEV1bGVyIHN0ZW5jaWwuc3ZnIgogICAgICAgaW5rc2NhcGU6ZXhwb3J0LXhkcGk9Ijk2IgogICAgICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICAgICAgdHJhbnNmb3JtPSJzY2FsZSgxLC0xKSIgLz4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTE3IgogICAgICAgY3g9IjU4LjIyNTg4IgogICAgICAgY3k9Ii0xMjguMzgzNTEiCiAgICAgICByPSIxLjgyNjU2ODIiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBpZD0iY2lyY2xlMTgiCiAgICAgICBjeD0iNzIuMjQ4ODEiCiAgICAgICBjeT0iLTEyOC4zODM1MSIKICAgICAgIHI9IjEuODI2NTY4MiIKICAgICAgIHRyYW5zZm9ybT0ic2NhbGUoMSwtMSkiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBkPSJNIDU4LjA4NDg3LDE0My4zNjE1IFYgMTI4Ljc0ODg4IgogICAgICAgaWQ9InBhdGgxOSIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgIGQ9Ik0gNDQuMjAyOTUzLDEyOC4zODM1NiBIIDcyLjY5NzQxNiIKICAgICAgIGlkPSJwYXRoMjAiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBpZD0iY2lyY2xlMjAiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgIGN4PSI3Mi42OTc0MTgiCiAgICAgICBjeT0iLTEyOC4zODM1MSIKICAgICAgIHI9IjAuNzkzNzQ5OTkiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBkPSJtIDQ0LjIwMjk1MywxMjguMzgzNTYgaCAyOC4xMjkxNSIKICAgICAgIGlkPSJwYXRoMjEiIC8+CiAgICA8Y2lyY2xlCiAgICAgICBpZD0iY2lyY2xlMjEiCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTpub25lO3N0cm9rZS13aWR0aDowLjI2NDU4MyIKICAgICAgIGN4PSI3Mi4zMzIxMDgiCiAgICAgICBjeT0iLTEyOC43NDg3OSIKICAgICAgIHI9IjAuMzk2ODc0OTkiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICBkPSJtIDU4LjIyNTg4LDEyOC41NTYyOCB2IDE1LjExMTU1IgogICAgICAgaWQ9InBhdGgyMiIgLz4KICAgIDx0ZXh0CiAgICAgICB4bWw6c3BhY2U9InByZXNlcnZlIgogICAgICAgc3R5bGU9ImZvbnQtc2l6ZTo0LjIzMzMzcHg7ZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MztzdHJva2Utb3BhY2l0eToxIgogICAgICAgeD0iODAuMDc3ODg4IgogICAgICAgeT0iMTQ0Ljk3NzE0IgogICAgICAgaWQ9InRleHQyMiI+PHRzcGFuCiAgICAgICAgIHNvZGlwb2RpOnJvbGU9ImxpbmUiCiAgICAgICAgIGlkPSJ0c3BhbjIyIgogICAgICAgICBzdHlsZT0ic3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgICB4PSI4MC4wNzc4ODgiCiAgICAgICAgIHk9IjE0NC45NzcxNCI+dDwvdHNwYW4+PC90ZXh0PgogICAgPHRleHQKICAgICAgIHhtbDpzcGFjZT0icHJlc2VydmUiCiAgICAgICBzdHlsZT0iZm9udC1zaXplOjQuMjMzMzNweDtmaWxsOiMwMDAwMDA7c3Ryb2tlOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzO3N0cm9rZS1vcGFjaXR5OjEiCiAgICAgICB4PSI4MC4wNzc4ODgiCiAgICAgICB5PSIxMjkuMzQ5MjEiCiAgICAgICBpZD0idGV4dDIzIj48dHNwYW4KICAgICAgICAgc29kaXBvZGk6cm9sZT0ibGluZSIKICAgICAgICAgaWQ9InRzcGFuMjMiCiAgICAgICAgIHN0eWxlPSJzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICAgIHg9IjgwLjA3Nzg4OCIKICAgICAgICAgeT0iMTI5LjM0OTIxIj50KzE8L3RzcGFuPjwvdGV4dD4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTIzIgogICAgICAgY3g9IjQ0LjIwMjk1IgogICAgICAgY3k9Ii0xNDMuMTk5OTgiCiAgICAgICByPSIxLjgyNjU2ODIiCiAgICAgICBpbmtzY2FwZTpleHBvcnQtZmlsZW5hbWU9ImJhY2t3YXJkIEV1bGVyIHN0ZW5jaWwuc3ZnIgogICAgICAgaW5rc2NhcGU6ZXhwb3J0LXhkcGk9Ijk2IgogICAgICAgaW5rc2NhcGU6ZXhwb3J0LXlkcGk9Ijk2IgogICAgICAgdHJhbnNmb3JtPSJzY2FsZSgxLC0xKSIgLz4KICAgIDxjaXJjbGUKICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7c3Ryb2tlLXdpZHRoOjAuMjY0NTgzIgogICAgICAgaWQ9ImNpcmNsZTI0IgogICAgICAgY3g9IjU4LjIyNTg4IgogICAgICAgY3k9Ii0xNDMuMTk5OTgiCiAgICAgICByPSIxLjgyNjU2ODIiCiAgICAgICB0cmFuc2Zvcm09InNjYWxlKDEsLTEpIiAvPgogICAgPGNpcmNsZQogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBpZD0iY2lyY2xlMjUiCiAgICAgICBjeD0iNzIuMjQ4ODEiCiAgICAgICBjeT0iLTE0My4xOTk5OCIKICAgICAgIHI9IjEuODI2NTY4MiIKICAgICAgIHRyYW5zZm9ybT0ic2NhbGUoMSwtMSkiIC8+CiAgICA8cGF0aAogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBkPSJNIDQ0LjIwMjk1MywxNDMuMjAwMzIgSCA3Mi42OTc0MTYiCiAgICAgICBpZD0icGF0aDI1IiAvPgogICAgPGNpcmNsZQogICAgICAgaWQ9ImNpcmNsZTI2IgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBjeD0iNzIuNjk3NDE4IgogICAgICAgY3k9Ii0xNDMuMTk5OTgiCiAgICAgICByPSIwLjc5Mzc0OTk5IgogICAgICAgdHJhbnNmb3JtPSJzY2FsZSgxLC0xKSIgLz4KICAgIDxwYXRoCiAgICAgICBzdHlsZT0iZmlsbDojMDAwMDAwO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowLjI2NDU4MztzdHJva2Utb3BhY2l0eToxIgogICAgICAgZD0ibSA0NC4yMDI5NTMsMTQzLjIwMDMyIGggMjguMTI5MTUiCiAgICAgICBpZD0icGF0aDI2IiAvPgogICAgPGNpcmNsZQogICAgICAgaWQ9ImNpcmNsZTI3IgogICAgICAgc3R5bGU9ImZpbGw6IzAwMDAwMDtzdHJva2U6bm9uZTtzdHJva2Utd2lkdGg6MC4yNjQ1ODMiCiAgICAgICBjeD0iNzIuMzMyMTA4IgogICAgICAgY3k9Ii0xNDMuNTY1MjYiCiAgICAgICByPSIwLjM5Njg3NDk5IgogICAgICAgdHJhbnNmb3JtPSJzY2FsZSgxLC0xKSIgLz4KICA8L2c+Cjwvc3ZnPgo=)</p>
+<section id="example-of-crank-nicholson-accuracy-vs-euler">
+<h2>Example of Crank Nicholson accuracy vs. Euler<a class="headerlink" href="#example-of-crank-nicholson-accuracy-vs-euler" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: compare the backward euler and crank-nicholson method for 5 time steps using the  previous example. Have the slider no change the time index instead of hte step.</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">IntSlider</span>
+
+<span class="c1"># ... (Your existing code for forward_euler_heat, backward_euler_heat, etc.) ...</span>
+
+
+<span class="k">def</span> <span class="nf">crank_nicholson_heat</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Solves the 1D heat equation using the Crank-Nicholson method.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    T: Initial temperature distribution (numpy array).</span>
+<span class="sd">    alpha: Thermal diffusivity.</span>
+<span class="sd">    dx: Spatial step size.</span>
+<span class="sd">    dt: Time step size.</span>
+<span class="sd">    num_steps: Number of time steps.</span>
+
+<span class="sd">  Returns:</span>
+<span class="sd">    A list of temperature distributions at each time step.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="n">T_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()]</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">dt</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">T</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">T</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">T</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Creates a sparsity plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Sparsity Pattern of Matrix A&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Apply boundary conditions (Dirichlet in this example, T=0 at edges)</span>
+    <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">T_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">T_new</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">T_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+  <span class="k">return</span> <span class="n">T_history</span>
+
+
+<span class="k">def</span> <span class="nf">plot_comparison</span><span class="p">(</span><span class="n">time_index</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Plots the solution of the heat equation using different methods for 5 timesteps.</span>
+
+<span class="sd">  Args:</span>
+<span class="sd">    time_index: Index of the time step to plot.</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="c1"># Parameters</span>
+  <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.1</span>
+  <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.1</span>
+  <span class="n">dt</span> <span class="o">=</span> <span class="mf">0.01</span>
+  <span class="n">num_steps</span> <span class="o">=</span> <span class="mi">5</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
+  <span class="n">T_initial</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">T_initial</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+
+  <span class="c1"># Solve the heat equation using different methods</span>
+  <span class="n">forward_euler_solution</span> <span class="o">=</span> <span class="n">forward_euler_heat</span><span class="p">(</span><span class="n">T_initial</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+  <span class="n">backward_euler_solution</span> <span class="o">=</span> <span class="n">backward_euler_heat</span><span class="p">(</span><span class="n">T_initial</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+  <span class="n">crank_nicholson_solution</span> <span class="o">=</span> <span class="n">crank_nicholson_heat</span><span class="p">(</span><span class="n">T_initial</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+
+  <span class="c1"># Plotting</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">forward_euler_solution</span><span class="p">[</span><span class="n">time_index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Forward Euler&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">backward_euler_solution</span><span class="p">[</span><span class="n">time_index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Backward Euler&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">crank_nicholson_solution</span><span class="p">[</span><span class="n">time_index</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Crank-Nicholson&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Position (x)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (T)&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Comparison of Methods at Time Step </span><span class="si">{</span><span class="n">time_index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+<span class="c1"># Interactive widget</span>
+<span class="n">interact</span><span class="p">(</span><span class="n">plot_comparison</span><span class="p">,</span> <span class="n">time_index</span><span class="o">=</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a5b60933d62b41c1942e408ac007440d", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p>#Summary</p>
+<p>Once again, we have seen the value of implicit timesteppers for solving stiff problems. However, as discussed in the Initial Value Problem section, they require a root finder to converge on a system, which generally relies on linear solvers. For large systems, direct solution (LU) is intractable, and so iterative methods are required.</p>
+<p>Explicit timesteppers are conditionally stable which limits the timestep, but they don’t require simultaneous solutions of equations which avoids the pitfalls of a root finder:</p>
+<ul class="simple">
+<li><p>no question of initial guesses</p></li>
+<li><p>always converges</p></li>
+<li><p>parallelizes well on HPCs</p></li>
+<li><p>much smaller memory usage</p></li>
+<li><p>Does not need an iterative linear solver routine</p></li>
+</ul>
+<p>At what point does the expense of interations in an implicit time stepper outweigh the moderate step size?
+-&gt; It depends on the problem!</p>
+<p>General multiphysics solvers rely on implicit timestepping since modern systems can use LU to root find. Specialized software (build for large systems) may prefer explicit methods which <em>just work</em>:</p>
+<ul class="simple">
+<li><p>LS-Dyna - impact tests, crashes, drop tests, etc.</p></li>
+<li><p>Several CFD packages (Flow 3D)</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "mwelland/ENGPHYS_3NM4",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters/Differential equations/Partial differential equations"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Boundary%20value%20problems/Finite_volume.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Finite volume methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../Finite%20element%20method/Finite%20element%20method.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Finite Element Method</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Partial differential equations</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-pdes">Classification of PDEs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#elliptic-equations">Elliptic equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-approaches">Solution approaches</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parabolic-equations">Parabolic equations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperbolic-equations">Hyperbolic equations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-schemes">Solution schemes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notation">Notation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicit-euler-timestepping">Explicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-forward-euler-time-stepping">Example of Forward Euler time stepping</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-analysis">Error analysis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implicit-euler-timestepping">Implicit Euler timestepping</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-backward-euler-time-stepping">Example of Backward Euler time stepping</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crank-nicholson-method">Crank-Nicholson method</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-crank-nicholson-accuracy-vs-euler">Example of Crank Nicholson accuracy vs. Euler</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

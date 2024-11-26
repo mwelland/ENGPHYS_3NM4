@@ -4,11 +4,16 @@ execute:
   allow_errors: true
 only_build_toc_files: true
 
+repository:
+  url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
+  path_to_book              : Book  # Optional path to your book, relative to the repository root
+  branch                    : main  # Which branch of the repository should be used when creating links (optional)
+
 launch_buttons:
-  jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
+  #jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
   thebe: true
   colab_url: https://colab.research.google.com
-  colab: true
+  #colab: true
   #binderhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
   
   # custom_launch_buttons:

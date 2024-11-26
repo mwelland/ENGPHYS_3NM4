@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Nonlinear least-squares regression &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/Optimization/Nonlinear least squares';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Equality constrained optimization" href="Equality%20constraints.html" />
+    <link rel="prev" title="Trust region methods" href="Trust%20region%20methods.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Roundoff%20error/Roundoff%20error.html">Round-off Error</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/Finite%20precision%20representations.html">Finite precision representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/True_and_approximate_error.html">Quantifying error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/Truncation_error.html">Truncation error</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Linear%20systems/Linear%20systems.html">Linear systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Solvability.html">Solvability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Complexity.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Conditioning.html">Conditioning</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Linear%20systems/Direct%20methods.html">Direct methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/Gaussian%20elimination.html">Solving linear systems with Gauss elimination</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/LU%20decomposition.html">LU decomposition</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/Matrix%20types%20and%20decompositions.html">Matrix types</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Linear%20systems/Iterative%20methods.html">Iterative methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Gauss-Seidel%2C%20Jacobi%2C%20and%20SOR.html">Jacobi iteration method</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Conjugate%20gradient%20and%20GMRES.html">Nomenclature</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Preconditioners.html">Preconditioners</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation%20and%20curve%20fitting.html">Interpolation and Curve-fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Polynomial%20interpolation.html">Polynomial interpolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Splines.html">Cubic splines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Radial%20basis%20functions.html">Radial Basis Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Curve%20fitting.html">Curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Linear%20least%20squares%20regression.html">Linear least squares regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Polyfit.html">Polyfit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Best%20fit%20radial%20basis%20functions.html">Radial Basis Functions revisted!</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Optimization.html">Optimization</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Closed%20methods.html">Bracketed minimization</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Indefinite%20systems.html">Indefinite systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Trust%20region%20methods.html">Trust region methods</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Nonlinear least-squares regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Equality%20constraints.html">Equality constrained optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Differentiation%20and%20integration.html">Differentiation and integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Finite%20difference.html">Finite difference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/First%20order%20derivatives.html">First order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Second%20order%20derivatives.html">Second order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Higher%20dimensions.html">Higher dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Even%20vs%20uneven%20spacing.html">Even vs uneven spacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Uncertainty%20amplification.html">Uncertainty amplification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Numerical%20integration.html">Numerical integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Newton-Cotes%20formulae.html">Newton-Cotes integration formulae</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Romberg%20rule.html">Romberg rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Gaussian%20quadrature.html">Gaussian quadrature</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Differential%20equations/Differential%20equations.html">Differential equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Initial%20value%20problems.html">Initial value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Explicit%20methods.html">Explicit methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Implicit%20methods.html">Implicit methods</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Boundary_value_problems.html">Boundary value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Shooting%20method.html">The Shooting method</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Collocation%20methods.html">Collocation algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Finite_difference_method.html">The Finite Difference method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Finite_volume.html">Finite volume methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../Differential%20equations/Partial%20differential%20equations/Partial_differential_equations.html">Partial differential equations</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Finite%20element%20method/Finite%20element%20method.html">The Finite Element Method</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Finite%20element%20method/Motivating%20example.html">Motivating example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Finite%20element%20method/Theoretical%20background.html">Theoretical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Finite%20element%20method/Elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Finite%20element%20method/Discretization%20and%20assembly.html">Discretization and assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Finite%20element%20method/Solution.html">Solution</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/mwelland/ENGPHYS_3NM4/blob/main/Book/Chapters/Optimization/Nonlinear least squares.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/Optimization/Nonlinear least squares.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Nonlinear least-squares regression</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-newton-s-regression">Gauss-Newton’s regression:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-levenberg-marquardt-algorithm">The Levenberg-Marquardt algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-curve-fit">Example: Nonlinear curve fit</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-2d-curve-fit">Example: Nonlinear 2D curve fit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nonlinear-least-squares-regression">
+<h1>Nonlinear least-squares regression<a class="headerlink" href="#nonlinear-least-squares-regression" title="Link to this heading">#</a></h1>
+<p>There is one more important unconstrained minimization that we should discuss: non-linear least-squares, which is the extension of the linear least-square regression we did for curve fitting.</p>
+<p>Now, we have several measurements in pairs <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> and we wish to fit a function of <span class="math notranslate nohighlight">\(x\)</span> which depends in some complex, nonlinear fashion on a set of parameters <span class="math notranslate nohighlight">\(\beta\)</span>. E.g.: <span class="math notranslate nohighlight">\(f(x,\beta) = sin(\beta_1 x) e^{\beta_2 x^3}\)</span></p>
+<p>Our goal is to choose the set of <em>parameteres</em> <span class="math notranslate nohighlight">\(\beta\)</span> that minimizes the of the sum of the least squares of the residuals, <span class="math notranslate nohighlight">\(r_i = f(x_i,\beta) - y_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\min_\beta F = \min_\beta \sum_i r_i^2 = \min_\beta \sum_i [f(x_i,\beta) - y_i]^2
+\end{align}\]</div>
+<p>Note: <span class="math notranslate nohighlight">\(F\)</span> is necessarily symmetric and positive semidefinite, therefore any extremum is a minimum.</p>
+<section id="gauss-newton-s-regression">
+<h2>Gauss-Newton’s regression:<a class="headerlink" href="#gauss-newton-s-regression" title="Link to this heading">#</a></h2>
+<p>Let’s consider Newton’s optimization:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial^2 F}{\partial \beta^2} \Delta \beta = - \frac{\partial F}{\partial \beta} \]</div>
+<p>Since <span class="math notranslate nohighlight">\(F\)</span> is the sum of squared <span class="math notranslate nohighlight">\(r_i\)</span> we can expand:
+$<span class="math notranslate nohighlight">\( \begin{align}
+\frac{\partial F}{\partial \beta} = 2 r \frac{\partial r}{\partial \beta} = 2 r J
+\end{align} \)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(J = \frac{\partial r}{\partial \beta}\)</span> is the Jacobian of the residuals with respect to the parameters. Since we typically have more data points (residuals) than parameters, this is rectangular.</p>
+<p>The Hessian is expanded:
+$<span class="math notranslate nohighlight">\( \begin{align}
+\frac{\partial^2 F}{\partial \beta^2} &amp;= 2 \sum_i \frac{\partial r_i}{\partial \beta_j} \frac{\partial r_i}{\partial \beta_k} + r \frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k} \\
+&amp;= 2\bigg[ J J^T +  r \frac{\partial^2 r_i}{\partial \beta_j \partial \beta_k} \bigg]
+\end{align} \)</span>$</p>
+<p>The second derivative in the Hessian is troublesome for computation. Luckily, near the root <span class="math notranslate nohighlight">\(r\rightarrow 0\)</span> and we can disregard the term entirely:</p>
+<div class="math notranslate nohighlight">
+\[\begin{align}
+\frac{\partial^2 F}{\partial \beta^2} \approx 2 \sum_i J J^T
+\end{align} \]</div>
+<p>Our minimization now becomes,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+J J^T \Delta \beta &amp;= -J r \\
+\Delta \beta &amp;= -[J J^T]^{-1} J r \\
+&amp;= -J^\dagger r
+\end{align}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(J^\dagger\)</span> is the pseudoinverse of the Jacobian!</p>
+<p>This is an interesting result since it suggests we could write the original problem as solving <span class="math notranslate nohighlight">\(J \Delta \beta = -r\)</span> which is the Newton-Raphson method for <em>root finding</em>, not minimization… Remember however, that this is the <em>pseudoinverse</em>, not the true inverse. Indeed, if we had exactly as many data points as parameters, <span class="math notranslate nohighlight">\(J\)</span> would be square, and we <em>would</em> be able to find the exact solution which is the root! The fact that this is analagously true for least squares regression comes from 1) approximating the Hessian as the product of Jacobians, and 2) properties of the pseudo-inverse in performing linear least-squares.</p>
+</section>
+<section id="the-levenberg-marquardt-algorithm">
+<h2>The Levenberg-Marquardt algorithm<a class="headerlink" href="#the-levenberg-marquardt-algorithm" title="Link to this heading">#</a></h2>
+<p>The problem with Gauss-Newton is that the Hessian approximation is only good near the root, and the method fails unless the initial guess is good.</p>
+<p>Levenberg-Marquardt blends Gauss-Newton with Gradient decent:</p>
+<div class="math notranslate nohighlight">
+\[
+[J J^T + \lambda I ] \Delta \beta = -J r
+\]</div>
+<p>When <span class="math notranslate nohighlight">\(\lambda\)</span> is small, the method reduces to Gauss-Newton. When it is large, the <span class="math notranslate nohighlight">\(J J^T\)</span> term can be disregarded and the method is simply gradient decent. Determination of <span class="math notranslate nohighlight">\(\lambda\)</span> is a matter of heuristics and implementation.</p>
+<p>The Levenberg-Marquart algorithm is the go-to for common lst solvers including scipy, numpy, and tools like Excel.</p>
+<section id="example-nonlinear-curve-fit">
+<h3>Example: Nonlinear curve fit<a class="headerlink" href="#example-nonlinear-curve-fit" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+
+<span class="c1"># Define the function to fit</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Generate some sample data</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Perform the curve fit</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+
+<span class="c1"># Print the fitted parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitted parameters:&quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span>
+
+<span class="c1"># Generate the fitted curve</span>
+<span class="n">y_fit</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+<span class="c1"># True function</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+
+<span class="c1"># Plot the data and the fitted curve</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_true</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_fit</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fit&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted parameters: [2.55266109 1.34621434 0.47897151]
+</pre></div>
+</div>
+<img alt="../../_images/cc8d1fa3c61a9afb2e3e38da8b4e5c27ab8b59736e8065838566cecd98d29f01.png" src="../../_images/cc8d1fa3c61a9afb2e3e38da8b4e5c27ab8b59736e8065838566cecd98d29f01.png" />
+</div>
+</div>
+<section id="example-nonlinear-2d-curve-fit">
+<h4>Example: Nonlinear 2D curve fit<a class="headerlink" href="#example-nonlinear-2d-curve-fit" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: make a 2D example of a nonlineaar curve_fit</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="c1"># Define the function to fit (e.g., a 2D Gaussian)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+  <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">X</span>
+  <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span> <span class="o">+</span> <span class="n">f</span>
+
+<span class="c1"># Generate some sample data</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_data</span><span class="p">,</span> <span class="n">y_data</span><span class="p">)</span>
+<span class="n">Z_data</span> <span class="o">=</span> <span class="n">func</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+
+<span class="c1"># Flatten the data for curve_fit</span>
+<span class="n">x_data_flat</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">y_data_flat</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">z_data_flat</span> <span class="o">=</span> <span class="n">Z_data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="c1"># Perform the curve fit</span>
+<span class="n">initial_guess</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Provide an initial guess for the parameters</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">(</span><span class="n">x_data_flat</span><span class="p">,</span> <span class="n">y_data_flat</span><span class="p">),</span> <span class="n">z_data_flat</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="n">initial_guess</span><span class="p">)</span>
+
+<span class="c1"># Print the fitted parameters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitted parameters:&quot;</span><span class="p">,</span> <span class="n">popt</span><span class="p">)</span>
+
+<span class="c1"># Generate the fitted surface</span>
+<span class="n">Z_fit</span> <span class="o">=</span> <span class="n">func</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">),</span> <span class="o">*</span><span class="n">popt</span><span class="p">)</span>
+
+
+<span class="c1"># Plot the data and the fitted surface</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_data_flat</span><span class="p">,</span> <span class="n">y_data_flat</span><span class="p">,</span> <span class="n">z_data_flat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z_fit</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;fit&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted parameters: [ 9.99242341e-01 -1.10886030e-03  1.03302831e+00  6.17376908e-04
+  9.68851674e-01 -3.79420297e-03]
+</pre></div>
+</div>
+<img alt="../../_images/bc46d9c9eaf6558d844aada71377d2e66d32a96398134829c44f14fcbb9e5726.png" src="../../_images/bc46d9c9eaf6558d844aada71377d2e66d32a96398134829c44f14fcbb9e5726.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "mwelland/ENGPHYS_3NM4",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters/Optimization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Trust%20region%20methods.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Trust region methods</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Equality%20constraints.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Equality constrained optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-newton-s-regression">Gauss-Newton’s regression:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-levenberg-marquardt-algorithm">The Levenberg-Marquardt algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-curve-fit">Example: Nonlinear curve fit</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-nonlinear-2d-curve-fit">Example: Nonlinear 2D curve fit</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

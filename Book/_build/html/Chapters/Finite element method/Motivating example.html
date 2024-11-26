@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Motivating example &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/Finite element method/Motivating example';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Theoretical background" href="Theoretical%20background.html" />
+    <link rel="prev" title="The Finite Element Method" href="Finite%20element%20method.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Roundoff%20error/Roundoff%20error.html">Round-off Error</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/Finite%20precision%20representations.html">Finite precision representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/True_and_approximate_error.html">Quantifying error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Roundoff%20error/Truncation_error.html">Truncation error</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Linear%20systems/Linear%20systems.html">Linear systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Solvability.html">Solvability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Complexity.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Linear%20systems/Conditioning.html">Conditioning</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Linear%20systems/Direct%20methods.html">Direct methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/Gaussian%20elimination.html">Solving linear systems with Gauss elimination</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/LU%20decomposition.html">LU decomposition</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Direct%20methods/Matrix%20types%20and%20decompositions.html">Matrix types</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Linear%20systems/Iterative%20methods.html">Iterative methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Gauss-Seidel%2C%20Jacobi%2C%20and%20SOR.html">Jacobi iteration method</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Conjugate%20gradient%20and%20GMRES.html">Nomenclature</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Linear%20systems/Iterative%20methods/Preconditioners.html">Preconditioners</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation%20and%20curve%20fitting.html">Interpolation and Curve-fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Polynomial%20interpolation.html">Polynomial interpolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Splines.html">Cubic splines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Interpolation/Radial%20basis%20functions.html">Radial Basis Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Curve%20fitting.html">Curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Linear%20least%20squares%20regression.html">Linear least squares regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Polyfit.html">Polyfit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Interpolation%20and%20curve%20fitting/Curve%20fitting/Best%20fit%20radial%20basis%20functions.html">Radial Basis Functions revisted!</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Optimization/Optimization.html">Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Closed%20methods.html">Bracketed minimization</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Indefinite%20systems.html">Indefinite systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Trust%20region%20methods.html">Trust region methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Nonlinear%20least%20squares.html">Nonlinear least-squares regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Optimization/Equality%20constraints.html">Equality constrained optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Differentiation%20and%20integration.html">Differentiation and integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Finite%20difference.html">Finite difference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/First%20order%20derivatives.html">First order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Second%20order%20derivatives.html">Second order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Higher%20dimensions.html">Higher dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Even%20vs%20uneven%20spacing.html">Even vs uneven spacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Finite%20difference/Uncertainty%20amplification.html">Uncertainty amplification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Numerical%20integration.html">Numerical integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Newton-Cotes%20formulae.html">Newton-Cotes integration formulae</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Romberg%20rule.html">Romberg rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differentiation%20and%20integration/Integration/Gaussian%20quadrature.html">Gaussian quadrature</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Differential%20equations/Differential%20equations.html">Differential equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Initial%20value%20problems.html">Initial value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Explicit%20methods.html">Explicit methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Initial%20value%20problems/Implicit%20methods.html">Implicit methods</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Boundary_value_problems.html">Boundary value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Shooting%20method.html">The Shooting method</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Collocation%20methods.html">Collocation algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Finite_difference_method.html">The Finite Difference method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Differential%20equations/Boundary%20value%20problems/Finite_volume.html">Finite volume methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../Differential%20equations/Partial%20differential%20equations/Partial_differential_equations.html">Partial differential equations</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="Finite%20element%20method.html">The Finite Element Method</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Motivating example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Theoretical%20background.html">Theoretical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Discretization%20and%20assembly.html">Discretization and assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Solution.html">Solution</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/mwelland/ENGPHYS_3NM4/blob/main/Book/Chapters/Finite element method/Motivating example.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/Chapters/Finite element method/Motivating example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Motivating example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-direct-substitution">Option 1: Direct substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-least-square-minimization-of-the-residual">Option 2: Least square minimization of the residual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-integrate-the-mwr-to-find-the-parameters">Option 3: Integrate the MWR to find the parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-the-approach">Recap of the approach</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="motivating-example">
+<h1>Motivating example<a class="headerlink" href="#motivating-example" title="Link to this heading">#</a></h1>
+<p>Consider an ODE <span class="math notranslate nohighlight">\( y^\prime = -y \quad y(0) = 1\)</span>, which has an analytical answer <span class="math notranslate nohighlight">\(y = e^{-t}\)</span>.</p>
+<p>We wish to approximate this function numerically between <span class="math notranslate nohighlight">\([0,1]\)</span> with a line defined by the boundary points, <span class="math notranslate nohighlight">\(f(0) = a = 1\)</span> and <span class="math notranslate nohighlight">\(f(1) = b\)</span>, $<span class="math notranslate nohighlight">\(f(x) =  [1-x] + x b\)</span>$</p>
+<p>How do we find <span class="math notranslate nohighlight">\(b\)</span>?</p>
+<section id="option-1-direct-substitution">
+<h2>Option 1: Direct substitution<a class="headerlink" href="#option-1-direct-substitution" title="Link to this heading">#</a></h2>
+<p>Following the Finite Difference method, we can subsitute <span class="math notranslate nohighlight">\(f(1)\)</span> into the ODE and solve for b:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+f'(1) &amp;= f(1) \\
+b-1 &amp;= -b \\
+b &amp;= 1/2
+\end{align}\end{split}\]</div>
+<p>and the approximate solution is <span class="math notranslate nohighlight">\(f = 1 -\frac{x}{2}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Define the functions</span>
+<span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Generate values</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">f_values</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Plot the functions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 - x/2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y = e^{-t}&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Plot of f(x) and y(t) from 0 to 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9de6d5e6f89b9dcb437aeac69c2aa0dcd87990ba227db3ed48004f2f1b2737cb.png" src="../../_images/9de6d5e6f89b9dcb437aeac69c2aa0dcd87990ba227db3ed48004f2f1b2737cb.png" />
+</div>
+</div>
+</section>
+<section id="option-2-least-square-minimization-of-the-residual">
+<h2>Option 2: Least square minimization of the residual<a class="headerlink" href="#option-2-least-square-minimization-of-the-residual" title="Link to this heading">#</a></h2>
+<p>Let’s integrate the squared residual of f(x) plugged into the ODE, <span class="math notranslate nohighlight">\(y^\prime + y\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+R &amp;= f^\prime(x) +f(x) \\
+&amp;= [b-1] + 1-x + x b \\
+&amp;= b+x[b-1] \\
+R^2 &amp;= b^2 + 2 b x[b - 1] + [x[b - 1]]^2 \\
+F = \int_0^1 R^2 \ dx &amp;= \frac{1}{3} [7 b^2 - 5 b + 1] \\
+\end{align} \end{split}\]</div>
+<p>Note that in the end the integral of the residual, <span class="math notranslate nohighlight">\(F\)</span> is a parabolic function of the parameter <span class="math notranslate nohighlight">\(b\)</span>. The minimum is found at:
+<span class="math notranslate nohighlight">\(\frac{\partial F}{\partial b}(b) = 0\)</span>, for <span class="math notranslate nohighlight">\(b = \frac{5}{14}\)</span>. The approximate solution is <span class="math notranslate nohighlight">\(f(x) = 1-\frac{9}{14}x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the new function</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">f_new</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">9.</span><span class="o">/</span><span class="mi">14</span><span class="o">*</span><span class="n">x</span>
+<span class="n">f_new_values</span> <span class="o">=</span> <span class="n">f_new</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1"># Plot the functions</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 - x/2&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y = e^{-t}&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_new_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;f(x) = 1 - 9/14*x&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Plot of f(x) and y(t) from 0 to 1&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the residual</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="mi">9</span><span class="o">/</span><span class="mi">14</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">9.</span><span class="o">/</span><span class="mi">14</span><span class="o">*</span><span class="n">x</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">residual</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Residual of f(x) = 1 - x/2 and f(x) = 1 - 9/14*x&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5143c0bf5777bdbe5150bfbfa40039e66df96d6cba0ddf79f4942b86a14737ba.png" src="../../_images/5143c0bf5777bdbe5150bfbfa40039e66df96d6cba0ddf79f4942b86a14737ba.png" />
+</div>
+</div>
+<p>We see that option 2 does a better job of approximating the function over the full domain since it focusses on the integral of the residual.</p>
+<p>You may have noticed that we did something funny here: we integrated <span class="math notranslate nohighlight">\(R^2\)</span> and then took its derivative with respect to <span class="math notranslate nohighlight">\(b\)</span> in order to find the minimum of the integral! I.e.:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial F}{\partial b} = 0 &amp;= \frac{\partial }{\partial b} \int_0^1 R^2 \ dx  \\
+&amp;= \int_0^1 2R \frac{\partial R}{\partial b}  \ dx \\
+&amp;= \int_0^1 R v  \ dx
+\end{align} \end{split}\]</div>
+<p>where the residual has now been weighted by the function <span class="math notranslate nohighlight">\(v\)</span>. This is called the Method of Weighted Residual [MWR]. Let’s try a different function and see what happens.</p>
+</section>
+<section id="option-3-integrate-the-mwr-to-find-the-parameters">
+<h2>Option 3: Integrate the MWR to find the parameters<a class="headerlink" href="#option-3-integrate-the-mwr-to-find-the-parameters" title="Link to this heading">#</a></h2>
+<p>Integrate the weighted residual function directly with a convenient choice of <span class="math notranslate nohighlight">\(v\)</span>.</p>
+<p>lets take <span class="math notranslate nohighlight">\(v = x\)</span> (to be motivated later) and integrate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+\frac{\partial F}{\partial b} =0 &amp;= \int_0^1 R x  \ dx \\
+&amp;= \int_0^1 \big[b+[b-1]x\big]x  \ dx \\
+&amp;= \int_0^1 b x+[b-1]x^2  \ dx \\
+&amp;= \bigg[ \frac{1}{6} x^2\big[3b+2[b-1]x\big]\bigg]_0^1 \\
+&amp;= b-\frac{2}{5} \\
+\end{align} \end{split}\]</div>
+<p>which is very close to our previous solution <span class="math notranslate nohighlight">\(b = \frac{5}{14}\)</span> but with a simpler integration. BUT, we are still let with analytically integrating! If only there were a way to express integrals as the sum of the integrand evaluated at certain points…</p>
+</section>
+<section id="option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">
+<h2>Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.<a class="headerlink" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points" title="Link to this heading">#</a></h2>
+<p>Integrate the weighted residual function directly with a convenient choice of <span class="math notranslate nohighlight">\(v\)</span> as the sum of the integrand evaluated at certain points:</p>
+<p>Recall Gaussian Quadrature allows us to evaluate an integral by summing the integrand at the Gauss Points. The Gauss Points for the domain <span class="math notranslate nohighlight">\([-1,1]\)</span> are <span class="math notranslate nohighlight">\(\pm\frac{1}{\sqrt{3}}\)</span>, scaled to this integral domain become,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \begin{align}
+x_{[0,1]]} &amp;= 0.5 (x_{[-1,1]} + 1) \\
+&amp;= \frac{1}{2} \bigg[1 \pm\frac{1}{\sqrt{3}} \bigg] \\
+&amp;\approx [0.21132487, 0.78867513]
+\end{align} \end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{align}
+0 &amp;= \int_0^1 R x  \ dx \\
+&amp;= Rx (x=.21132487) + Rx(x = .78867513) \\
+&amp;= -0.0446582 + 0.255983 b  -0.622008 + 1.41068 b \\
+b &amp;= \frac{2}{5}
+\end{align} \end{split}\]</div>
+</section>
+<section id="recap-of-the-approach">
+<h2>Recap of the approach<a class="headerlink" href="#recap-of-the-approach" title="Link to this heading">#</a></h2>
+<p>Let’s recap what we’ve done:</p>
+<ol class="arabic simple">
+<li><p>parameterized a function as a weighted sum of simpler functions (a linear basis)</p></li>
+<li><p>found a (simple) integral expression that minimizes the error in the approxiation (Minimized Weighted Residual)</p></li>
+<li><p>performed the integration <em>exactly</em> using only function evaluations into a linear system (Gaussian quadrature)</p></li>
+<li><p>Solved the linear system (I <strong>told</strong> you everything boiled down to linear systems!)</p></li>
+</ol>
+<p>Practical solution of linear systems requires sparsity! Let’s formalize our proceedure and see how we can ensure sparsity.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "mwelland/ENGPHYS_3NM4",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters/Finite element method"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Finite%20element%20method.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Finite Element Method</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Theoretical%20background.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Theoretical background</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-direct-substitution">Option 1: Direct substitution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-least-square-minimization-of-the-residual">Option 2: Least square minimization of the residual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-3-integrate-the-mwr-to-find-the-parameters">Option 3: Integrate the MWR to find the parameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-4-express-the-mwr-integral-as-the-sum-of-the-integrand-evaluated-at-certain-points">Option 4: Express the MWR integral as the sum of the integrand evaluated at certain points.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap-of-the-approach">Recap of the approach</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
