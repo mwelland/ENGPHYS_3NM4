@@ -1,0 +1,98 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+format: jb-book
+root: index
+options:
+  numbered: false #false
+
+chapters:
+  - file: Lecture notes/Roundoff error/Roundoff error
+    sections:
+    - file: Lecture notes/Roundoff error/Finite precision representations
+    - file: Lecture notes/Roundoff error/True_and_approximate_error
+    - file: Lecture notes/Roundoff error/Truncation_error
+
+  - file: Lecture notes/Linear systems/Linear systems
+    sections:
+    - file: Lecture notes/Linear systems/Solvability
+    - file: Lecture notes/Linear systems/Complexity
+    - file: Lecture notes/Linear systems/Conditioning
+    - file: Lecture notes/Linear systems/Direct methods
+      sections: 
+      - file: Lecture notes/Linear systems/Direct methods/Gaussian elimination
+      - file: Lecture notes/Linear systems/Direct methods/LU decomposition
+      - file: Lecture notes/Linear systems/Direct methods/Matrix types and decompositions
+    - file: Lecture notes/Linear systems/Iterative methods
+      sections: 
+      - file: Lecture notes/Linear systems/Iterative methods/Gauss-Seidel, Jacobi, and SOR
+      - file: Lecture notes/Linear systems/Iterative methods/Conjugate gradient and GMRES
+      - file: Lecture notes/Linear systems/Iterative methods/Preconditioners
+
+
+  - file: Lecture notes/Interpolation and curve fitting/Interpolation and curve fitting
+    sections:
+    - file: Lecture notes/Interpolation and curve fitting/Interpolation/Interpolation
+      sections:
+      - file: Lecture notes/Interpolation and curve fitting/Interpolation/Polynomial interpolation
+      - file: Lecture notes/Interpolation and curve fitting/Interpolation/Splines
+      - file: Lecture notes/Interpolation and curve fitting/Interpolation/Radial basis functions
+    - file: Lecture notes/Interpolation and curve fitting/Curve fitting/Curve fitting 
+      sections:
+      - file: Lecture notes/Interpolation and curve fitting/Curve fitting/Linear least squares regression
+      - file: Lecture notes/Interpolation and curve fitting/Curve fitting/Polyfit
+      - file: Lecture notes/Interpolation and curve fitting/Curve fitting/Best fit radial basis functions
+
+  - file: Lecture notes/Root finding/Root finding
+    sections:
+    - file: Lecture notes/Root finding/Polynomial roots
+    - file: Lecture notes/Root finding/Closed methods
+    - file: Lecture notes/Root finding/Open methods
+    - file: Lecture notes/Root finding/Global convergence methods
+
+  - file: Lecture notes/Optimization/Optimization
+    sections:
+    - file: Lecture notes/Optimization/Closed methods
+    - file: Lecture notes/Optimization/Open methods
+    - file: Lecture notes/Optimization/Gradient based optimizers
+    - file: Lecture notes/Optimization/Indefinite systems
+    - file: Lecture notes/Optimization/Trust region methods
+    - file: Lecture notes/Optimization/Nonlinear least squares
+    - file: Lecture notes/Optimization/Equality constraints
+  
+
+  - file: Lecture notes/Differentiation and integration/Differentiation and integration
+    sections:
+    - file: Lecture notes/Differentiation and integration/Finite difference/Finite difference
+      sections:
+      - file: Lecture notes/Differentiation and integration/Finite difference/First order derivatives
+      - file: Lecture notes/Differentiation and integration/Finite difference/Second order derivatives
+      - file: Lecture notes/Differentiation and integration/Finite difference/Higher dimensions
+      - file: Lecture notes/Differentiation and integration/Finite difference/Even vs uneven spacing
+      - file: Lecture notes/Differentiation and integration/Finite difference/Uncertainty amplification
+    - file: Lecture notes/Differentiation and integration/Integration/Numerical integration
+      sections:
+      - file: Lecture notes/Differentiation and integration/Integration/Newton-Cotes formulae
+      - file: Lecture notes/Differentiation and integration/Integration/Romberg rule
+      - file: Lecture notes/Differentiation and integration/Integration/Gaussian quadrature
+
+  - file: Lecture notes/Differential equations/Differential equations
+    sections:
+    - file: Lecture notes/Differential equations/Initial value problems/Initial value problems
+      sections:
+      - file: Lecture notes/Differential equations/Initial value problems/Explicit methods
+      - file: Lecture notes/Differential equations/Initial value problems/Implicit methods
+    - file: Lecture notes/Differential equations/Boundary value problems/Boundary_value_problems
+      sections:
+      - file: Lecture notes/Differential equations/Boundary value problems/Shooting method
+      - file: Lecture notes/Differential equations/Boundary value problems/Collocation methods
+      - file: Lecture notes/Differential equations/Boundary value problems/Finite_difference_method
+      - file: Lecture notes/Differential equations/Boundary value problems/Finite_volume
+    - file: Lecture notes/Differential equations/Partial differential equations/Partial_differential_equations
+
+  - file: Lecture notes/Finite element method/Finite element method
+    sections:
+    - file: Lecture notes/Finite element method/Motivating example
+    - file: Lecture notes/Finite element method/Theoretical background
+    - file: Lecture notes/Finite element method/Elements
+    - file: Lecture notes/Finite element method/Discretization and assembly
+    - file: Lecture notes/Finite element method/Solution
