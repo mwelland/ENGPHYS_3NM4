@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>First order derivatives &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/Differentiation and integration/Finite difference/First order derivatives';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Second order derivatives" href="Second%20order%20derivatives.html" />
+    <link rel="prev" title="Finite difference" href="Finite%20difference.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Roundoff%20error/Roundoff%20error.html">Round-off Error</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Finite%20precision%20representations.html">Finite precision representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/True_and_approximate_error.html">Quantifying error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Truncation_error.html">Truncation error</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Linear%20systems/Linear%20systems.html">Linear systems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Solvability.html">Solvability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Complexity.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Linear%20systems/Conditioning.html">Conditioning</a></li>
+
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Linear%20systems/Direct%20methods.html">Direct methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/Gaussian%20elimination.html">Solving linear systems with Gauss elimination</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/LU%20decomposition.html">LU decomposition</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Direct%20methods/Matrix%20types%20and%20decompositions.html">Matrix types</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods.html">Iterative methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Gauss-Seidel%2C%20Jacobi%2C%20and%20SOR.html">Jacobi iteration method</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Conjugate%20gradient%20and%20GMRES.html">Nomenclature</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../../Linear%20systems/Iterative%20methods/Preconditioners.html">Preconditioners</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation%20and%20curve%20fitting.html">Interpolation and Curve-fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Polynomial%20interpolation.html">Polynomial interpolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Splines.html">Cubic splines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Radial%20basis%20functions.html">Radial Basis Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Curve%20fitting.html">Curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Linear%20least%20squares%20regression.html">Linear least squares regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Polyfit.html">Polyfit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Best%20fit%20radial%20basis%20functions.html">Radial Basis Functions revisted!</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Optimization/Optimization.html">Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Closed%20methods.html">Bracketed minimization</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Indefinite%20systems.html">Indefinite systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Trust%20region%20methods.html">Trust region methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Nonlinear%20least%20squares.html">Nonlinear least-squares regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Equality%20constraints.html">Equality constrained optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Differentiation%20and%20integration.html">Differentiation and integration</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="Finite%20difference.html">Finite difference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">First order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Second%20order%20derivatives.html">Second order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Higher%20dimensions.html">Higher dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Even%20vs%20uneven%20spacing.html">Even vs uneven spacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Uncertainty%20amplification.html">Uncertainty amplification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Integration/Numerical%20integration.html">Numerical integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Integration/Newton-Cotes%20formulae.html">Newton-Cotes integration formulae</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Integration/Romberg%20rule.html">Romberg rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../Integration/Gaussian%20quadrature.html">Gaussian quadrature</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Differential%20equations/Differential%20equations.html">Differential equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Initial%20value%20problems.html">Initial value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Explicit%20methods.html">Explicit methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Implicit%20methods.html">Implicit methods</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Boundary_value_problems.html">Boundary value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Shooting%20method.html">The Shooting method</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Collocation%20methods.html">Collocation algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Finite_difference_method.html">The Finite Difference method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Finite_volume.html">Finite volume methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Differential%20equations/Partial%20differential%20equations/Partial_differential_equations.html">Partial differential equations</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Finite%20element%20method/Finite%20element%20method.html">The Finite Element Method</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Motivating%20example.html">Motivating example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Theoretical%20background.html">Theoretical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Discretization%20and%20assembly.html">Discretization and assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Solution.html">Solution</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster/hub/user-redirect/git-pull?repo=https%3A//github.com/executablebooks/jupyter-book&urlpath=tree/jupyter-book/Chapters/Differentiation+and+integration/Finite+difference/First+order+derivatives.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/Chapters/Differentiation and integration/Finite difference/First order derivatives.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Chapters/Differentiation and integration/Finite difference/First order derivatives.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>First order derivatives</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-difference">Forward difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rocket-velocity">Example - Rocket velocity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-difference">Backward difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-difference">Central difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">Comparison</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="first-order-derivatives">
+<h1>First order derivatives<a class="headerlink" href="#first-order-derivatives" title="Link to this heading">#</a></h1>
+<p>We have already approached this in the context of the <em>secant</em> search methods which approximate the tangent of the curve.</p>
+<p><img alt="secant vs tangent.png" src="data:image/png;base64,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" /></p>
+<p>Note that the secant becomes the tangent when <span class="math notranslate nohighlight">\(Q \rightarrow P\)</span>. Most methods are characterized in terms of the <em>step size</em>, in this case the <span class="math notranslate nohighlight">\(x\)</span> distance between P and Q.</p>
+<p>This notion of the secant approaching the tangent  motivates the <em>forward difference</em> formula.</p>
+<section id="forward-difference">
+<h2>Forward difference<a class="headerlink" href="#forward-difference" title="Link to this heading">#</a></h2>
+<p>The forward difference is so named because it starts at <span class="math notranslate nohighlight">\(x\)</span> and looks <em>forward</em> to obtain derivative information.</p>
+<p>Consider the Taylor expansion of <span class="math notranslate nohighlight">\(f(x)\)</span> from a point <span class="math notranslate nohighlight">\(x_i\)</span>, with the step size <span class="math notranslate nohighlight">\(h\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+f(x+h) &amp;= f(x) + f'(x) h + f''(x) \frac{h^2}{2} + f'''(x) \frac{h^3}{6}
+\end{align}
+\]</div>
+<p>Consider truncating the series after the first two terms:</p>
+<div class="math notranslate nohighlight">
+\[ f(x+h) = f(x) + f'(x) h + O(h^2)\]</div>
+<p>and solve for
+$<span class="math notranslate nohighlight">\(f'(x) = \frac{f(x+h) - f(x)}{h} +  O(h^2) \)</span>$</p>
+<section id="example-rocket-velocity">
+<h3>Example - Rocket velocity<a class="headerlink" href="#example-rocket-velocity" title="Link to this heading">#</a></h3>
+<p>A rocket has velocity:</p>
+<div class="math notranslate nohighlight">
+\[v(t) = 2000 \ln \bigg[\frac{14 \times 10^4}{14 \times 10^4 - 2100t}\bigg] - 9.8 t\]</div>
+<p>What is the acceleration as a function of <span class="math notranslate nohighlight">\(t\)</span>?</p>
+<p>Analytically we can find,
+$<span class="math notranslate nohighlight">\(a(t) = v'(t) = a(t) = \frac{42 \times 10^5} {14 \times 10^4 - 2100 t} - 9.8\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: write a function for the v(t) and a(t) above</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">2000</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">2100</span> <span class="o">*</span> <span class="n">t</span><span class="p">))</span> <span class="o">-</span> <span class="mf">9.8</span> <span class="o">*</span> <span class="n">t</span>
+
+
+<span class="k">def</span> <span class="nf">a</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="mi">42</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">14</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mi">2100</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mf">9.8</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Plot v(t) and a(t) from t = 0 to 30 side by side</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define the time range</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Calculate v(t) and a(t)</span>
+<span class="n">vt</span> <span class="o">=</span> <span class="n">v</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="n">at</span> <span class="o">=</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Create subplots side by side</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># Plot v(t)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">vt</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Velocity (v(t))&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Velocity vs. Time&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot a(t)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Acceleration (a(t))&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Acceleration vs. Time&#39;</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout and display the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/7dc7089a6fb72640bbf9545a53a261e21222882668dbc61f3d00bec083a20b8c.png" src="../../../_images/7dc7089a6fb72640bbf9545a53a261e21222882668dbc61f3d00bec083a20b8c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+
+<span class="n">a_fd_h2</span> <span class="o">=</span> <span class="n">forward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">a_fd_h1</span> <span class="o">=</span> <span class="n">forward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">a_fd_h0p1</span> <span class="o">=</span> <span class="n">forward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Plotting the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_fd_h2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Difference Approximation: h= 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_fd_h1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Difference Approximation: h= 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_fd_h0p1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Difference Approximation: h= 0.1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Acceleration (a(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Forward Difference Approximation of Acceleration&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/52ce4c324e5f858da68951b80592a9517435936c1f9f96b097c23ea521ad4004.png" src="../../../_images/52ce4c324e5f858da68951b80592a9517435936c1f9f96b097c23ea521ad4004.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="backward-difference">
+<h2>Backward difference<a class="headerlink" href="#backward-difference" title="Link to this heading">#</a></h2>
+<p>By contrast, the <em>backward difference</em> steps backwards. Consider replacing <span class="math notranslate nohighlight">\(h\)</span> with <span class="math notranslate nohighlight">\(-h\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[ f(x-h) = f(x) - f'(x) h + O(h^2)\]</div>
+<p>and solve for:</p>
+<div class="math notranslate nohighlight">
+\[f'(x) = \frac{f(x)- f(x-h)}{h} +  O(h^2) \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backward_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
+
+<span class="n">a_bd_h2</span> <span class="o">=</span> <span class="n">backward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">a_bd_h1</span> <span class="o">=</span> <span class="n">backward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">a_bd_h0p1</span> <span class="o">=</span> <span class="n">backward_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Plotting the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_bd_h2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Difference Approximation: h= 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_bd_h1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Difference Approximation: h= 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_bd_h0p1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Difference Approximation: h= 0.1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Acceleration (a(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Backward Difference Approximation of Acceleration&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/78fdc8b391e68c202772b10937864f8d8281d8f47f2320e0653e989dd31a6895.png" src="../../../_images/78fdc8b391e68c202772b10937864f8d8281d8f47f2320e0653e989dd31a6895.png" />
+</div>
+</div>
+<p>Note that the approximations are approaching the analytic solution from the other direction.</p>
+<p><em>Can we combine forward and backward differences to get a better result</em>?</p>
+</section>
+<section id="central-difference">
+<h2>Central difference<a class="headerlink" href="#central-difference" title="Link to this heading">#</a></h2>
+<p>Let’s examine the forward and backward expansions:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+f(x+h) &amp;= f(x) + f'(x) h + f''(x) \frac{h^2}{2} + f'''(x)\frac{h^3}{6} + O(h^4) \\
+f(x-h) &amp;= f(x) - f'(x) h + f''(x) \frac{h^2}{2} - f'''(x)\frac{h^3}{6} + O(h^4) \\
+\end{align}
+\end{split}\]</div>
+<p>and subtract them:
+$<span class="math notranslate nohighlight">\(
+f(x+h)-f(x-h) = 2 f'(x) h + f''' \frac{h^3}{3} + O(h^5)
+\)</span><span class="math notranslate nohighlight">\(
+Note that the even powers of \)</span>h$ cancel!</p>
+<p>Rearranging this equation leads to the central difference formula:
+$<span class="math notranslate nohighlight">\(
+f'(x) = \frac{f(x+h)-f(x-h)}{2h} + O(h^2)
+\)</span>$</p>
+<p>which is <em>second order accurate in <span class="math notranslate nohighlight">\(h\)</span></em> since the next correction is <span class="math notranslate nohighlight">\(h^2\)</span>!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">central_difference</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">h</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+<span class="n">a_cd_h1</span> <span class="o">=</span> <span class="n">central_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">a_cd_h2</span> <span class="o">=</span> <span class="n">central_difference</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Plotting the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_bd_h2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Backward Difference Approximation: h= 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_fd_h2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Forward Difference Approximation: h= 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a_cd_h2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Central Difference Approximation: h= 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Analytical Solution&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (t)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Acceleration (a(t))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Central Difference Approximation of Acceleration&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/70d822aa390c9951e8fc7dbb0ad78536c139fe587d42517e01a585e552889df7.png" src="../../../_images/70d822aa390c9951e8fc7dbb0ad78536c139fe587d42517e01a585e552889df7.png" />
+</div>
+</div>
+</section>
+<section id="comparison">
+<h2>Comparison<a class="headerlink" href="#comparison" title="Link to this heading">#</a></h2>
+<p>Lets comare the error in forward, backward and central difference for <span class="math notranslate nohighlight">\(h=2\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a_fd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">a_bd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">a_cd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.46345415, -0.44519649,  0.00912883],
+       [ 0.46776   , -0.44924984,  0.00925508],
+       [ 0.47212613, -0.4533588 ,  0.00938366],
+       [ 0.47655369, -0.4575244 ,  0.00951465]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see how it scales with decreasing step size between <span class="math notranslate nohighlight">\(h=2\)</span> and <span class="math notranslate nohighlight">\(h' = 1\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a_fd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">a_fd_h1</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.46345415, 0.22936654],
+       [0.46776   , 0.23148645],
+       [0.47212613, 0.23363589],
+       [0.47655369, 0.2358154 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a_bd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">a_bd_h1</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.44519649, -0.22480399],
+       [-0.44924984, -0.22686082],
+       [-0.4533588 , -0.22894601],
+       [-0.4575244 , -0.23106008]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the error roughly cuts in half; <span class="math notranslate nohighlight">\(Error \sim \frac{h}{h'}\)</span>. Now take a look at the central difference:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">a_cd_h2</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">a_cd_h1</span><span class="o">-</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.00912883, 0.00228127],
+       [0.00925508, 0.00231281],
+       [0.00938366, 0.00234494],
+       [0.00951465, 0.00237766]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>See how it reduces by a factor of 4: <span class="math notranslate nohighlight">\(Error \sim \bigg[\frac{h}{h'}\bigg]^2\)</span></p>
+<p>The central difference algorithm:</p>
+<ul class="simple">
+<li><p>finds a more accurate solution in the same number of function calls.</p></li>
+<li><p>becomes more accurate with step size quadratically.</p></li>
+<li><p>requires information both before and after the point (which can be a problem at boundaries).</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "executablebooks/jupyter-book",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters/Differentiation and integration/Finite difference"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Finite%20difference.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Finite difference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Second%20order%20derivatives.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Second order derivatives</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-difference">Forward difference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-rocket-velocity">Example - Rocket velocity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-difference">Backward difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#central-difference">Central difference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">Comparison</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
