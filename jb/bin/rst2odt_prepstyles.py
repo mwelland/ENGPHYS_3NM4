@@ -1,4 +1,4 @@
-#!/home/wellandm/Documents/GitHub/ENGPYHS_3NM4/jb/bin/python3
+#!/home/wellandm/Documents/GitHub/ENGPHYS_3NM4/jb/bin/python3
 
 # Copyright: This module has been placed in the public domain.
 

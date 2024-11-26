@@ -1,4 +1,4 @@
-#!/home/wellandm/Documents/GitHub/ENGPYHS_3NM4/jb/bin/python3
+#!/home/wellandm/Documents/GitHub/ENGPHYS_3NM4/jb/bin/python3
 
 # $Id: rst2html4.py 9115 2022-07-28 17:06:24Z milde $
 # Author: David Goodger <goodger@python.org>

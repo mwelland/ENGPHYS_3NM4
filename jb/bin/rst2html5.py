@@ -1,4 +1,4 @@
-#!/home/wellandm/Documents/GitHub/ENGPYHS_3NM4/jb/bin/python3
+#!/home/wellandm/Documents/GitHub/ENGPHYS_3NM4/jb/bin/python3
 # :Copyright: © 2015 Günter Milde.
 # :License: Released under the terms of the `2-Clause BSD license`_, in short:
 #
