@@ -39,21 +39,21 @@ jobs:
     # if you have config:
     # execute:
     #   execute_notebooks: cache
-    - name: cache executed notebooks
-      uses: actions/cache@v3
-      with:
-        path: _build/.jupyter_cache
-        key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
+    # - name: cache executed notebooks
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: _build/.jupyter_cache
+    #     key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
 
     # Build the book
     - name: Build the book
       run: |
         jupyter-book build ./Book
 
-    # Build the book as PDF
-    - name: Build the book as PDF
-      run: |
-        jupyter-book build ./Book --builder pdfhtml
+    # # Build the book as PDF
+    # - name: Build the book as PDF
+    #   run: |
+    #     jupyter-book build ./Book --builder pdfhtml
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
@@ -61,17 +61,17 @@ jobs:
       with:
         path: "Book/_build/html"
 
-    # Upload the book's PDF as an artifact
-    - name: Upload PDF artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: book-pdf
-        path: "Book/_build/pdf/book.pdf"
+    # # Upload the book's PDF as an artifact
+    # - name: Upload PDF artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: book-pdf
+    #     path: "Book/_build/pdf/book.pdf"
 
-    # Move the PDF to the webpage
-    - name: Move PDF to webpage
-      run: |
-        cp Book/_build/pdf/book.pdf Book/_build/html/book.pdf
+    # # Move the PDF to the webpage
+    # - name: Move PDF to webpage
+    #   run: |
+    #     cp Book/_build/pdf/book.pdf Book/_build/html/book.pdf
   
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
