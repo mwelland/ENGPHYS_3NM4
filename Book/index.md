@@ -15,3 +15,5 @@ Decompose into simpler problems.
 AI is fast. Use your head before the computer or it will run away with you! 
 Nondimensionalize
 Symmetries
+
+[PDF of the full book](files/book.pdf)
