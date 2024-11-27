@@ -16,4 +16,4 @@ AI is fast. Use your head before the computer or it will run away with you!
 Nondimensionalize
 Symmetries
 
-[PDF of the full book](pdf/book.pdf)
+[PDF of the full book](_static/book.pdf)
