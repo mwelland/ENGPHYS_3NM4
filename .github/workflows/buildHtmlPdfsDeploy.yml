@@ -50,11 +50,23 @@ jobs:
       run: |
         jupyter-book build ./Book
 
+    # Build the book as PDF
+    - name: Build the book as PDF
+      run: |
+        jupyter-book build ./Book --builder pdfhtml
+
     # Upload the book's HTML as an artifact
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v2
       with:
         path: "Book/_build/html"
+
+    # Upload the book's PDF as an artifact
+    - name: Upload PDF artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: book-pdf
+        path: "Book/_build/pdf/book.pdf"
 
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
