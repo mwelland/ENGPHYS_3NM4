@@ -68,6 +68,11 @@ jobs:
         name: book-pdf
         path: "Book/_build/pdf/book.pdf"
 
+    # Move the PDF to the webpage
+    - name: Move PDF to webpage
+      run: |
+        cp Book/_build/pdf/book.pdf Book/_build/html/book.pdf
+  
     # Deploy the book's HTML to GitHub Pages
     - name: Deploy to GitHub Pages
       id: deployment
