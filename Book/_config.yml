@@ -3,6 +3,7 @@ execute:
   execute_notebooks: off  #auto, force, cashe, inline, off
   allow_errors: true
 only_build_toc_files: true
+logo: _static/logo.png
 
 repository:
   url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
@@ -12,9 +13,6 @@ repository:
 html:
   use_repository_button: true
   use_issues_button: true
-  logo:
-    text: "ENGPHYS 3NM4"
-    path: "_static/logo.png"
     
 
 launch_buttons:
