@@ -1,6 +1,6 @@
 title: My Jupyter Book
 execute:
-  execute_notebooks: off  #auto, force, cashe, inline, off
+  execute_notebooks: auto  #auto, force, cashe, inline, off
   allow_errors: true
 only_build_toc_files: true
 logo: _static/logo.png
