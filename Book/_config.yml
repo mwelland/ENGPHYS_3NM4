@@ -13,15 +13,8 @@ repository:
 html:
   use_repository_button: true
   use_issues_button: true
-  extrahead:
-    - |
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9308D4F0V"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-R9308D4F0V');
-      </script>   
+  analytics:
+    google_analytics_id: G-R9308D4F0V
 
 launch_buttons:
   #jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
