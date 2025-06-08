@@ -1,0 +1,37 @@
+title: My Jupyter Book
+execute:
+  execute_notebooks: auto  #auto, force, cashe, inline, off
+  allow_errors: true
+only_build_toc_files: true
+logo: _static/logo.png
+
+repository:
+  url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
+  path_to_book              : Book  # Optional path to your book, relative to the repository root
+  branch                    : main  # Which branch of the repository should be used when creating links (optional)
+
+html:
+  use_repository_button: true
+  use_issues_button: true
+  analytics:
+    google_analytics_id: G-R9308D4F0V
+
+launch_buttons:
+  #jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
+  thebe: true
+  colab_url: https://colab.research.google.com
+  #colab: true
+  #binderhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
+  
+  # custom_launch_buttons:
+  #   - name: "Custom Button"
+  #     image_url: "https://path/to/image.png"
+  #     url: "https://path/to/custom/link"
+
+# Table of contents settings
+toc:
+  nav_title: Contents
+  base_url: /  # The base URL of your site
+  # Other TOC settings as needed
+
+# Add other necessary configurations

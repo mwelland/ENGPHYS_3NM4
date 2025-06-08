@@ -1,0 +1,105 @@
+title: ENGPHYS 3NM4
+format: jb-book
+root: index
+options:
+  numbered: false #false
+
+chapters:
+  - file: Chapters/Roundoff error/Roundoff error
+    sections:
+    - file: Chapters/Roundoff error/Finite precision representations
+    - file: Chapters/Roundoff error/True_and_approximate_error
+    - file: Chapters/Roundoff error/Truncation_error
+
+  - file: Chapters/Linear systems/Linear systems
+    sections:
+    - file: Chapters/Linear systems/Solvability
+    - file: Chapters/Linear systems/Complexity
+    - file: Chapters/Linear systems/Conditioning
+    - file: Chapters/Linear systems/Direct methods
+      sections: 
+      - file: Chapters/Linear systems/Direct methods/Gaussian elimination
+      - file: Chapters/Linear systems/Direct methods/LU decomposition
+      - file: Chapters/Linear systems/Direct methods/Matrix types and decompositions
+    - file: Chapters/Linear systems/Iterative methods
+      sections: 
+      - file: Chapters/Linear systems/Iterative methods/Gauss-Seidel, Jacobi, and SOR
+      - file: Chapters/Linear systems/Iterative methods/Conjugate gradient and GMRES
+      - file: Chapters/Linear systems/Iterative methods/Preconditioners
+
+
+  - file: Chapters/Interpolation and curve fitting/Interpolation and curve fitting
+    sections:
+    - file: Chapters/Interpolation and curve fitting/Interpolation/Interpolation
+      sections:
+      - file: Chapters/Interpolation and curve fitting/Interpolation/Polynomial interpolation
+      - file: Chapters/Interpolation and curve fitting/Interpolation/Splines
+      - file: Chapters/Interpolation and curve fitting/Interpolation/Radial basis functions
+    - file: Chapters/Interpolation and curve fitting/Curve fitting/Curve fitting 
+      sections:
+      - file: Chapters/Interpolation and curve fitting/Curve fitting/Linear least squares regression
+      - file: Chapters/Interpolation and curve fitting/Curve fitting/Polyfit
+      - file: Chapters/Interpolation and curve fitting/Curve fitting/Best fit radial basis functions
+
+  - file: Chapters/Root finding/Root finding
+    sections:
+    - file: Chapters/Root finding/Polynomial roots
+    - file: Chapters/Root finding/Closed methods
+    - file: Chapters/Root finding/Open methods
+    - file: Chapters/Root finding/Global convergence methods
+
+  - file: Chapters/Optimization/Optimization
+    sections:
+    - file: Chapters/Optimization/Closed methods
+    - file: Chapters/Optimization/Open methods
+    - file: Chapters/Optimization/Gradient based optimizers
+    - file: Chapters/Optimization/Indefinite systems
+    - file: Chapters/Optimization/Trust region methods
+    - file: Chapters/Optimization/Nonlinear least squares
+    - file: Chapters/Optimization/Equality constraints
+  
+
+  - file: Chapters/Differentiation and integration/Differentiation and integration
+    sections:
+    - file: Chapters/Differentiation and integration/Finite difference/Finite difference
+      sections:
+      - file: Chapters/Differentiation and integration/Finite difference/First order derivatives
+      - file: Chapters/Differentiation and integration/Finite difference/Second order derivatives
+      - file: Chapters/Differentiation and integration/Finite difference/Higher dimensions
+      - file: Chapters/Differentiation and integration/Finite difference/Even vs uneven spacing
+      - file: Chapters/Differentiation and integration/Finite difference/Uncertainty amplification
+    - file: Chapters/Differentiation and integration/Integration/Numerical integration
+      sections:
+      - file: Chapters/Differentiation and integration/Integration/Newton-Cotes formulae
+      - file: Chapters/Differentiation and integration/Integration/Romberg rule
+      - file: Chapters/Differentiation and integration/Integration/Gaussian quadrature
+
+  - file: Chapters/Differential equations/Differential equations
+    sections:
+    - file: Chapters/Differential equations/Initial value problems/Initial value problems
+      sections:
+      - file: Chapters/Differential equations/Initial value problems/Explicit methods
+      - file: Chapters/Differential equations/Initial value problems/Implicit methods
+    - file: Chapters/Differential equations/Boundary value problems/Boundary_value_problems
+      sections:
+      - file: Chapters/Differential equations/Boundary value problems/Shooting method
+      - file: Chapters/Differential equations/Boundary value problems/Collocation methods
+      - file: Chapters/Differential equations/Boundary value problems/Finite_difference_method
+      - file: Chapters/Differential equations/Boundary value problems/Finite_volume
+    - file: Chapters/Differential equations/Partial differential equations/Partial_differential_equations
+
+  - file: Chapters/Finite element method/Finite element method
+    sections:
+    - file: Chapters/Finite element method/Motivating example
+    - file: Chapters/Finite element method/Theoretical background
+    - file: Chapters/Finite element method/Elements
+    - file: Chapters/Finite element method/Discretization and assembly
+    - file: Chapters/Finite element method/Solution
+  
+  - file: Chapters/Eigenvalue problems/Eigenvalue problems
+    sections:
+    - file: Chapters/Eigenvalue problems/Eigenfunctions
+    - file: Chapters/Eigenvalue problems/Powers method
+    - file: Chapters/Eigenvalue problems/Matrix decomposition methods
+    - file: Chapters/Eigenvalue problems/Package tools
+

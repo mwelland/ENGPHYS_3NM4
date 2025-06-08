@@ -1,0 +1,1278 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Matrix types &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapters/Linear systems/Direct methods/Matrix types and decompositions';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Iterative methods" href="../Iterative%20methods.html" />
+    <link rel="prev" title="LU decomposition" href="LU%20decomposition.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Roundoff%20error/Roundoff%20error.html">Round-off Error</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Finite%20precision%20representations.html">Finite precision representations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/True_and_approximate_error.html">Quantifying error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Roundoff%20error/Truncation_error.html">Truncation error</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../Linear%20systems.html">Linear systems</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Solvability.html">Solvability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Complexity.html">Computational complexity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Conditioning.html">Conditioning</a></li>
+
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../Direct%20methods.html">Direct methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="Gaussian%20elimination.html">Solving linear systems with Gauss elimination</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="LU%20decomposition.html">LU decomposition</a></li>
+
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Matrix types</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../Iterative%20methods.html">Iterative methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../Iterative%20methods/Gauss-Seidel%2C%20Jacobi%2C%20and%20SOR.html">Jacobi iteration method</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Iterative%20methods/Conjugate%20gradient%20and%20GMRES.html">Nomenclature</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="../Iterative%20methods/Preconditioners.html">Preconditioners</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation%20and%20curve%20fitting.html">Interpolation and Curve-fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Interpolation.html">Interpolation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Polynomial%20interpolation.html">Polynomial interpolation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Splines.html">Cubic splines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Interpolation/Radial%20basis%20functions.html">Radial Basis Functions</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Curve%20fitting.html">Curve fitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Linear%20least%20squares%20regression.html">Linear least squares regression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Polyfit.html">Polyfit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Interpolation%20and%20curve%20fitting/Curve%20fitting/Best%20fit%20radial%20basis%20functions.html">Radial Basis Functions revisted!</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Root%20finding/Root%20finding.html">Root finding</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Polynomial%20roots.html">Polynomial roots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Closed%20methods.html">Closed root-finding methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Open%20methods.html">Open methods</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Root%20finding/Global%20convergence%20methods.html">‘Global’ convergence</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Optimization/Optimization.html">Optimization</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Closed%20methods.html">Bracketed minimization</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Open%20methods.html">Open methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Gradient%20based%20optimizers.html">Gradient-based optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Indefinite%20systems.html">Indefinite systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Trust%20region%20methods.html">Trust region methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Nonlinear%20least%20squares.html">Nonlinear least-squares regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Optimization/Equality%20constraints.html">Equality constrained optimization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Differentiation%20and%20integration.html">Differentiation and integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Finite%20difference.html">Finite difference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/First%20order%20derivatives.html">First order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Second%20order%20derivatives.html">Second order derivatives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Higher%20dimensions.html">Higher dimensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Even%20vs%20uneven%20spacing.html">Even vs uneven spacing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Finite%20difference/Uncertainty%20amplification.html">Uncertainty amplification</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Numerical%20integration.html">Numerical integration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Newton-Cotes%20formulae.html">Newton-Cotes integration formulae</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Romberg%20rule.html">Romberg rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differentiation%20and%20integration/Integration/Gaussian%20quadrature.html">Gaussian quadrature</a></li>
+
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Differential%20equations/Differential%20equations.html">Differential equations</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Initial%20value%20problems.html">Initial value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Explicit%20methods.html">Explicit methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Initial%20value%20problems/Implicit%20methods.html">Implicit methods</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Boundary_value_problems.html">Boundary value problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Shooting%20method.html">The Shooting method</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Collocation%20methods.html">Collocation algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Finite_difference_method.html">The Finite Difference method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../Differential%20equations/Boundary%20value%20problems/Finite_volume.html">Finite volume methods</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Differential%20equations/Partial%20differential%20equations/Partial_differential_equations.html">Partial differential equations</a></li>
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Finite%20element%20method/Finite%20element%20method.html">The Finite Element Method</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Motivating%20example.html">Motivating example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Theoretical%20background.html">Theoretical background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Elements.html">Elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Discretization%20and%20assembly.html">Discretization and assembly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Finite%20element%20method/Solution.html">Solution</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../Eigenvalue%20problems/Eigenvalue%20problems.html">Eigenvalue problems</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../Eigenvalue%20problems/Eigenfunctions.html">Eigenfunctions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Eigenvalue%20problems/Powers%20method.html">Power’s iterative method</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Eigenvalue%20problems/Matrix%20decomposition%20methods.html">Matrix decomposition methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Eigenvalue%20problems/Package%20tools.html">Package tools</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/mwelland/ENGPHYS_3NM4/blob/main/Book/Chapters/Linear systems/Direct methods/Matrix types and decompositions.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/mwelland/ENGPHYS_3NM4" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/mwelland/ENGPHYS_3NM4/issues/new?title=Issue%20on%20page%20%2FChapters/Linear systems/Direct methods/Matrix types and decompositions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Chapters/Linear systems/Direct methods/Matrix types and decompositions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Matrix types</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Matrix types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-matricies-and-sparsity-patterns">Sparse matricies and sparsity patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity-patterns-and-matrix">Sparsity patterns and matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#banded-matricies">Banded matricies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tridiagonal-bandwidth-3">Tridiagonal (bandwidth 3)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pentadiagonal-bandwidth-5">Pentadiagonal (bandwidth 5)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-banded-matrix">General banded matrix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-matricies">Block matricies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-diagonal">Block diagonal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-decompositions">Matrix decompositions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-triangular-matrix-is-triangular">Inverse of a triangular matrix is triangular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-decomposition-of-a-banded-matrix-is-banded-triangular">LU decomposition of a banded matrix is banded-triangular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-banded-matrix-is-not-banded-except-diagonal">Inverse of a banded matrix is <strong>not</strong> banded (except diagonal)</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="matrix-types">
+<h1>Matrix types<a class="headerlink" href="#matrix-types" title="Link to this heading">#</a></h1>
+<p>LU decomposition has useful properties depending on the types of matricies involved.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Matrix Type</p></th>
+<th class="head"><p>Example 2x2</p></th>
+<th class="head"><p>Interesting Properties</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Zero</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></p></td>
+<td><p>A-A = 0</p></td>
+</tr>
+<tr class="row-odd"><td><p>I</p></td>
+<td><p>Identity</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\)</span></p></td>
+<td><p>A I = A</p></td>
+</tr>
+<tr class="row-even"><td><p>D</p></td>
+<td><p>Diagonal</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} d_1 &amp; 0 \\ 0 &amp; d_2 \end{bmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(D^{-1}\)</span> = <span class="math notranslate nohighlight">\(\begin{bmatrix} d_1^{-1} &amp; 0 \\ 0 &amp; d_2^{-1} \end{bmatrix}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>U</p></td>
+<td><p>Upper Triangular</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 2 \\ 0 &amp; 4 \end{bmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(U^{-1}\)</span> is another upper triangular matrix</p></td>
+</tr>
+<tr class="row-even"><td><p>L</p></td>
+<td><p>Lower Triangular</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 5 &amp; 0 \\ -1 &amp; 2 \end{bmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(L^{-1}\)</span> is another lower triangular matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p>P</p></td>
+<td><p>Permutation</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{bmatrix}\)</span></p></td>
+<td><p>Its transpose is its inverse (<span class="math notranslate nohighlight">\(P^T = P^{-1}\)</span>)</p></td>
+</tr>
+<tr class="row-even"><td><p>S</p></td>
+<td><p>Symmetric</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 3 \\ 3 &amp; -4 \end{bmatrix}\)</span></p></td>
+<td><p>Equal to its transpose (<span class="math notranslate nohighlight">\(S = S^T\)</span>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPD</p></td>
+<td><p>Symmetric positive definite</p></td>
+<td><p><span class="math notranslate nohighlight">\(\begin{bmatrix} 1 &amp; 3 \\ 3 &amp; 4 \end{bmatrix}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(x^T [SPD] x &gt;0\)</span>  - think of a quadratic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="sparse-matricies-and-sparsity-patterns">
+<h2>Sparse matricies and sparsity patterns<a class="headerlink" href="#sparse-matricies-and-sparsity-patterns" title="Link to this heading">#</a></h2>
+<p>Sparsity refers to the fraction of non-zero elements in a matrix. Sparse matricies have a significant fraction of 0 elements, which can <strong>drastically</strong> reduce storage and computational requirements.</p>
+<p>Storage: Typically one (conceptually) stores a matrix as a 2D array. With significant sparsity, one can instead store only non-zero entries. There is a trade-off here between access / modification and memory efficiency.</p>
+<p>Computation: (Fill-in)
+Fill-in is the phenomena where, during computation, zeros become non-zeros. This disrupts the sparsity pattern and the benefits that accompany it, and is hence something to be avoided.</p>
+</section>
+<section id="sparsity-patterns-and-matrix">
+<h2>Sparsity patterns and matrix<a class="headerlink" href="#sparsity-patterns-and-matrix" title="Link to this heading">#</a></h2>
+<p>Sparsity patterns are condensly viewed as monochrome matricies filled in according to 0 or non-zero.</p>
+<p>Example: A sparsity pattern from a finite element problem in 2D.</p>
+<p><img alt="Finite_element_sparse_matrix.png" src="data:image/png;base64,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NR26tCNBSXxSVZ8ERlITB6S5gA8ldWPV2v0M+eFgAwsD13gk1KRJF1xlcbFfEVIIFWmMHMuj4zgCeraxPOyWLri0g3wR2UNOpaYCpo3iF78PT1rtu15gB5Hs5FPFXhbcjdyAOr3cthE1DhGv7sDniVOhblKIeif4G3XuC+jaKx2atXzo4d3IDbrNxOL9DvFFZyZrwEnwnEiBSj5UhfzsRTaaN+i/a4rqK0iGvyAvodJGVfe2F9mYggMlMLrgYCc2mGRgQPXrqvMKyA20npAKXHlyYvzsdzUqJZaaluXTF+rmk0FhpEXRhzBFFplt5VMac1vVE7dWrRELaPwxsKAw22o3nRzcOPoQpshiMyr5VhCY88RIALcCBpx6cdbKwY2jD3KJewrgAkeMHjj17dJMn01tE0fBNR7d75NZNSHSqNAoVihJA5xAv3yPc3hO7GOaRePEeZgmjxE4ZU3RvsnDPhN/5CKTQXlmk8pZrD1yldsrHY27yUaOY9FFARyHXEPolGIN9DRlVWFkAgIXhdaGC04YkARlV4tzvgWUMJdnkNXr08jlwfPnNmVHDtK7C9bsU3Xdcun/dpCNVCuO4FtAssxHjTxFeTGR0pEzlikBtTNHShgF8r/TsoCc9GtZDMpPYrjyePvQ/wMATb06WoZfWQAAAFx0RVh0Y29tbWVudABGaWxlIHNvdXJjZTogaHR0cDovL2NvbW1vbnMud2lraW1lZGlhLm9yZy93aWtpL0ZpbGU6RmluaXRlX2VsZW1lbnRfc3BhcnNlX21hdHJpeC5wbmcWxZJ5AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDEzLTExLTA4VDE5OjQzOjEzKzAwOjAwPqHvwgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxMy0xMS0wOFQxOTo0MzoxMyswMDowME/8V34AAABGdEVYdHNvZnR3YXJlAEltYWdlTWFnaWNrIDYuNi45LTcgMjAxMi0wOC0xNyBRMTYgaHR0cDovL3d3dy5pbWFnZW1hZ2ljay5vcmecvblIAAAAGHRFWHRUaHVtYjo6RG9jdW1lbnQ6OlBhZ2VzADGn/7svAAAAGHRFWHRUaHVtYjo6SW1hZ2U6OmhlaWdodAA4MTbPZQcbAAAAF3RFWHRUaHVtYjo6SW1hZ2U6OldpZHRoADgxNhPJVJYAAAAZdEVYdFRodW1iOjpNaW1ldHlwZQBpbWFnZS9wbmc/slZOAAAAF3RFWHRUaHVtYjo6TVRpbWUAMTM4MzkzOTc5M/q2o+AAAAATdEVYdFRodW1iOjpTaXplADEuMzNLQkIhdFWPAAAAM3RFWHRUaHVtYjo6VVJJAGZpbGU6Ly8vdG1wL2xvY2FsY29weV81NjVmOGZiNTIzZGYtMS5wbmeYx4H2AAAAAElFTkSuQmCC" /></p>
+<p>We already have examples of sparse matricies with</p>
+<ul class="simple">
+<li><p>diagonal</p></li>
+<li><p>upper and lower triangular
+and have seen their importance in controlling complexity and roundoff error.</p></li>
+</ul>
+<section id="banded-matricies">
+<h3>Banded matricies<a class="headerlink" href="#banded-matricies" title="Link to this heading">#</a></h3>
+<p>Banded matricies only have non-zero elements parallel to the diagonal. Sometimes they are described by the <em>bandwidth</em>, the number of parallel bands.</p>
+<section id="tridiagonal-bandwidth-3">
+<h4>Tridiagonal (bandwidth 3)<a class="headerlink" href="#tridiagonal-bandwidth-3" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: give me a tridiagonal matrix of dimension 10 and view its sparsity pattern with spy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a tridiagonal matrix of dimension 10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Main diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Lower diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">T</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Upper diagonal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># View the sparsity pattern</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2. -1.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [-1.  2. -1.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0. -1.  2. -1.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0. -1.  2. -1.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0. -1.  2. -1.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0. -1.  2. -1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0. -1.  2. -1.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0. -1.  2. -1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0. -1.  2. -1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0. -1.  2.]]
+</pre></div>
+</div>
+<img alt="../../../_images/7fd25982ee40e49b4a60c4b9ccfd9f1a0727d56039342790e2bd8412af8aa4ca.png" src="../../../_images/7fd25982ee40e49b4a60c4b9ccfd9f1a0727d56039342790e2bd8412af8aa4ca.png" />
+</div>
+</div>
+</section>
+<section id="pentadiagonal-bandwidth-5">
+<h4>Pentadiagonal (bandwidth 5)<a class="headerlink" href="#pentadiagonal-bandwidth-5" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: give me a pentadiagonal matrix of dimension 10 and view its sparsity pattern with spy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a pentadiagonal matrix of dimension 10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Main diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Lower diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Second upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Second lower diagonal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># View the sparsity pattern</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2. -1. -1.  0.  0.  0.  0.  0.  0.  0.]
+ [-1.  2. -1. -1.  0.  0.  0.  0.  0.  0.]
+ [-1. -1.  2. -1. -1.  0.  0.  0.  0.  0.]
+ [ 0. -1. -1.  2. -1. -1.  0.  0.  0.  0.]
+ [ 0.  0. -1. -1.  2. -1. -1.  0.  0.  0.]
+ [ 0.  0.  0. -1. -1.  2. -1. -1.  0.  0.]
+ [ 0.  0.  0.  0. -1. -1.  2. -1. -1.  0.]
+ [ 0.  0.  0.  0.  0. -1. -1.  2. -1. -1.]
+ [ 0.  0.  0.  0.  0.  0. -1. -1.  2. -1.]
+ [ 0.  0.  0.  0.  0.  0.  0. -1. -1.  2.]]
+</pre></div>
+</div>
+<img alt="../../../_images/c66d138a7cfcbbc6bff1d5070400d1dc298c184c1e407e19d030b25f221b087c.png" src="../../../_images/c66d138a7cfcbbc6bff1d5070400d1dc298c184c1e407e19d030b25f221b087c.png" />
+</div>
+</div>
+<p>One can imagine the benefit of storing such a matrix</p>
+</section>
+<section id="general-banded-matrix">
+<h4>General banded matrix<a class="headerlink" href="#general-banded-matrix" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a pentadiagonal matrix of dimension 10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Main diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Lower diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">4</span><span class="p">:],</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Second upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Second lower diagonal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="c1"># View the sparsity pattern</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 2. -1.  0.  0. -1.  0.  0.  0.  0.  0.]
+ [-1.  2. -1.  0.  0. -1.  0.  0.  0.  0.]
+ [ 0. -1.  2. -1.  0.  0. -1.  0.  0.  0.]
+ [ 0.  0. -1.  2. -1.  0.  0. -1.  0.  0.]
+ [-2.  0.  0. -1.  2. -1.  0.  0. -1.  0.]
+ [ 0. -2.  0.  0. -1.  2. -1.  0.  0. -1.]
+ [ 0.  0. -2.  0.  0. -1.  2. -1.  0.  0.]
+ [ 0.  0.  0. -2.  0.  0. -1.  2. -1.  0.]
+ [ 0.  0.  0.  0. -2.  0.  0. -1.  2. -1.]
+ [ 0.  0.  0.  0.  0. -2.  0.  0. -1.  2.]]
+</pre></div>
+</div>
+<img alt="../../../_images/73518dfbd8f22e58557ba4ef005f993293ac70a2462ea6ed31cf65fbba834497.png" src="../../../_images/73518dfbd8f22e58557ba4ef005f993293ac70a2462ea6ed31cf65fbba834497.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="block-matricies">
+<h2>Block matricies<a class="headerlink" href="#block-matricies" title="Link to this heading">#</a></h2>
+<p>Block matricies can be partitioned:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} M=
+\begin{bmatrix}
+2 &amp; -1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+-1 &amp; 2 &amp; -1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; -1 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 2 &amp; -1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; -1 &amp; 2 &amp; -1 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; -1 &amp; 2
+\end{bmatrix} = \begin{bmatrix}
+A &amp; B \\
+C &amp; D
+\end{bmatrix}
+\end{split}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A=D = \begin{bmatrix}
+2 &amp; -1 &amp; 0  \\
+-1 &amp; 2 &amp; -1  \\
+0 &amp; -1 &amp; 2 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B=C = \begin{bmatrix}
+1 &amp; 0 &amp; 0  \\
+0 &amp; 1 &amp; 0  \\
+0 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>The inverse can be formed:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+M^{-1} =
+\begin{bmatrix}
+A^{-1} + A^{-1}B(D - CA^{-1}B)^{-1}CA^{-1} &amp; -A^{-1}B(D - CA^{-1}B)^{-1} \\
+-(D - CA^{-1}B)^{-1}CA^{-1} &amp; (D - CA^{-1}B)^{-1}
+\end{bmatrix}
+\end{split}\]</div>
+<p>This is a substantial savings since the cost of each block scales exponentially!</p>
+<p>Sometimes we get lucky and one of the blocks is <span class="math notranslate nohighlight">\(0\)</span> or <span class="math notranslate nohighlight">\(I\)</span> which is a HUGE benefit!</p>
+<p>If the blocks are each <span class="math notranslate nohighlight">\(n \times n\)</span>, <span class="math notranslate nohighlight">\(M\)</span> is <span class="math notranslate nohighlight">\(2n \times 2n\)</span> and takes <span class="math notranslate nohighlight">\(O((2n)^3)\)</span> to solve. But if we partition into blocks, the inverse can be formed in 2 separate <span class="math notranslate nohighlight">\(O(n^3)\)</span> (plus matrix multiplications).</p>
+<p>This situation arises commonly in multiphysics applications, with two fields (e.g.: T and c). The blocks are then defined corresponding to the unknown vectors for each field.</p>
+<p>Certaint types of physics is solved more efficiently with certain solvers. This decomposition, sometimes called <em>operator splitting</em> or <em>segregated solving</em> allows each variable (block) to be treated optimally and inverse of the full system assembled.</p>
+<p>In contrast, solving the matrix as a whole is called a <em>monolithic</em> solution.</p>
+<section id="block-diagonal">
+<h3>Block diagonal<a class="headerlink" href="#block-diagonal" title="Link to this heading">#</a></h3>
+<p>Taking <span class="math notranslate nohighlight">\(B=C=0\)</span> in the above we can see the inverse of a <em>block diagonal</em> matrix is simply the diagonal assembly of the inverse of its blocks:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+A &amp; 0 \\
+0 &amp; D
+\end{bmatrix}^{-1} = \begin{bmatrix}
+A^{-1} &amp; 0 \\
+0 &amp; D^{-1}
+\end{bmatrix}
+\end{split}\]</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="matrix-decompositions">
+<h1>Matrix decompositions<a class="headerlink" href="#matrix-decompositions" title="Link to this heading">#</a></h1>
+<p>We can now summarize some decompositions:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Matrix equation</p></th>
+<th class="head"><p>Operation count</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(A = LU\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n^3/3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(S = L D L^T\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n^3/6\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(SPD = L L^T\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(n^3/6\)</span> + n</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The later two are called Choleski decomposition and take advantage of matrix symmetry for efficiency.</p>
+<p>Since in general</p>
+<p><span class="math notranslate nohighlight">\(A^{-1} = [LU]^{-1} = U^{-1} L^{-1}\)</span></p>
+<p>it would be tempting to calculate and store <span class="math notranslate nohighlight">\(A^{-1}\)</span> instead of <span class="math notranslate nohighlight">\(L\)</span> and <span class="math notranslate nohighlight">\(U\)</span>, but this is not preferred due to the impact on sparsity, in addition to round-off error <span class="math notranslate nohighlight">\(\propto |A|^{-1}\)</span>.</p>
+<p>##Decompositions of certain matricies</p>
+<section id="inverse-of-a-triangular-matrix-is-triangular">
+<h2>Inverse of a triangular matrix is triangular<a class="headerlink" href="#inverse-of-a-triangular-matrix-is-triangular" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: show the inverse of an upper triangular matrix with numpy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="c1"># Create an upper triangular matrix</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">]])</span>
+
+<span class="c1"># Calculate the inverse</span>
+<span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Upper triangular matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Inverse of the upper triangular matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A_inv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Upper triangular matrix:
+ [[1 2 3]
+ [0 4 5]
+ [0 0 6]]
+
+Inverse of the upper triangular matrix:
+ [[ 1.         -0.5        -0.08333333]
+ [ 0.          0.25       -0.20833333]
+ [ 0.          0.          0.16666667]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="lu-decomposition-of-a-banded-matrix-is-banded-triangular">
+<h2>LU decomposition of a banded matrix is banded-triangular<a class="headerlink" href="#lu-decomposition-of-a-banded-matrix-is-banded-triangular" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: Show that the choleski decomposition of a banded matrix is triangular-banded</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">cholesky</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a pentadiagonal matrix of dimension 10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Main diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Lower diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="mf">.1</span><span class="p">)</span>  <span class="c1"># Second upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:],</span> <span class="mf">.1</span><span class="p">)</span>  <span class="c1"># Second lower diagonal</span>
+
+<span class="c1"># Calculate the Cholesky decomposition</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Cholesky decomposition (L):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># View the sparsity pattern</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original matrix:
+ [[2.  1.  0.1 0.  0.  0.  0.  0.  0.  0. ]
+ [1.  2.  1.  0.1 0.  0.  0.  0.  0.  0. ]
+ [0.1 1.  2.  1.  0.1 0.  0.  0.  0.  0. ]
+ [0.  0.1 1.  2.  1.  0.1 0.  0.  0.  0. ]
+ [0.  0.  0.1 1.  2.  1.  0.1 0.  0.  0. ]
+ [0.  0.  0.  0.1 1.  2.  1.  0.1 0.  0. ]
+ [0.  0.  0.  0.  0.1 1.  2.  1.  0.1 0. ]
+ [0.  0.  0.  0.  0.  0.1 1.  2.  1.  0.1]
+ [0.  0.  0.  0.  0.  0.  0.1 1.  2.  1. ]
+ [0.  0.  0.  0.  0.  0.  0.  0.1 1.  2. ]]
+
+Cholesky decomposition (L):
+ [[1.41 0.   0.   0.   0.   0.   0.   0.   0.   0.  ]
+ [0.71 1.22 0.   0.   0.   0.   0.   0.   0.   0.  ]
+ [0.07 0.78 1.18 0.   0.   0.   0.   0.   0.   0.  ]
+ [0.   0.08 0.79 1.17 0.   0.   0.   0.   0.   0.  ]
+ [0.   0.   0.08 0.8  1.16 0.   0.   0.   0.   0.  ]
+ [0.   0.   0.   0.09 0.8  1.16 0.   0.   0.   0.  ]
+ [0.   0.   0.   0.   0.09 0.8  1.16 0.   0.   0.  ]
+ [0.   0.   0.   0.   0.   0.09 0.8  1.16 0.   0.  ]
+ [0.   0.   0.   0.   0.   0.   0.09 0.8  1.16 0.  ]
+ [0.   0.   0.   0.   0.   0.   0.   0.09 0.8  1.16]]
+</pre></div>
+</div>
+<img alt="../../../_images/32dea9c1a74f05238e7c6e05acf312919ebcfcb32f0e461bce88732636a63877.png" src="../../../_images/32dea9c1a74f05238e7c6e05acf312919ebcfcb32f0e461bce88732636a63877.png" />
+</div>
+</div>
+</section>
+<section id="inverse-of-a-banded-matrix-is-not-banded-except-diagonal">
+<h2>Inverse of a banded matrix is <strong>not</strong> banded (except diagonal)<a class="headerlink" href="#inverse-of-a-banded-matrix-is-not-banded-except-diagonal" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: show the inverse of a banded matrix in numpy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Create a tridiagonal matrix of dimension 10</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Main diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Upper diagonal</span>
+<span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Lower diagonal</span>
+
+<span class="c1"># Calculate the inverse</span>
+<span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Banded matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Inverse of the banded matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">A_inv</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Banded matrix:
+
+[[ 2. -1.  0.  0.  0.  0.  0.  0.  0.  0.]
+ [-1.  2. -1.  0.  0.  0.  0.  0.  0.  0.]
+ [ 0. -1.  2. -1.  0.  0.  0.  0.  0.  0.]
+ [ 0.  0. -1.  2. -1.  0.  0.  0.  0.  0.]
+ [ 0.  0.  0. -1.  2. -1.  0.  0.  0.  0.]
+ [ 0.  0.  0.  0. -1.  2. -1.  0.  0.  0.]
+ [ 0.  0.  0.  0.  0. -1.  2. -1.  0.  0.]
+ [ 0.  0.  0.  0.  0.  0. -1.  2. -1.  0.]
+ [ 0.  0.  0.  0.  0.  0.  0. -1.  2. -1.]
+ [ 0.  0.  0.  0.  0.  0.  0.  0. -1.  2.]]
+</pre></div>
+</div>
+<img alt="../../../_images/7fd25982ee40e49b4a60c4b9ccfd9f1a0727d56039342790e2bd8412af8aa4ca.png" src="../../../_images/7fd25982ee40e49b4a60c4b9ccfd9f1a0727d56039342790e2bd8412af8aa4ca.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inverse of the banded matrix:
+
+[[0.90909091 0.81818182 0.72727273 0.63636364 0.54545455 0.45454545
+  0.36363636 0.27272727 0.18181818 0.09090909]
+ [0.81818182 1.63636364 1.45454545 1.27272727 1.09090909 0.90909091
+  0.72727273 0.54545455 0.36363636 0.18181818]
+ [0.72727273 1.45454545 2.18181818 1.90909091 1.63636364 1.36363636
+  1.09090909 0.81818182 0.54545455 0.27272727]
+ [0.63636364 1.27272727 1.90909091 2.54545455 2.18181818 1.81818182
+  1.45454545 1.09090909 0.72727273 0.36363636]
+ [0.54545455 1.09090909 1.63636364 2.18181818 2.72727273 2.27272727
+  1.81818182 1.36363636 0.90909091 0.45454545]
+ [0.45454545 0.90909091 1.36363636 1.81818182 2.27272727 2.72727273
+  2.18181818 1.63636364 1.09090909 0.54545455]
+ [0.36363636 0.72727273 1.09090909 1.45454545 1.81818182 2.18181818
+  2.54545455 1.90909091 1.27272727 0.63636364]
+ [0.27272727 0.54545455 0.81818182 1.09090909 1.36363636 1.63636364
+  1.90909091 2.18181818 1.45454545 0.72727273]
+ [0.18181818 0.36363636 0.54545455 0.72727273 0.90909091 1.09090909
+  1.27272727 1.45454545 1.63636364 0.81818182]
+ [0.09090909 0.18181818 0.27272727 0.36363636 0.45454545 0.54545455
+  0.63636364 0.72727273 0.81818182 0.90909091]]
+</pre></div>
+</div>
+<img alt="../../../_images/fd663b54bf4bb81ece22c39c5628de94175ba2bd32441f819373b4bc8dd98ae5.png" src="../../../_images/fd663b54bf4bb81ece22c39c5628de94175ba2bd32441f819373b4bc8dd98ae5.png" />
+</div>
+</div>
+<p>Yikes!!! :-(</p>
+<p>#Package implementations</p>
+<p>Numpy and Scipy linear solvers both do (P)LU decomposition and then solution. In general they can be accessed through:</p>
+<blockquote>
+<div><p>numpy.linalg.solve(A,b)</p>
+</div></blockquote>
+<p>and</p>
+<blockquote>
+<div><p>scipy.linalg.solve(A,b)</p>
+</div></blockquote>
+<p>Examining the options of scipy show that you can choose to:</p>
+<ol class="arabic simple">
+<li><p>specify the matrix type</p></li>
+<li><p>overwrite the original matricies (which may boost efficiency)</p></li>
+</ol>
+<p>The advent of distributed computing (HPCs) motivated new algorithms that are better suited to large, sparse, systems (You will run in to these names in the future!)</p>
+<ul class="simple">
+<li><p>PARADISO (PARallel Direct SOlver)</p></li>
+<li><p>SuperLU (Supernodal LU)</p></li>
+<li><p>UMFPACK (Unsymmetric-pattern MultiFrontal method)</p></li>
+<li><p>MUMPS (Multifrontal Massively Parallel Sparse Direct Solver)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: use numpy to solve a linear system then repeat with scipy</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="c1"># Define the coefficient matrix A</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+
+<span class="c1"># Define the right-hand side vector b</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Solve the linear system using numpy.linalg.solve</span>
+<span class="n">x_numpy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Solution using numpy.linalg.solve:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x_numpy</span><span class="p">)</span>
+
+<span class="c1"># Solve the linear system using scipy.linalg.solve</span>
+<span class="n">x_scipy</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Solution using scipy.linalg.solve:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">x_scipy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Solution using numpy.linalg.solve:
+ [2.5 4.  3.5]
+
+Solution using scipy.linalg.solve:
+ [2.5 4.  3.5]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># prompt: solve a 200x200 sparse system with sparse solvers then again  with a dense solver</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="kn">import</span> <span class="n">diags</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.linalg</span> <span class="kn">import</span> <span class="n">spsolve</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+
+<span class="c1"># Generate a random sparse matrix</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">main_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">upper_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">lower_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">A_sparse</span> <span class="o">=</span> <span class="n">diags</span><span class="p">([</span><span class="n">lower_diag</span><span class="p">,</span> <span class="n">main_diag</span><span class="p">,</span> <span class="n">upper_diag</span><span class="p">],</span> <span class="n">offsets</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;csr&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># row_ind = np.arange(n)</span>
+<span class="c1"># col_ind = np.arange(n)</span>
+<span class="c1"># data = np.random.rand(n)</span>
+<span class="c1"># A_sparse = csr_matrix((data, (row_ind, col_ind)), shape=(n, n))</span>
+
+<span class="c1"># Generate a random right-hand side vector</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="c1"># Solve the sparse system</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="n">x_sparse</span> <span class="o">=</span> <span class="n">spsolve</span><span class="p">(</span><span class="n">A_sparse</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="c1">#print(&quot;Solution using sparse solver:\n&quot;, x_sparse, &quot;\n&quot;)</span>
+
+<span class="c1"># Convert the sparse matrix to a dense matrix</span>
+<span class="n">A_dense</span> <span class="o">=</span> <span class="n">A_sparse</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+<span class="c1"># Solve the dense system</span>
+
+<span class="o">%</span><span class="n">timeit</span> <span class="n">x_dense</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A_dense</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="c1">#print(&quot;Solution using dense solver:\n&quot;, x_dense)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>307 µs ± 142 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+1.29 ms ± 101 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "mwelland/ENGPHYS_3NM4",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Chapters/Linear systems/Direct methods"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="LU%20decomposition.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">LU decomposition</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Iterative%20methods.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Iterative methods</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Matrix types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-matricies-and-sparsity-patterns">Sparse matricies and sparsity patterns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity-patterns-and-matrix">Sparsity patterns and matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#banded-matricies">Banded matricies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#tridiagonal-bandwidth-3">Tridiagonal (bandwidth 3)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pentadiagonal-bandwidth-5">Pentadiagonal (bandwidth 5)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#general-banded-matrix">General banded matrix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#block-matricies">Block matricies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#block-diagonal">Block diagonal</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-decompositions">Matrix decompositions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-triangular-matrix-is-triangular">Inverse of a triangular matrix is triangular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lu-decomposition-of-a-banded-matrix-is-banded-triangular">LU decomposition of a banded matrix is banded-triangular</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-of-a-banded-matrix-is-not-banded-except-diagonal">Inverse of a banded matrix is <strong>not</strong> banded (except diagonal)</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
