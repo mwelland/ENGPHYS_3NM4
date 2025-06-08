@@ -60,12 +60,7 @@ jobs:
       with:
         path: "Book/_build/html"
 
-    # # Upload the book's PDF as an artifact
-    # - name: Upload PDF artifact
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: book-pdf
-    #     path: "Book/_build/pdf/book.pdf"
+   
 
     # # Move the PDF to the webpage
     # - name: Move PDF to webpage
