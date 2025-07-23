@@ -11,6 +11,7 @@ chapters:
 
   - file: Chapters/Roundoff error/Roundoff error
     sections:
+    - file: Chapters/Module/Linear_Solver
     - file: Chapters/Roundoff error/Finite precision representations
     - file: Chapters/Roundoff error/True_and_approximate_error
     - file: Chapters/Roundoff error/Truncation_error
@@ -100,10 +101,3 @@ chapters:
     - file: Chapters/Finite element method/Discretization and assembly
     - file: Chapters/Finite element method/Solution
   
-  - file: Chapters/Eigenvalue problems/Eigenvalue problems
-    sections:
-    - file: Chapters/Eigenvalue problems/Eigenfunctions
-    - file: Chapters/Eigenvalue problems/Powers method
-    - file: Chapters/Eigenvalue problems/Matrix decomposition methods
-    - file: Chapters/Eigenvalue problems/Package tools
-
