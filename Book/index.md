@@ -1,6 +1,5 @@
 
 # Welcome
-# THIS IS A TEST
 This is an introduction to the book. Below are the main sections:
 
 Decompose into simpler problems. 
