@@ -5,7 +5,7 @@ options:
   numbered: false #false
 
 chapters:
-  - file: Chapters/Module/Module
+  - file: Chapters/Module/Linear_Solver
     sections:
     - file: Chapters/Module/Linear_Solver
 
