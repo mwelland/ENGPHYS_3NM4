@@ -5,7 +5,9 @@ options:
   numbered: false #false
 
 chapters:
-  - file: Chapters/Module/Linear_Solver
+  - file: Chapters/Module/Module
+    sections:
+    - file: Chapters/Module/Linear_Solver
 
   - file: Chapters/Roundoff error/Roundoff error
     sections:
