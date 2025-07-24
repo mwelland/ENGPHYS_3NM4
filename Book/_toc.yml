@@ -5,7 +5,7 @@ options:
   numbered: false #false
 
 chapters:
-  - file: Chapters//Module
+  - file: Chapters/Module
     sections:
     - file: Chapters/Module/Linear_Solver
 
@@ -105,4 +105,5 @@ chapters:
     - file: Chapters/Eigenvalue problems/Eigenfunctions
     - file: Chapters/Eigenvalue problems/Powers method
     - file: Chapters/Eigenvalue problems/Matrix decomposition methods
+    - file: Chapters/Eigenvalue problems/Package tools
 
