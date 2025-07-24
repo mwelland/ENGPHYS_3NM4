@@ -6,7 +6,12 @@ options:
 
 chapters:
 
- 
+  - file: Chapters/Roundoff error/Roundoff error
+    sections:
+    - file: Chapters/Module/Linear_Solver
+    - file: Chapters/Roundoff error/Finite precision representations
+    - file: Chapters/Roundoff error/True_and_approximate_error
+    - file: Chapters/Roundoff error/Truncation_error
 
   - file: Chapters/Linear systems/Linear systems
     sections:
