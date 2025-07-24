@@ -105,5 +105,4 @@ chapters:
     - file: Chapters/Eigenvalue problems/Eigenfunctions
     - file: Chapters/Eigenvalue problems/Powers method
     - file: Chapters/Eigenvalue problems/Matrix decomposition methods
-    - file: Chapters/Module/Linear_Solver
 
