@@ -5,6 +5,8 @@ options:
   numbered: false #false
 
 chapters:
+  - file: Chapters/Module/Module
+    sections:
 
   - file: Chapters/Roundoff error/Roundoff error
     sections:
