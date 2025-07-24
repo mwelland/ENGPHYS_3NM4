@@ -3,3 +3,4 @@ pyppeteer
 matplotlib
 ipywidgets
 IPython
+numpy
