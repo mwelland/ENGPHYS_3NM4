@@ -5,6 +5,10 @@ options:
   numbered: false #false
 
 chapters:
+  - file: Chapters/Module/Module
+    sections:
+    - file: Chapters/Module/Linear_Solver
+
   - file: Chapters/Roundoff error/Roundoff error
     sections:
     - file: Chapters/Roundoff error/Finite precision representations
