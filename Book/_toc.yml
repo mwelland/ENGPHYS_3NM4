@@ -6,8 +6,6 @@ options:
 
 chapters:
   - file: Chapters/Module/Linear_Solver
-    sections:
-    - file: Chapters/Module/Linear_Solver
 
   - file: Chapters/Roundoff error/Roundoff error
     sections:
