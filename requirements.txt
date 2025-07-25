@@ -1,8 +1,2 @@
 jupyter-book>=0.13
 nbconvert
-jupyter-book
-pyppeteer
-matplotlib
-ipywidgets
-IPython
-numpy

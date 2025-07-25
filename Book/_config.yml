@@ -17,10 +17,12 @@ html:
     google_analytics_id: G-R9308D4F0V
 
 launch_buttons:
-  binderhub_url: "https://mybinder.org/v2/gh/mwelland/ENGPHYS_3NM4/HEAD"
+  #jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
   thebe: true
   colab_url: https://colab.research.google.com
-  colab: true
+  #colab: true
+  #binderhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
+  
   # custom_launch_buttons:
   #   - name: "Custom Button"
   #     image_url: "https://path/to/image.png"
