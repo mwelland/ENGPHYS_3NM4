@@ -17,6 +17,7 @@ chapters:
 
   - file: Chapters/Linear systems/Linear systems
     sections:
+    - file: Chapters/Linear systems/Lin Solve Tool
     - file: Chapters/Linear systems/Solvability
     - file: Chapters/Linear systems/Complexity
     - file: Chapters/Linear systems/Conditioning
