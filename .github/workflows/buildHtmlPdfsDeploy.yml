@@ -48,12 +48,11 @@ jobs:
     - name: Build the book
       run: |
         jupyter-book build ./Book
-        
-    # # Build the book as PDF
-    - name: Build the book as PDF
-      run: |
-        jupyter-book build ./Book --builder pdfhtml
 
+    # # Build the book as PDF
+    # - name: Build the book as PDF
+    #   run: |
+    #     jupyter-book build ./Book --builder pdfhtml
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
