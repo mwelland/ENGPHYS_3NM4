@@ -43,11 +43,6 @@ jobs:
     #   with:
     #     path: _build/.jupyter_cache
     #     key: jupyter-book-cache-${{ hashFiles('requirements.txt') }}
-    #install pdf dependancy
-    - name: Install Playwright
-      run: |
-        pip install playwright
-        playwright install
 
     # Build the book
     - name: Build the book
