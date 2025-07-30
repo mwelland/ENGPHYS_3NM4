@@ -6,3 +6,4 @@ IPython
 numpy
 nbconvert
 scipy
+plotly
