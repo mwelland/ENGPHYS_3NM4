@@ -1,0 +1,31 @@
+Metadata-Version: 2.4
+Name: tools3nm4
+Version: 0.1.0
+Summary: A Jupyter widgets for solving
+Home-page: https://github.com/mwelland/ENGPHYS_3NM4
+Author: Joel
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE.txt
+Requires-Dist: numpy
+Requires-Dist: matplotlib
+Requires-Dist: ipywidgets
+Requires-Dist: IPython
+Requires-Dist: pyppeteer
+Requires-Dist: nbconvert
+Requires-Dist: scipy
+Requires-Dist: plotly
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+Webite: https://mwelland.github.io/ENGPYHS_3NM4/

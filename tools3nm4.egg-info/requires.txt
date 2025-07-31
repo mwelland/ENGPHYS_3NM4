@@ -1,0 +1,8 @@
+numpy
+matplotlib
+ipywidgets
+IPython
+pyppeteer
+nbconvert
+scipy
+plotly
