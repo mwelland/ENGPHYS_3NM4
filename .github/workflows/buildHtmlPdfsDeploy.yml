@@ -47,7 +47,8 @@ jobs:
     - name: Install Playwright
       run: |
         pip install playwright
-        playwright install
+        playwright install --with-deps chromium
+
 
     # Build the book
     - name: Build the book
@@ -55,9 +56,9 @@ jobs:
         jupyter-book build ./Book
 
      # Build the book as PDF
-    #- name: Build the book as PDF
-    #  run: |
-    #     jupyter-book build ./Book --builder pdfhtml
+    - name: Build the book as PDF
+      run: |
+         jb build ./Book/ --builder pdfhtml
 
     # Upload the book's HTML as an artifact
     - name: Upload artifact
