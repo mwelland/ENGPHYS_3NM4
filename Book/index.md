@@ -25,6 +25,6 @@ AI is fast. Use your head before the computer or it will run away with you!
 [NotepadLM 'Audio overview'](https://notebooklm.google.com/notebook/a1f51dab-a729-4dfb-b94b-965be763a7b1/audio)
 NB: The audio overview is AI generated from the notes. Although it is well grounded, it may still be incorrect.
 
-This resource is being developed in part through the [McMaster University Open Educational Resources grant] (https://mi.mcmaster.ca/oer-grant).
+This resource is being developed in part through the [McMaster University Open Educational Resources grant](https://mi.mcmaster.ca/oer-grant).
 
 ![Meme](Meme.png)
