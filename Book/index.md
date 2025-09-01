@@ -5,7 +5,7 @@ This is an introduction to the book. Below are the main sections:
 
 Decompose into simpler problems. 
 
-TEst1
+![Meme](Meme.png)
 
 * Boil everything down to a simple task (linear system of equations)
 * Approximate functions as weighted sums of simpler functions (a linear basis)
