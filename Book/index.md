@@ -1,11 +1,11 @@
 
 # Welcome
 
-This is an introduction to the book. Below are the main sections:
+This online textbook is associated with the course EngPhys 3NM4 at McMaster University. 
 
 Decompose into simpler problems. 
 
-![Meme](Meme.png)
+This is an introduction to the book. Below are the main sections:
 
 * Boil everything down to a simple task (linear system of equations)
 * Approximate functions as weighted sums of simpler functions (a linear basis)
@@ -23,3 +23,5 @@ Symmetries
 
 [NotepadLM 'Audio overview'](https://notebooklm.google.com/notebook/a1f51dab-a729-4dfb-b94b-965be763a7b1/audio)
 NB: The audio overview is AI generated from the notes. Although it is well grounded, it may still be incorrect.
+
+![Meme](Meme.png)
