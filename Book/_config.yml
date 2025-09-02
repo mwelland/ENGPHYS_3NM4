@@ -19,8 +19,8 @@ html:
 launch_buttons:
   #jupyterhub_url: https://mybinder.org/v2/gh/jupyterhub/binderhub/master?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fjupyter%252Fmy-first-binder%26urlpath%3Dtree%252Fmy-first-binder%252F%26branch%3Dmaster
   thebe: true
-  # colab_url: https://colab.research.google.com
-  # colab: true
+  colab_url: https://colab.research.google.com
+  colab: true
   binderhub_url: https://mybinder.org/
   # custom_launch_buttons:
   #   - name: "Custom Button"
