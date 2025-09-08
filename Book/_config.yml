@@ -5,6 +5,12 @@ execute:
 only_build_toc_files: true
 logo: _static/logo.png
 
+parse:
+  myst_enable_extensions:
+    # don't forget to list any other extensions you want enabled,
+    # including those that are enabled by default!
+    - amsmath
+
 repository:
   url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
   path_to_book              : Book  # Optional path to your book, relative to the repository root
