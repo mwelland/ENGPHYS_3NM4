@@ -14,8 +14,8 @@ chapters:
   - file: Chapters/Linear systems/Linear systems
     sections:
     - file: Chapters/Linear systems/Solvability
-    - file: Chapters/Linear systems/Complexity
     - file: Chapters/Linear systems/Conditioning
+    - file: Chapters/Linear systems/Complexity
     - file: Chapters/Linear systems/Direct methods
       sections: 
       - file: Chapters/Linear systems/Direct methods/Gaussian elimination

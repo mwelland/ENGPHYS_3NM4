@@ -5,11 +5,11 @@ execute:
 only_build_toc_files: true
 logo: _static/logo.png
 
-parse:
-  myst_enable_extensions:
-    # don't forget to list any other extensions you want enabled,
-    # including those that are enabled by default!
-    - dollarmath
+# parse:
+#   myst_enable_extensions:
+#     # don't forget to list any other extensions you want enabled,
+#     # including those that are enabled by default!
+#     - dollarmath
 
 repository:
   url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
