@@ -5,11 +5,11 @@ options:
   numbered: false #false
 
 chapters:
-  - file: Chapters/Roundoff error/Roundoff error
+  - file: Chapters/Numerical error/Numerical error
     sections:
-    - file: Chapters/Roundoff error/Finite precision representations
-    - file: Chapters/Roundoff error/True_and_approximate_error
-    - file: Chapters/Roundoff error/Truncation_error
+    - file: Chapters/Numerical error/Roundoff error and finite precision representations
+    - file: Chapters/Numerical error/True_and_approximate_error
+    - file: Chapters/Numerical error/Truncation_error
 
   - file: Chapters/Linear systems/Linear systems
     sections:
