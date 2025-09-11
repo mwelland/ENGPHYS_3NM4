@@ -6,22 +6,22 @@ only_build_toc_files: true
 logo: _static/logo.png
 
 
-myst_enable_extensions = [
-    "amsmath",
-    "attrs_inline",
-    "colon_fence",
-    "deflist",
-    "dollarmath",
-    "fieldlist",
-    "html_admonition",
-    "html_image",
-    "linkify",
-    "replacements",
-    "smartquotes",
-    "strikethrough",
-    "substitution",
-    "tasklist",
-]
+# myst_enable_extensions = [
+#     "amsmath",
+#     "attrs_inline",
+#     "colon_fence",
+#     "deflist",
+#     "dollarmath",
+#     "fieldlist",
+#     "html_admonition",
+#     "html_image",
+#     "linkify",
+#     "replacements",
+#     "smartquotes",
+#     "strikethrough",
+#     "substitution",
+#     "tasklist",
+# ]
 
 repository:
   url                       : https://github.com/mwelland/ENGPHYS_3NM4  # Online location of your book
