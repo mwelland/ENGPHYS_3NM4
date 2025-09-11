@@ -19,6 +19,7 @@ chapters:
     - file: Chapters/Linear systems/Direct methods
       sections: 
       - file: Chapters/Linear systems/Direct methods/Gaussian elimination
+      - file: Chapters/Linear systems/Direct methods/Diagonal dominance and pivoting
       - file: Chapters/Linear systems/Direct methods/LU decomposition
       - file: Chapters/Linear systems/Direct methods/Matrix types and decompositions
     - file: Chapters/Linear systems/Iterative methods
