@@ -48,11 +48,12 @@ launch_buttons:
   thebe: true
   colab_url: https://colab.research.google.com
   colab: true
-  #binderhub_url: https://mybinder.org/
+  #binderhub_url: https://mybinder.org/ 
   # custom_launch_buttons:
   #   - name: "Custom Button"
   #     image_url: "https://path/to/image.png"
   #     url: "https://path/to/custom/link"
+  
 
 # Table of contents settings
 toc:
