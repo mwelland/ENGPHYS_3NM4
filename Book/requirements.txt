@@ -5,3 +5,4 @@ ipywidgets
 IPython
 numpy
 nbconvert
+scipy
