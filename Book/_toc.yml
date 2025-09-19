@@ -41,6 +41,7 @@ chapters:
       - file: Chapters/Interpolation and curve fitting/Curve fitting/Linear least squares regression
       - file: Chapters/Interpolation and curve fitting/Curve fitting/Polyfit
       - file: Chapters/Interpolation and curve fitting/Curve fitting/Best fit radial basis functions
+      - file: Chapters/Interpolation and curve fitting/Curve fitting/Neural networks
 
   - file: Chapters/Root finding/Root finding
     sections:
